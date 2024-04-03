@@ -11,6 +11,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <!-- Apunts generals -->
 &nbsp &nbsp - El makefile agafa com a PATH les comandes del MSYS i té conflictes amb el sistema per executar certes comandes (com el rm). Per emprar el makefile, cal emprar MSYS (per ara, ja es buscarà solució).<br>
 &nbsp &nbsp - La resta de comandes del makefile ja es crearan quan es tingui la organització dels arxius pensada i planificada.<br>
+&nbsp &nbsp - Afegeixo fitxers main.c, build.txt, include.h i data.txt per poder fer commit i push dels directoris. Quan s'elabori la organització d'arxius ja s'aniran substituint.
 
 <!-- Fi dels apunts generals -->
 </p>
