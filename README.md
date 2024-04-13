@@ -24,6 +24,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <!-- Apunts d'Iván -->
 <ul>
     <li>Main amb estructura bàsica feta, acabar d'organitzar i fer repartiment de tasques</li>
+    <li>Falten algunes capçaleres, fer pseudocodi de funció afegir_amistats, eliminar_usuari i eliminar_amistat per poder analitzar disseny descendent correctament</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

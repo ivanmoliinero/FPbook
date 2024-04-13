@@ -13,7 +13,12 @@ int main(int argc, char *argv[])
     else
     {
         char o; // Opció seleccionada per l'usuari.
-        // COMANDES PER INICIALITZAR TAULES.
+        short usuari = obtenir_usuari(argv); // Id de l'usuari que ha iniciat el programa.
+        persona_t *usuaris; // Punter a taula d'usuaris.
+        int *amistats; // Punter a taula d'amistats.
+        short n_elem = carregar_usuaris(usuaris); // Nombre d'usuaris registrats al sistema.
+        carregar_amistats(amistats);
+        // TODO: Comprobar que l'identificador és d'un usuari vàlid.
         missatge_benvinguda();
         do
         {
@@ -21,7 +26,7 @@ int main(int argc, char *argv[])
             o = demanar_opcio();
             switch(o)
             {
-                case MOSTRAR_PERFIL_USUARI: mostrar_perfil();
+                case MOSTRAR_PERFIL_USUARI: mostrar_perfil(usuari, usuaris);
                                             break;
                 case MOSTRAR_AMISTATS: mostrar_amistats();
                                        break;
@@ -33,7 +38,7 @@ int main(int argc, char *argv[])
                                     break;
             } // Es podria afegir cas DEFAULT, però com el rang de o està (per funció demanar_opcio) controlat no cal.
         } while (o != 0);
-        // Actualització de fitxers SI ESCAL (mirar README.md).
+        // TODO: Actualització de fitxers SI ESCAL (mirar README.md).
         missatge_acomiadament();
     }
 
