@@ -17,10 +17,10 @@ CCFLAGS := -Wall -gdwarf-3 -O0 $(INCL)
 #------------------------------------------------------------------
 #	Generació d'arxius.
 #------------------------------------------------------------------
-fpbook.exe : sources/back_functions.c sources/interface_functions.c sources/main.c \
+build/fpbook.exe : sources/back_functions.c sources/interface_functions.c sources/main.c \
 			 include/back_functions.h include/interface_functions.h include/estructures.h
 	gcc $(CCFLAGS) sources/back_functions.c sources/interface_functions.c sources/main.c \
-		-o fpbook.exe
+		-o build/fpbook.exe
 
 
 #------------------------------------------------------------------
