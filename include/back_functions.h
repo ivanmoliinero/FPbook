@@ -5,8 +5,11 @@
 /**
  * @brief Obté l'identificador de l'usuari passat com a paràmetre.
  * @param argv (E) Taula amb paràmetres del main (d'on s'obté l'identificador esperat).
+ * @param usuaris (E) Taula d'usuaris
+ * @param (E) Nombre d'elements de la tabla usuaris
+ * @return char ID del usuari si existeix, -1 en cas de que no existeixi
 */
-extern short obtenir_usuari(char *argv[]);
+extern short obtenir_usuari(char *argv[], persona_t *usuaris, short n_elem);
 
 /**
  * @brief Carrega usuaris en una taula passada com a punter.

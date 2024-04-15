@@ -17,7 +17,7 @@
 <br><br>
 <h3 style="color:DodgerBlue"> ERIC </h3> 
 <P>
-    OBTENIR USUARI
+    OBTENIR USUARI (HECHO)
 </p>
 <p>
     CARREGAR AMISTATS
