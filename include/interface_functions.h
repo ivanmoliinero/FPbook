@@ -43,4 +43,9 @@ extern char demanar_opcio();
 */
 extern void mostrar_perfil(short id, persona_t t[]);
 
+/**
+ * @brief Mostra un missatge d'error en cas que l'usuari no existeixi.
+*/
+extern void usuari_inexistent();
+
 #endif
