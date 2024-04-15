@@ -1,44 +1,30 @@
-#include <stdbool.h>
-#include <stdlib.h>
+#include <stdio.h>  // Proporciona les funcions necessàries per a l'entrada i sortida estàndard de dades
+#include <stdlib.h> // Proporciona funcions per a la gestió de memòria dinàmica, control de processos i conversions de tipus
 
-bool cerca_dicotomica(int v, int dades[], int n)
+short obtenir_usuaris(char *argv[], short n_elem)
 {
-    int p_i = 0, p_f = n - 1;
-    bool trobat = false;
-    
-    while ((p_i <= p_f) && !trobat)
-    {
-        int mig = (p_i + p_f) / 2;
-        
-        if (dades[mig] == v) trobat = true;
-        
-        else if (v > dades[mig])
-            p_i = mig + 1;
-        
-        else
-            p_f = mig - 1;
-    }
-    
-    return trobat;
-}
+    short id = atoi(argv[1]); // Convertim la cadena de caràcters ASCII a un Integer(int)
 
-short obtenir_usuaris(char *argv[], persona_t *usuaris, short n_elem)
-{
-    bool resultat = false;
-    short id = atoi(argv[1])
-
-    if(id > n_elem)
+    if ((id > n_elem - 1) || (id < 0)) // Comprovem que no s'hagui introduït un id inexistent
     {
         id = -1;
     }
-    else
-    {
-        // Cerca dicotomica porque tenemos los datos ordendos pero no sabemos con certeca que el id coincide con la posicion de la tabla
-        if(!cerca_dicotomica(id, usuaris, n_elem))
-        {
-            id = -1;
-        }
+    return (id); // Retornem el valor passat com a paràmetre en la trucada al nostre executable convertit a enter o -1 en cas de no existir l'id
+}
 
+extern char carregar_amistats(int *amistats)
+{
+    short i, j, fila_columna;
+    FILE *fitxer = fopen("propers.fpb", "r");
+    fscanf(fitxer, "%hd", &fila_columna);
+    amistats = malloc(sizeof(short) * fila_columna * fila_columna);
+
+    for (i = 0; i < fila_columna; i++)
+    {
+        for (j = 0; j < fila_columna; j++)
+        {
+            fscanf(fitxer, "%hd", &amistats[i * fila_columna + j]);
+        }
     }
-    return (id); // Devolvemos el valor pasado como parametro en la llamada a nuestro ejecutable convertido a entero
+    fclose(fitxer);
 }

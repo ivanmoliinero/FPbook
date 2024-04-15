@@ -18,6 +18,7 @@
 <h3 style="color:DodgerBlue"> ERIC </h3> 
 <P>
     OBTENIR USUARI (HECHO)
+    Explicar en la documentación el uso de la Cerca dicotomica(porque tenemos los datos ordendos pero no sabemos con certeca que el id coincide con la posicion de la tabla).
 </p>
 <p>
     CARREGAR AMISTATS

@@ -2,6 +2,9 @@
     "files.associations": {
         "estructures.h": "c",
         "interface_functions.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stdbool.h": "c",
+        "back_functions.h": "c",
+        "stdio.h": "c"
     }
 }
