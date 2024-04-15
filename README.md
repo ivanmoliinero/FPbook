@@ -25,7 +25,12 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <ul>
     <li>Carregar usuaris, funcions per guardar fitxers, afegir usuaris</li>
     <li>PROBAR CARREGAR USUARIS CON MOSTRAR PERFIL + BUCLE (esperar implementación Oscar)</li>
-    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE UQEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).
+    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE UQEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).</li>
+    <li>PREGUNTAR SI SUPOSICION DE USUARIOS CORRECTA</li>
+    <li>PREGUNTAR SI SUPOSICION DE ARCHIVOS DE USUARIO CORRECTA</li>
+    <li>ACABAR FUNCION GUARDAR USUARI</li>
+    <li>EN AFEGIR USUARIS, INCREMENTAR n_elem++;</li>
+    <li>PREGUNTAR TEMA stdbool.h EN back_functions.h</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

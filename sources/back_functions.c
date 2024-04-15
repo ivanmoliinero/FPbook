@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "estructures.h"
 #include "back_functions.h"
@@ -84,12 +85,39 @@ short carregar_usuaris(persona_t *t)
     return(n_usuaris);    
 }
 
-char guardar_usuaris()
-{
-
-}
-
-char guardar_amistats()
+void guardar_usuari(FILE *f, persona_t *t, short usuari)
 {
     
+}
+
+bool guardar_usuaris(persona_t *t, short n_elem)
+{
+    FILE *f = fopen("data/usuaris.fpb", "w"); // S'obre el fitxer d'usuaris.
+    bool res;
+    short n_elem_antics, iteracions;
+    if(feof(f))
+        res = false; // L'arxiu s'ha creat, no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
+    else
+    {   
+        fscanf(f, "%hd", &n_elem_antics);
+        iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
+        fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
+        res = fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
+        if(!res) 
+            res = false;
+        else
+        {
+            fprintf(f, "%c", '\n'); // S'escriu el separador estètic per l'arxiu de salt de línia.
+            for(char i = n_elem - iteracions; i < n_elem; i++)
+            {
+                guardar_usuari(f, t, i);
+            }
+        }
+    }
+    return(res);
+}
+
+bool guardar_amistats()
+{
+
 }

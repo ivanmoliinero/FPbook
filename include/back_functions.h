@@ -1,15 +1,15 @@
 #ifndef back_functions_h
 #define back_functions_h
+#include <stdbool.h>
 
 // Capceleres de les funcions de càlculs interns.
 /**
  * @brief Obté l'identificador de l'usuari passat com a paràmetre.
  * @param argv (E) Taula amb paràmetres del main (d'on s'obté l'identificador esperat).
- * @param usuaris (E) Taula d'usuaris.
  * @param n_elem (E) Nombre d'elements de la taula usuaris.
  * @return char Id de l'usuari si existeix, -1 en cas que no existeixi.
 */
-extern short obtenir_usuari(char *argv[], persona_t *usuaris, short n_elem);
+extern short obtenir_usuari(char *argv[], short n_elem);
 
 /**
  * @brief Carrega les dades de l'usuari indicat a la taula d'usuaris a partir d'un fitxer passat com a paràmetre.
@@ -31,7 +31,7 @@ extern short carregar_usuaris(persona_t *t);
  * @param amistats (E/S) Taula amb les informacions de les amistats. De tipus int (no sabem quin és el màxim nombre de distància).
  * @return char 0 si s'ha pogut carregar, -1 en cas contrari.
 */
-extern char carregar_amistats(int *t);
+extern char carregar_amistats(int *amistats);
 
 /**
  * @brief Carrega la data de naixement d'un arxiu de text a un usuari.
@@ -65,5 +65,13 @@ extern void carregar_mes(persona_t *us, char data[], unsigned char *index);
  * @param index (E/S) Índex de recorregut de la taula data.
 */
 extern void carregar_any(persona_t *us, char data[], unsigned char *index);
+
+/**
+ * @brief Emmagatzema les dades dels usuaris en el fitxer usuaris.fpb.
+ * @param t (E) Taula amb tota la informació dels usuaris.
+ * @param n_elem Nombre d'usuaris a guardar.
+ * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
+*/
+bool guardar_usuaris(persona_t *t, short n_elem);
 
 #endif
