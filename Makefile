@@ -26,8 +26,8 @@ build/fpbook.exe : sources/back_functions.c sources/interface_functions.c source
 #------------------------------------------------------------------
 #	run command
 #------------------------------------------------------------------
-run : fpbook.exe
-	fpbook.exe
+run : build/fpbook.exe
+	build/fpbook.exe
 
 
 #------------------------------------------------------------------
