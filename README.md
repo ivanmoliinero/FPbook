@@ -12,6 +12,8 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 &nbsp &nbsp - Per executar makefile, DESDE CMD (powershell no accepta algunes comandes)<br>
 &nbsp &nbsp - La resta de comandes del makefile ja es crearan quan es tingui la organització dels arxius pensada i planificada.<br>
 &nbsp &nbsp - Afegeixo fitxers main.c, build.txt, include.h i data.txt per poder fer commit i push dels directoris. Quan s'elabori la organització d'arxius ja s'aniran substituint.
+&nbsp &nbsp - DISCUTIR: Cada cop que es demana una opció, redesplegar menú???
+&nbsp &nbsp - CAL CONSIDERAR SI CAL MODIFICAR FITXERS EN CAS QUE NOMÉS ES FACIN CONSULTES (ni insercions d'usuaris ni actualitzacions d'amistats ni esborrament d'amistats).
 
 <!-- Fi dels apunts generals -->
 </p>
@@ -20,9 +22,10 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <h3 style="color:DodgerBlue"> IVÁN </h3> 
 <p>
 <!-- Apunts d'Iván -->
-
-
-
+<ul>
+    <li>Main amb estructura bàsica feta, acabar d'organitzar i fer repartiment de tasques</li>
+    <li>Falten algunes capçaleres, fer pseudocodi de funció afegir_amistats, eliminar_usuari i eliminar_amistat per poder analitzar disseny descendent correctament</li>
+</ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
 <br><br>

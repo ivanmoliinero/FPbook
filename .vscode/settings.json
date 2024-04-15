@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "estructures.h": "c",
+        "interface_functions.h": "c"
+    }
+}
