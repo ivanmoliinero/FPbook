@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "estructures.h": "c",
-        "interface_functions.h": "c"
+        "interface_functions.h": "c",
+        "back_functions.h": "c"
     }
 }

@@ -1,5 +1,6 @@
 #include <stdio.h> // Menús + interacció per terminal.
 #include <stdlib.h> 
+#include <stdbool.h>
 
 #include "back_functions.h"
 #include "interface_functions.h"
@@ -21,8 +22,8 @@ int main(int argc, char *argv[])
         else
         {
             int *amistats; // Punter a taula d'amistats.
+            bool usuaris_editats = false, amistats_editades = false; // Booleans per controlar l'edició de les dades.
             carregar_amistats(amistats);
-            // TODO: Comprobar que l'identificador és d'un usuari vàlid.
             missatge_benvinguda();
             do
             {
@@ -35,14 +36,20 @@ int main(int argc, char *argv[])
                     case MOSTRAR_AMISTATS: mostrar_amistats();
                                         break;
                     case AFEGIR_AMISTAT: afegir_amistat();
+                                        amistats_editades = true;
                                         break;
                     case ELIMINAR_AMISTAT: eliminar_amistat();
+                                        amistats_editades = true;
                                         break;
                     case AFEGIR_USUARI: afegir_usuari();
+                                        usuaris_editats = true;
                                         break;
                 } // Es podria afegir cas DEFAULT, però com el rang de o està (per funció demanar_opcio) controlat no cal.
             } while (o != 0);
-            // TODO: Actualització de fitxers SI ESCAL (mirar README.md).
+            if(usuaris_editats && guardar_usuaris())
+                error_guardat_usuaris();
+            if(amistats_editades && guardar_amistats())
+                error_guardat_amistats();
             missatge_acomiadament();
     }
         }

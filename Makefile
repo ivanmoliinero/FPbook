@@ -22,6 +22,11 @@ build/fpbook.exe : sources/back_functions.c sources/interface_functions.c source
 	gcc $(CCFLAGS) sources/back_functions.c sources/interface_functions.c sources/main.c \
 		-o build/fpbook.exe
 
+build/tests.exe : sources/tests.c sources/interface_functions.c sources/back_functions.c \
+			 include/back_functions.h include/interface_functions.h include/estructures.h
+	gcc $(CCFLAGS) sources/tests.c sources/interface_functions.c sources/back_functions.c \
+		-o build/tests.exe
+
 
 #------------------------------------------------------------------
 #	run command
@@ -33,7 +38,8 @@ run : build/fpbook.exe
 #------------------------------------------------------------------
 #	debug command
 #------------------------------------------------------------------
-
+debug : build/tests.exe
+	build/tests.exe
 
 
 #------------------------------------------------------------------

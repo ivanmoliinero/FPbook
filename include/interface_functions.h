@@ -48,4 +48,14 @@ extern void mostrar_perfil(short id, persona_t t[]);
 */
 extern void usuari_inexistent();
 
+/**
+ * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades dels usuaris.
+*/
+extern void error_guardat_usuaris();
+
+/**
+ * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades de les amistats.
+*/
+extern void error_guardat_amistats();
+
 #endif

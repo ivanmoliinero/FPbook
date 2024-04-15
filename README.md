@@ -23,9 +23,9 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <p>
 <!-- Apunts d'Iván -->
 <ul>
-    <li>Main amb estructura bàsica feta, acabar d'organitzar i fer repartiment de tasques</li>
-    <li>Falten algunes capçaleres, fer pseudocodi de funció afegir_amistats, eliminar_usuari i eliminar_amistat per poder analitzar disseny descendent correctament</li>
     <li>Carregar usuaris, funcions per guardar fitxers, afegir usuaris</li>
+    <li>PROBAR CARREGAR USUARIS CON MOSTRAR PERFIL + BUCLE (esperar implementación Oscar)</li>
+    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE UQEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

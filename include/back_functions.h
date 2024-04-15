@@ -13,9 +13,9 @@ extern short obtenir_usuari(char *argv[], persona_t *usuaris, short n_elem);
 
 /**
  * @brief Carrega les dades de l'usuari indicat a la taula d'usuaris a partir d'un fitxer passat com a paràmetre.
- * @param f Arxiu amb els usuaris.
- * @param t Taula amb les dades dels usuaris.
- * @param usuari Índex de la taula d'usuaris on es guarda la informació.
+ * @param f (E) Arxiu amb els usuaris.
+ * @param t (S) Taula amb les dades dels usuaris.
+ * @param usuari (E) Índex de la taula d'usuaris on es guarda la informació.
 */
 extern void carregar_usuari(FILE *f, persona_t *t, short usuari);
 
@@ -33,5 +33,37 @@ extern short carregar_usuaris(persona_t *t);
 */
 extern char carregar_amistats(int *t);
 
+/**
+ * @brief Carrega la data de naixement d'un arxiu de text a un usuari.
+ * @param f (E) Arxiu d'on s'extreu la informació.
+ * @param us (S) Usuari a on es guardarà la data de naixement.
+*/
+extern void carregar_data(FILE *f, persona_t *us);
+
+/**
+ * @brief Guarda el dia d'una data passada com a string en format dd/mm/aaaa en el dia de naixement d'un usuari.
+ * @param us Usuari en el qual s'emmagatzema la data.
+ * @param data String amb la data en el format especificat.
+ * @param index (E/S) Índex de recorregut de la taula data.
+ * @post index queda actualitzat per començar a llegir el mes directament (posició de la taula del primer dígit del mes).
+*/
+extern void carregar_dia(persona_t *us, char data[], unsigned char *index);
+
+/**
+ * @brief Guarda el mes d'una data passada com a string en format dd/mm/aaaa en el mes de naixement d'un usuari.
+ * @param us Usuari en el qual s'emmagatzema la data.
+ * @param data String amb la data en el format especificat.
+ * @param index (E/S) Índex de recorregut de la taula data.
+ * @post index queda actualitzat per començar a llegir l'any directament (posició de la taula del primer dígit de l'any).
+*/
+extern void carregar_mes(persona_t *us, char data[], unsigned char *index);
+
+/**
+ * @brief Guarda l'any d'una data passada com a string en format dd/mm/aaaa en l'any de naixement d'un usuari.
+ * @param us Usuari en el qual s'emmagatzema la data.
+ * @param data String amb la data en el format especificat.
+ * @param index (E/S) Índex de recorregut de la taula data.
+*/
+extern void carregar_any(persona_t *us, char data[], unsigned char *index);
 
 #endif
