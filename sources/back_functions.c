@@ -39,3 +39,8 @@ bool carregar_amistats(int *amistats)
     }
     return resultat;
 }
+
+bool afegir_amistat(short usuari, int *amistats)
+{
+    bool resultat = false;
+}
