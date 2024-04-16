@@ -13,7 +13,7 @@ short obtenir_usuaris(char *argv[], short n_elem)
     return (id); // Retorna el valor passat com a paràmetre en la trucada a l'executable convertit a enter o -1 en cas de no existir l'id
 }
 
-extern bool carregar_amistats(int *amistats)
+bool carregar_amistats(int *amistats)
 {
     bool resultat = true;
     short i, j, fila_columna;
