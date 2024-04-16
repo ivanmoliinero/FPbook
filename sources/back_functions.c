@@ -82,12 +82,23 @@ short carregar_usuaris(persona_t *t)
     }
     else
         n_usuaris = -1;
+    fclose(f);
     return(n_usuaris);    
+}
+
+void guardar_data(FILE *f, persona_t *usuari) // Es passa per referència per evitar sobresaturar la pila.
+{
+    fprintf(f, "%c", usuari->data_neix.dia); // REVISAR COMO GUARDAR CHAR.
+    fprintf(f)
 }
 
 void guardar_usuari(FILE *f, persona_t *t, short usuari)
 {
-    
+   fprintf(f, "%hd", t[usuari].id);
+   fprintf(f, "%s", t[usuari].nom);
+   fprintf(f, "%s", t[usuari].nom);
+   fprintf(f, "%s", t[usuari].ciutat);
+   guardar_data(f, &t[usuari]); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
 }
 
 bool guardar_usuaris(persona_t *t, short n_elem)
@@ -95,8 +106,8 @@ bool guardar_usuaris(persona_t *t, short n_elem)
     FILE *f = fopen("data/usuaris.fpb", "w"); // S'obre el fitxer d'usuaris.
     bool res;
     short n_elem_antics, iteracions;
-    if(feof(f))
-        res = false; // L'arxiu s'ha creat, no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
+    if(f = NULL || feof(f))
+        res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {   
         fscanf(f, "%hd", &n_elem_antics);
@@ -114,6 +125,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
             }
         }
     }
+    fclose(f);
     return(res);
 }
 
