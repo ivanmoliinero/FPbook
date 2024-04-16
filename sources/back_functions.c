@@ -18,8 +18,9 @@ void carregar_dia(persona_t *us, char data[], unsigned char *index)
         (*index)++;
         i++;
     }
+    temp[i] = '\0';
     (*index)++; // Deixa l'índex preparat per la lectura del mes.
-    us->data_neix.dia = atoi(temp);
+    us->data_neix.dia = (char)atoi(temp);
 }
 
 void carregar_mes(persona_t *us, char data[], unsigned char *index)
@@ -32,8 +33,9 @@ void carregar_mes(persona_t *us, char data[], unsigned char *index)
         (*index)++;
         i++;
     }
+    temp[i] = '\0';
     (*index)++; // Deixa l'índex preparat per la lectura de l'any.
-    us->data_neix.mes = atoi(temp);
+    us->data_neix.mes = (char)atoi(temp);
 }
 
 void carregar_any(persona_t *us, char data[], unsigned char *index)
@@ -44,8 +46,10 @@ void carregar_any(persona_t *us, char data[], unsigned char *index)
     {
         temp[i] = data[*index];
         (*index)++;
+        i++;
     }
-    us->data_neix.any = atoi(temp);
+    temp[i] = '\0';
+    us->data_neix.any = (short)atoi(temp);
 }
 
 void carregar_data(FILE *f, persona_t *us) // COM SEPARAR DATES PER INCLOURE-HO DINS D'UN STRUCT.
@@ -58,29 +62,37 @@ void carregar_data(FILE *f, persona_t *us) // COM SEPARAR DATES PER INCLOURE-HO 
     carregar_any(us, data, &i);
 }
 
-void carregar_usuari(FILE *f, persona_t *t, short usuari)
+void carregar_usuari(FILE *f, persona_t *usuari)
 {
-    fscanf(f, "%hd", &t[usuari].id);
-    fscanf(f, "%s", t[usuari].nom);
-    fscanf(f, "%s", t[usuari].genere);
-    fscanf(f, "%s", t[usuari].ciutat);
-    carregar_data(f, &t[usuari]);
+    fscanf(f, "%hd", &usuari->id);
+    fscanf(f, "%s", usuari->nom);
+    fscanf(f, "%s", usuari->genere);
+    fscanf(f, "%s", usuari->ciutat);
+    carregar_data(f, usuari);
 }
 
-short carregar_usuaris(persona_t *t)
+short carregar_usuaris(persona_t **usuaris)
 {
     FILE *f = fopen("data/usuaris.fpb", "r");
     short n_usuaris; // short perquè com a màxim serà de 10000 (definit a l'enunciat de la pràctica".)
-    if(f!=NULL)
+    if(f != NULL)
     {
+        persona_t *t; // Taula temporal.
         fscanf(f, "%hd", &n_usuaris);
-        t = malloc(sizeof(persona_t)*n_usuaris);
-        for(short i = 0; i < n_usuaris; i++)
+        t = malloc(86*n_usuaris);
+        if(t != NULL) // S'ha pogut crear la taula.
         {
-            carregar_usuari(f, t, i);
+            for(short i = 0; i < n_usuaris; i++)
+            {
+                carregar_usuari(f, &(t[i]));
+            }
+            *usuaris = t; /* No s'ha de fer free(t) ja que es volen conservar les dades. El valor de t en sí és la direcció
+                            de memòria, que es perd en sortir de la pila */
         }
+        else
+            n_usuaris = -1; // No s'ha pogut crear la taula amb malloc.
     }
-    else
+    else // Problemes en l'obertura del fitxer.
         n_usuaris = -1;
     fclose(f);
     return(n_usuaris);    
@@ -89,16 +101,20 @@ short carregar_usuaris(persona_t *t)
 void guardar_data(FILE *f, persona_t *usuari) // Es passa per referència per evitar sobresaturar la pila.
 {
     fprintf(f, "%c", usuari->data_neix.dia); // REVISAR COMO GUARDAR CHAR.
-    fprintf(f)
+    fprintf(f, "%c", '/');
+    fprintf(f, "%c", usuari->data_neix.mes);
+    fprintf(f, "%c", '/');
+    fprintf(f, "%c", usuari->data_neix.any);
 }
 
-void guardar_usuari(FILE *f, persona_t *t, short usuari)
+void guardar_usuari(FILE *f, persona_t *usuari)
 {
-   fprintf(f, "%hd", t[usuari].id);
-   fprintf(f, "%s", t[usuari].nom);
-   fprintf(f, "%s", t[usuari].nom);
-   fprintf(f, "%s", t[usuari].ciutat);
-   guardar_data(f, &t[usuari]); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
+   fprintf(f, "%hd", usuari->id);
+   fprintf(f, "%s", usuari->nom);
+   fprintf(f, "%s", usuari->nom);
+   fprintf(f, "%s", usuari->ciutat);
+   guardar_data(f, usuari); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
+   fprintf(f, "%c", '\n'); // Separador estètic entre usuaris.
 }
 
 bool guardar_usuaris(persona_t *t, short n_elem)
@@ -106,7 +122,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
     FILE *f = fopen("data/usuaris.fpb", "w"); // S'obre el fitxer d'usuaris.
     bool res;
     short n_elem_antics, iteracions;
-    if(f = NULL || feof(f))
+    if(f == NULL || feof(f))
         res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {   
@@ -114,14 +130,14 @@ bool guardar_usuaris(persona_t *t, short n_elem)
         iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
         fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
         res = fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
-        if(!res) 
+        if(!res) // Com es retorna 0 (false), s'ha de mirar el contrari (1, cert) per entrar al condicional. 
             res = false;
         else
         {
             fprintf(f, "%c", '\n'); // S'escriu el separador estètic per l'arxiu de salt de línia.
-            for(char i = n_elem - iteracions; i < n_elem; i++)
+            for(unsigned char i = n_elem - iteracions; i < n_elem; i++)
             {
-                guardar_usuari(f, t, i);
+                guardar_usuari(f, &t[i]);
             }
         }
     }
@@ -131,5 +147,5 @@ bool guardar_usuaris(persona_t *t, short n_elem)
 
 bool guardar_amistats()
 {
-
+    return true;
 }

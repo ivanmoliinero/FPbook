@@ -31,6 +31,8 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>ACABAR FUNCION GUARDAR USUARI</li>
     <li>EN AFEGIR USUARIS, INCREMENTAR n_elem++;</li>
     <li>PREGUNTAR TEMA stdbool.h EN back_functions.h</li>
+    <li>EXPLICAR EL PERQUÈ DEL DOBLE PUNTER I DE LA TAULA TEMPORAL</li>
+    <li>GUARDAR NUMEROS EN FORMATO CHAR/BYTE</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

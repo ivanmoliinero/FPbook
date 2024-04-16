@@ -10,7 +10,7 @@ Cada diumenge s'ha d'anotar en aquest document la setmana, els objectius i els p
 <h3 style="color:DodgerBlue"> IVÁN </h3> 
 <p>
 <!-- Progressos d'Iván -->
-<u>15/04 - 21/04 : Anàlisi de funcions bàsiques a desenvolupar + estructura esquemàtica del main (pseudocodi + C), funció carregar_usuaris() desenvolupada (falta provar-la).
+<u>15/04 - 21/04 : Anàlisi de funcions bàsiques a desenvolupar + estructura esquemàtica del main (pseudocodi + C), funció carregar_usuaris() desenvolupada, provada en tests.c.
 
 
 <!-- Fi dels progressos d'Iván -->

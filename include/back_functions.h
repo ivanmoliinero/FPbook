@@ -12,19 +12,18 @@
 extern short obtenir_usuari(char *argv[], short n_elem);
 
 /**
- * @brief Carrega les dades de l'usuari indicat a la taula d'usuaris a partir d'un fitxer passat com a paràmetre.
+ * @brief Carrega les dades de l'usuari indicat a partir d'un fitxer passat com a paràmetre.
  * @param f (E) Arxiu amb els usuaris.
- * @param t (S) Taula amb les dades dels usuaris.
- * @param usuari (E) Índex de la taula d'usuaris on es guarda la informació.
+ * @param usuari (S) Variable de persona on es carrega la info de l'arxiu.
 */
-extern void carregar_usuari(FILE *f, persona_t *t, short usuari);
+extern void carregar_usuari(FILE *f, persona_t *usuari);
 
 /**
  * @brief Carrega usuaris en una taula passada com a punter.
  * @param t (E/S) Taula on es carreguen les dades dels usuaris.
  * @return short Nombre d'usuaris registrats en el sistema, -1 si no es poden obrir l'arxiu de dades.
 */
-extern short carregar_usuaris(persona_t *t);
+extern short carregar_usuaris(persona_t **usuaris);
 
 /**
  * @brief Carrega les dades de les amistats del sistema en una taula passada com a punter.
@@ -72,6 +71,13 @@ extern void carregar_any(persona_t *us, char data[], unsigned char *index);
  * @param n_elem Nombre d'usuaris a guardar.
  * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
 */
-bool guardar_usuaris(persona_t *t, short n_elem);
+extern bool guardar_usuaris(persona_t *t, short n_elem);
+
+/**
+ * @brief Emmagatzema les dades d'un usuari concret en un fitxer de text passat com a paràmetre.
+ * @param f (E/S) Fitxer on es guarda la informació de l'usuari en qüestió.
+ * @param usuari (E/S) Variable amb tota la informació de l'usuari.
+*/
+extern void guardar_usuari(FILE *f, persona_t *usuari);
 
 #endif

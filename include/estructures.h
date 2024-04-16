@@ -7,7 +7,8 @@
 
 typedef struct 
 {
-    char dia, mes, any;
+    char dia, mes;
+    short any;
 } data_t;
 
 typedef struct
