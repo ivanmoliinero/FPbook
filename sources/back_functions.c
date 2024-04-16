@@ -119,11 +119,11 @@ void guardar_usuari(FILE *f, persona_t *usuari)
 
 bool guardar_usuaris(persona_t *t, short n_elem)
 {
-    FILE *f = fopen("data/usuaris.fpb", "w"); // S'obre el fitxer d'usuaris.
+    FILE *f = fopen("data/usuaris.fpb", "r+"); // S'obre el fitxer d'usuaris per llegir/escriure. Així es força a que l'arxiu ja existeixi prèviament (s'eviten sobreescriure dades inútilment).
     bool res;
     short n_elem_antics, iteracions;
-    if(f == NULL || feof(f))
-        res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
+    if(f == NULL)
+        res = false; 
     else
     {   
         fscanf(f, "%hd", &n_elem_antics);
@@ -135,17 +135,38 @@ bool guardar_usuaris(persona_t *t, short n_elem)
         else
         {
             fprintf(f, "%c", '\n'); // S'escriu el separador estètic per l'arxiu de salt de línia.
-            for(unsigned char i = n_elem - iteracions; i < n_elem; i++)
-            {
+            for(short i = n_elem - iteracions; i < n_elem; i++)
                 guardar_usuari(f, &t[i]);
-            }
         }
     }
     fclose(f);
     return(res);
 }
 
-bool guardar_amistats()
+bool guardar_amistats(int *amistats, short n_elem)
 {
-    return true;
+    FILE *f = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
+                                                 s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
+                                                 existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
+    bool res;
+    short n_elem_antics, iteracions; // Pot passar que s'hagin afegit nous usuaris, de manera que cal tenir en compte aquesta possibilitat.
+    if(f == NULL) 
+        res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
+    else
+    {
+        fprintf(f, "%hd", n_elem);
+        for(short i = 0; i < n_elem; i++) // Files.
+        {
+            fprintf(f, "%s", "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
+            if(amistats[i*n_elem] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
+            for(short j = 0; j < n_elem; j++) // Columnes.
+            {
+                if(amistats[i*n_elem+j] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
+                fprintf(f, "%d", amistats[i*n_elem+j]);
+            }
+            fprintf(f, "%s", '\n'); // Salt de línia per separar files.
+        }        
+    }
+    fclose(f);
+    return(res);
 }

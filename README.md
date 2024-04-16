@@ -33,6 +33,8 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>PREGUNTAR TEMA stdbool.h EN back_functions.h</li>
     <li>EXPLICAR EL PERQUÈ DEL DOBLE PUNTER I DE LA TAULA TEMPORAL</li>
     <li>GUARDAR NUMEROS EN FORMATO CHAR/BYTE</li>
+    <li>VALORAR REDUCIR ESCALA INT AMISTATS!!! (+ PREGUNTAR FORMATO ARCHIVO propers.fpb)</li>
+    <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
