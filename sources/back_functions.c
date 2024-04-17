@@ -79,7 +79,7 @@ short carregar_usuaris(persona_t **usuaris)
     {
         persona_t *t; // Taula temporal.
         fscanf(f, "%hd", &n_usuaris);
-        t = malloc(86*n_usuaris);
+        t = malloc(sizeof(persona_t)*n_usuaris);
         if(t != NULL) // S'ha pogut crear la taula.
         {
             for(short i = 0; i < n_usuaris; i++)
