@@ -142,7 +142,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
 
 bool guardar_amistats(int *amistats, short n_elem)
 {
-    FILE *f = fopen("data/propers_test.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
+    FILE *f = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
                                                  s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
                                                  existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
     bool res;
@@ -164,4 +164,9 @@ bool guardar_amistats(int *amistats, short n_elem)
     }
     fclose(f);
     return(res);
+}
+
+void afegir_usuari()
+{
+    
 }
