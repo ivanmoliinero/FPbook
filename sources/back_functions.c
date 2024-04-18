@@ -100,11 +100,11 @@ short carregar_usuaris(persona_t **usuaris)
 
 void guardar_data(FILE *f, persona_t *usuari) // Es passa per referència per evitar sobresaturar la pila.
 {
-    fprintf(f, "%c", usuari->data_neix.dia); // REVISAR COMO GUARDAR CHAR.
+    fprintf(f, "%hd", (short)usuari->data_neix.dia); // Fem casting a short per guardar els char, al final es guardarà el nombre.
     fprintf(f, "%c", '/');
-    fprintf(f, "%c", usuari->data_neix.mes);
+    fprintf(f, "%hd", (short)usuari->data_neix.mes);
     fprintf(f, "%c", '/');
-    fprintf(f, "%c", usuari->data_neix.any);
+    fprintf(f, "%hd", usuari->data_neix.any);
 }
 
 void guardar_usuari(FILE *f, persona_t *usuari)
@@ -145,7 +145,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
 
 bool guardar_amistats(int *amistats, short n_elem)
 {
-    FILE *f = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
+    FILE *f = fopen("data/propers_test.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
                                                  s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
                                                  existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
     bool res;
@@ -164,7 +164,7 @@ bool guardar_amistats(int *amistats, short n_elem)
                 if(amistats[i*n_elem+j] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
                 fprintf(f, "%d", amistats[i*n_elem+j]);
             }
-            fprintf(f, "%s", '\n'); // Salt de línia per separar files.
+            fprintf(f, "%c", '\n'); // Salt de línia per separar files.
         }        
     }
     fclose(f);

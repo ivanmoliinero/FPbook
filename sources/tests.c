@@ -7,15 +7,10 @@
 
 int main()
 {
-    persona_t *usuaris; // Punter a taula d'usuaris.
-    short n_elem = carregar_usuaris(&usuaris); // Nombre d'usuaris registrats al sistema.
-    for (int i = 0; i < n_elem; i++)
-    {
-        printf("ID: %hd\n", usuaris[i].id);
-        printf("NOM: %s\n", usuaris[i].nom);
-        printf("GÈNERE: %s\n", usuaris[i].genere);
-        printf("CIUTAT: %s\n", usuaris[i].ciutat);
-        printf("DATA: %d/%d/%d\n", (int)usuaris[i].data_neix.dia, (int)usuaris[i].data_neix.mes, (int)usuaris[i].data_neix.any);
-    }
+    int amistats[9] = {1, 2, 3,
+                      -1, 5, 6,
+                       7, 8, 9}; // Vector com a matriu.
+    bool fet = guardar_amistats(amistats, 9);
+    fet ? (printf("GUARDAT")) : (printf("NO GUARDAT"));
     return 0;
 }

@@ -39,7 +39,7 @@ run : build/fpbook.exe
 #	debug command
 #------------------------------------------------------------------
 debug : build/tests.exe
-	gdb build/tests.exe
+	build/tests.exe
 
 
 #------------------------------------------------------------------

@@ -41,8 +41,8 @@ extern void carregar_data(FILE *f, persona_t *us);
 
 /**
  * @brief Guarda el dia d'una data passada com a string en format dd/mm/aaaa en el dia de naixement d'un usuari.
- * @param us Usuari en el qual s'emmagatzema la data.
- * @param data String amb la data en el format especificat.
+ * @param us (S) Usuari en el qual s'emmagatzema la data.
+ * @param data (E) String amb la data en el format especificat.
  * @param index (E/S) Índex de recorregut de la taula data.
  * @post index queda actualitzat per començar a llegir el mes directament (posició de la taula del primer dígit del mes).
 */
@@ -50,8 +50,8 @@ extern void carregar_dia(persona_t *us, char data[], unsigned char *index);
 
 /**
  * @brief Guarda el mes d'una data passada com a string en format dd/mm/aaaa en el mes de naixement d'un usuari.
- * @param us Usuari en el qual s'emmagatzema la data.
- * @param data String amb la data en el format especificat.
+ * @param us (S) Usuari en el qual s'emmagatzema la data.
+ * @param data (E) String amb la data en el format especificat.
  * @param index (E/S) Índex de recorregut de la taula data.
  * @post index queda actualitzat per començar a llegir l'any directament (posició de la taula del primer dígit de l'any).
 */
@@ -59,8 +59,8 @@ extern void carregar_mes(persona_t *us, char data[], unsigned char *index);
 
 /**
  * @brief Guarda l'any d'una data passada com a string en format dd/mm/aaaa en l'any de naixement d'un usuari.
- * @param us Usuari en el qual s'emmagatzema la data.
- * @param data String amb la data en el format especificat.
+ * @param us (S) Usuari en el qual s'emmagatzema la data.
+ * @param data (E) String amb la data en el format especificat.
  * @param index (E/S) Índex de recorregut de la taula data.
 */
 extern void carregar_any(persona_t *us, char data[], unsigned char *index);
@@ -68,7 +68,7 @@ extern void carregar_any(persona_t *us, char data[], unsigned char *index);
 /**
  * @brief Emmagatzema les dades dels usuaris en el fitxer usuaris.fpb.
  * @param t (E) Taula amb tota la informació dels usuaris.
- * @param n_elem Nombre d'usuaris a guardar.
+ * @param n_elem (E) Nombre d'usuaris a guardar.
  * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
 */
 extern bool guardar_usuaris(persona_t *t, short n_elem);
@@ -79,5 +79,12 @@ extern bool guardar_usuaris(persona_t *t, short n_elem);
  * @param usuari (E/S) Variable amb tota la informació de l'usuari.
 */
 extern void guardar_usuari(FILE *f, persona_t *usuari);
+
+/**
+ * @brief Emmagatzema les dades dels estats de proximitat i amistat entre els usuaris.
+ * @param amistats (E) Direcció de memòria de la matriu d'amistats (interpretada com un vector).
+ * @param n_elem (E) Nombre de files i columnes de la matriu (nombre d'usuaris del sistema).
+*/
+extern bool guardar_amistats(int *amistats, short n_elem);
 
 #endif
