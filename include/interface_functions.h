@@ -9,6 +9,12 @@
 #define AFEGIR_USUARI 5
 
 // Capceleres de les funcions d'interfície.
+
+/**
+ * @brief Mostra missatge informant de les opcions del menu afegir_amistat().
+ */
+extern void menu_afegir_amistat();
+
 /**
  * @brief Mostra un missatge de benvinguda a FPbook.
  */

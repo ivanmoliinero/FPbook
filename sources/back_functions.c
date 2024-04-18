@@ -2,7 +2,9 @@
 #include <stdlib.h>  // Proporciona funcions per a la gestió de memòria dinàmica, control de processos i conversions de tipus
 #include <stdbool.h> // Proporciona l'estructura de dades booleana
 
-short obtenir_usuaris(char *argv[], short n_elem)
+#define COMPATIBILIDAD 3
+
+short obtenir_usuari(char *argv[], short n_elem)
 {
     short id = atoi(argv[1]); // Converteix la cadena de caràcters ASCII a un Integer(int)
 
@@ -40,7 +42,97 @@ bool carregar_amistats(int **amistats)
     return resultat;
 }
 
-bool afegir_amistat(short usuari, int *amistats)
+bool afegir_amistat(short usuari, short n_usuaris, int **amistats)
 {
-    bool resultat = false;
+    bool correcte = true;
+    bool error = false;
+    short opcio, confirmacio;
+    int i, j;
+    int fila = usuari * n_usuaris;
+    *amistats = malloc(sizeof(int) * n_usuaris * n_usuaris); // Reserva memòria pel vector amistats de forma dinàmica
+
+    for (int i = 0; i < n_usuaris; i++)
+    {
+        if (((*amistats)[fila + i]) > COMPATIBILIDAD)
+        {
+            printf("mostrar_perfil();");
+        }
+    }
+
+    menu_afegir_amistat();
+
+    do
+    {
+        scanf("%hd", &opcio);
+        if (((*amistats)[fila + opcio]) == -1)
+        {
+            correcte = false; // AÑADIR COMENTARIO INFORMANDO DEL ERROR
+        }
+        else if (opcio < 0 || opcio > n_usuaris)
+        {
+            correcte = false; // AÑADIR COMENTARIO INFORMANDO DEL ERROR
+        }
+        else
+        {
+            if (((*amistats)[fila + opcio]) < COMPATIBILIDAD)
+            {
+                // AÑADIR MENSAJE DE ESTAS SEGURO DE QUE QUIERES AÑADIR A ALGUIEN CON POCA COMPATIBILIDAD?
+                do
+                {
+                    scanf("%hd", &confirmacio);
+                } while (confirmacio != 0 && confirmacio != 1);
+
+                if (confirmacio == 1)
+                {
+                    // AÑADIR AMISTAD
+                    ((*amistats)[fila + opcio]) = -1;
+                    FILE *fitxer = fopen("propers.fpb", "w");
+
+                    if (fitxer == NULL)
+                    {
+                        error = true;
+                    }
+                    else
+                    {
+                        fprintf(fitxer, "%hd", n_usuaris);
+                        for (i = 0; i < n_usuaris; i++)
+                        {
+                            for (j = 0; j < n_usuaris; j++)
+                            {
+                                fprintf(fitxer, "%d ", ((*amistats)[i * n_usuaris + j]));
+                            }
+                            fprintf(fitxer, "\n");
+                        }
+                        fclose(fitxer);
+                    }
+                }
+            }
+            else
+            {
+                // AÑADIR AMISTAD
+                ((*amistats)[fila + opcio]) = -1;
+                FILE *fitxer = fopen("propers.fpb", "w");
+
+                if (fitxer == NULL)
+                {
+                    error = true;
+                }
+                else
+                {
+                    fprintf(fitxer, "%hd", n_usuaris);
+                    for (i = 0; i < n_usuaris; i++)
+                    {
+                        for (j = 0; j < n_usuaris; j++)
+                        {
+                            fprintf(fitxer, "%d ", ((*amistats)[i * n_usuaris + j]));
+                        }
+                        fprintf(fitxer, "\n");
+                    }
+                    fclose(fitxer);
+                }
+            }
+        }
+    } while (!correcte);
+
+    return error;
 }

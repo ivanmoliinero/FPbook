@@ -16,21 +16,15 @@ extern short obtenir_usuari(char *argv[], short n_elem);
  * @param amistats (E/S) Vector amb l'informació de cada amistat. De tipus int (no sabem quin és el màxim nombre de distància).
  * @return booleà amb el resultat de l'operació; tot correcte --> true; error --> false
  */
-extern bool carregar_amistats(int *amistats);
+extern bool carregar_amistats(int **amistats);
 
 /**
  * @brief Afegeix una amistat y actualitza la informació de les amistats d'aquell usuari
  * @param usuari (E) Id de l'usuari
+ * @param n_usuaris (E) Número d'usuaris al sistema
  * @param amistats (E) Vector amb l'informació de cada amistat. De tipus int (no sabem quin és el màxim nombre de distància).
  * @return booleà amb el resultat de l'operació; tot correcte --> true; error --> false
  */
-extern bool afegir_amistat(short usuari, int amistats);
-
-/**
- * @brief Carrega usuaris en una taula passada com a punter.
- * @param t (E/S) Taula on es carreguen les dades dels usuaris.
- * @return short Nombre d'usuaris registrats en el sistema.
- */
-extern short carregar_usuaris(persona_t *t);
+extern bool afegir_amistat(short usuari, short n_usuaris, int amistats);
 
 #endif

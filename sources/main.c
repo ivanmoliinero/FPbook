@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         char o;                                      // Opció seleccionada per l'usuari.
         persona_t *usuaris;                          // Punter a taula d'usuaris.
         int *amistats;                               // Punter a taula d'amistats.
-        short n_elem = carregar_usuaris(usuaris);    // Nombre d'usuaris registrats al sistema.
+        short n_elem = carregar_usuaris(&usuaris);   // Nombre d'usuaris registrats al sistema.
         short usuari = obtenir_usuari(argv, n_elem); // Id de l'usuari que ha iniciat el programa.
         if (usuari == -1)
         {
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                         mostrar_amistats();
                         break;
                     case AFEGIR_AMISTAT:
-                        afegir_amistat(usuari, amistats);
+                        afegir_amistat(usuari, n_elem, &amistats);
                         break;
                     case ELIMINAR_AMISTAT:
                         eliminar_amistat();
