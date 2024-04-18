@@ -146,20 +146,18 @@ bool guardar_amistats(int *amistats, short n_elem)
                                                  s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
                                                  existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
     bool res;
-    short n_elem_antics, iteracions; // Pot passar que s'hagin afegit nous usuaris, de manera que cal tenir en compte aquesta possibilitat.
     if(f == NULL) 
         res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {
-        fprintf(f, "%hd", n_elem);
+        fprintf(f, "%hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
         {
             fprintf(f, "%s", "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
-            if(amistats[i*n_elem] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
             for(short j = 0; j < n_elem; j++) // Columnes.
             {
                 if(amistats[i*n_elem+j] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
-                fprintf(f, "%d", amistats[i*n_elem+j]);
+                fprintf(f, "%d ", amistats[i*n_elem+j]);
             }
             fprintf(f, "%c", '\n'); // Salt de línia per separar files.
         }        
