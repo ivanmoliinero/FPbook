@@ -77,17 +77,14 @@ short carregar_usuaris(persona_t **usuaris)
     short n_usuaris; // short perquè com a màxim serà de 10000 (definit a l'enunciat de la pràctica".)
     if(f != NULL)
     {
-        persona_t *t; // Taula temporal.
         fscanf(f, "%hd", &n_usuaris);
-        t = malloc(sizeof(persona_t)*n_usuaris);
-        if(t != NULL) // S'ha pogut crear la taula.
+        *usuaris = malloc(sizeof(persona_t)*n_usuaris);
+        if(*usuaris != NULL) // S'ha pogut crear la taula.
         {
             for(short i = 0; i < n_usuaris; i++)
             {
-                carregar_usuari(f, &(t[i]));
+                carregar_usuari(f, &((*usuaris)[i]));
             }
-            *usuaris = t; /* No s'ha de fer free(t) ja que es volen conservar les dades. El valor de t en sí és la direcció
-                            de memòria, que es perd en sortir de la pila */
         }
         else
             n_usuaris = -1; // No s'ha pogut crear la taula amb malloc.
