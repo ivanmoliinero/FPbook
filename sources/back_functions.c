@@ -166,7 +166,21 @@ bool guardar_amistats(int *amistats, short n_elem)
     return(res);
 }
 
-void afegir_usuari()
+void demanar_dades_nous_usuaris()
 {
-    
+    short n_usuaris_nous;
+    persona_t *usuari;
+    // TODO: Demanar n_usuaris_nous.
+    for(short i = 0; i < n_usuaris_nous; i++)
+    {
+        demanar_dades_nous_usuaris(usuari);
+    }
+}
+
+void afegir_usuaris()
+{
+    demanar_dades_nous_usuaris();
+
+    // TODO: Canviar longitud de la taula inicial a 1 més.
+
 }

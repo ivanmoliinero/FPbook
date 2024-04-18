@@ -33,6 +33,9 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>GUARDAR NUMEROS EN FORMATO CHAR/BYTE</li>
     <li>VALORAR REDUCIR ESCALA INT AMISTATS!!! (+ PREGUNTAR FORMATO ARCHIVO propers.fpb)</li>
     <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
+    <br>
+    <li>FUNCION EXTRA PARA CONTROLAR RANGOS DE VALORES INTRODUCIDOS POR TECLADO (que no sean caracteres + rango).</li>
+    
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

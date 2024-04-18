@@ -11,7 +11,7 @@ Cada diumenge s'ha d'anotar en aquest document la setmana, els objectius i els p
 <p>
 <!-- Progressos d'Iván -->
 <ul>
-<li><u>15/04 - 21/04</u>: Anàlisi de funcions bàsiques a desenvolupar + estructura esquemàtica del main (pseudocodi + C), funció carregar_usuaris() desenvolupada, provada en tests.c. Funció guardar_amistats() desenvolupada (falta provar-la amb l'ajuda de les funcions a implementar per part dels companys).</li>
+<li><u>15/04 - 21/04</u>: Anàlisi de funcions bàsiques a desenvolupar + estructura esquemàtica del main (pseudocodi + C), funció carregar_usuaris() desenvolupada, provada en tests.c. Funció guardar_amistats() desenvolupada i provada en tests.c</li>
 </ul>
 
 <!-- Fi dels progressos d'Iván -->
