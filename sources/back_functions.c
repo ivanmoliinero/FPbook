@@ -5,61 +5,10 @@
 #include "estructures.h"
 #include "back_functions.h"
 
-#define MAX_DATA 11 // Longitud màxima del string de la data que es llegeix dels arxius.
-#define MAX_TEMP 4 // Longitud màxima possible de cada dada (any).
-
-void carregar_dia(persona_t *us, char data[], unsigned char *index)
+void carregar_data(FILE *f, persona_t *us)
 {
-    char temp[MAX_TEMP];
-    unsigned char i = 0;
-    while(data[*index] != '/')
-    {
-        temp[i] = data[*index];
-        (*index)++;
-        i++;
-    }
-    temp[i] = '\0';
-    (*index)++; // Deixa l'índex preparat per la lectura del mes.
-    us->data_neix.dia = (char)atoi(temp);
-}
-
-void carregar_mes(persona_t *us, char data[], unsigned char *index)
-{
-    char temp[MAX_TEMP];
-    unsigned char i = 0;
-    while(data[*index] != '/')
-    {
-        temp[i] = data[*index];
-        (*index)++;
-        i++;
-    }
-    temp[i] = '\0';
-    (*index)++; // Deixa l'índex preparat per la lectura de l'any.
-    us->data_neix.mes = (char)atoi(temp);
-}
-
-void carregar_any(persona_t *us, char data[], unsigned char *index)
-{
-    char temp[MAX_TEMP];
-    unsigned char i = 0;
-    while(data[*index] != 0)
-    {
-        temp[i] = data[*index];
-        (*index)++;
-        i++;
-    }
-    temp[i] = '\0';
-    us->data_neix.any = (short)atoi(temp);
-}
-
-void carregar_data(FILE *f, persona_t *us) // COM SEPARAR DATES PER INCLOURE-HO DINS D'UN STRUCT.
-{
-    char data[MAX_DATA];
-    fscanf(f, "%s", data);
-    unsigned char i = 0;
-    carregar_dia(us, data, &i);
-    carregar_mes(us, data, &i);
-    carregar_any(us, data, &i);
+    fscanf(f, "%hd/%hd/%hd", (short*)&us->data_neix.dia, (short*)&us->data_neix.mes, &us->data_neix.any); /* Cal fer casting a short per tal de poder llegir correctament
+                                                                                                           les dades. Quan es guardin, ja es guarden en un char */
 }
 
 void carregar_usuari(FILE *f, persona_t *usuari)
@@ -150,16 +99,19 @@ bool guardar_amistats(int *amistats, short n_elem)
         res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {
+        short dir; // Variable per evitar recalcular constantment i * n_elem+ j
         fprintf(f, "%hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
         {
-            fprintf(f, "%c", '\t'); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
-            for(short j = 0; j < n_elem; j++) // Columnes.
+            fprintf(f, "%s", "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
+            dir = i * n_elem; // j = 0;
+            while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
             {
-                if(amistats[i*n_elem+j] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
-                fprintf(f, "%d ", amistats[i*n_elem+j]);
+                if(amistats[dir] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
+                fprintf(f, "%d ", amistats[dir]);
+                dir++; // j++;
             }
-            fprintf(f, "%c", '\n'); // Salt de línia per separar files.
+            fprintf(f, "%s", " 0\n"); // Sentinella 0 + salt de línia per separar files.
         }        
     }
     fclose(f);

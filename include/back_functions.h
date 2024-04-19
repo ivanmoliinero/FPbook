@@ -40,32 +40,6 @@ extern char carregar_amistats(int *amistats);
 extern void carregar_data(FILE *f, persona_t *us);
 
 /**
- * @brief Guarda el dia d'una data passada com a string en format dd/mm/aaaa en el dia de naixement d'un usuari.
- * @param us (S) Usuari en el qual s'emmagatzema la data.
- * @param data (E) String amb la data en el format especificat.
- * @param index (E/S) Índex de recorregut de la taula data.
- * @post index queda actualitzat per començar a llegir el mes directament (posició de la taula del primer dígit del mes).
-*/
-extern void carregar_dia(persona_t *us, char data[], unsigned char *index);
-
-/**
- * @brief Guarda el mes d'una data passada com a string en format dd/mm/aaaa en el mes de naixement d'un usuari.
- * @param us (S) Usuari en el qual s'emmagatzema la data.
- * @param data (E) String amb la data en el format especificat.
- * @param index (E/S) Índex de recorregut de la taula data.
- * @post index queda actualitzat per començar a llegir l'any directament (posició de la taula del primer dígit de l'any).
-*/
-extern void carregar_mes(persona_t *us, char data[], unsigned char *index);
-
-/**
- * @brief Guarda l'any d'una data passada com a string en format dd/mm/aaaa en l'any de naixement d'un usuari.
- * @param us (S) Usuari en el qual s'emmagatzema la data.
- * @param data (E) String amb la data en el format especificat.
- * @param index (E/S) Índex de recorregut de la taula data.
-*/
-extern void carregar_any(persona_t *us, char data[], unsigned char *index);
-
-/**
  * @brief Emmagatzema les dades dels usuaris en el fitxer usuaris.fpb.
  * @param t (E) Taula amb tota la informació dels usuaris.
  * @param n_elem (E) Nombre d'usuaris a guardar.
