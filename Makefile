@@ -29,17 +29,20 @@ build/tests.exe : sources/tests.c sources/interface_functions.c sources/back_fun
 
 
 #------------------------------------------------------------------
-#	run command
+#	run commands
 #------------------------------------------------------------------
 run : build/fpbook.exe
 	build/fpbook.exe
+
+run_tests : build/tests.exe
+	build/tests.exe
 
 
 #------------------------------------------------------------------
 #	debug command
 #------------------------------------------------------------------
 debug : build/tests.exe
-	build/tests.exe
+	gdb build/tests.exe
 
 
 #------------------------------------------------------------------

@@ -74,13 +74,13 @@ bool guardar_usuaris(persona_t *t, short n_elem)
     {   
         fscanf(f, "%hd", &n_elem_antics);
         iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
+        rewind(f); // Es torna a l'inici de l'arxiu.
         fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
         res = fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
         if(!res) // Com es retorna 0 (false), s'ha de mirar el contrari (1, cert) per entrar al condicional. 
-            res = false;
-        else
         {
-            fprintf(f, "%c", '\n'); // S'escriu el separador estètic per l'arxiu de salt de línia.
+            res = true;
+            fprintf(f, "\n\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
             for(short i = n_elem - iteracions; i < n_elem; i++)
                 guardar_usuari(f, &t[i]);
         }
@@ -103,7 +103,7 @@ bool guardar_amistats(int *amistats, short n_elem)
         fprintf(f, "%hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
         {
-            fprintf(f, "%s", "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
+            fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
             dir = i * n_elem; // j = 0;
             while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
             {
@@ -111,7 +111,7 @@ bool guardar_amistats(int *amistats, short n_elem)
                 fprintf(f, "%d ", amistats[dir]);
                 dir++; // j++;
             }
-            fprintf(f, "%s", " 0\n"); // Sentinella 0 + salt de línia per separar files.
+            fprintf(f, " 0\n"); // Sentinella 0 + salt de línia per separar files.
         }        
     }
     fclose(f);

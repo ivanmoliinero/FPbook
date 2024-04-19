@@ -44,6 +44,7 @@ extern void carregar_data(FILE *f, persona_t *us);
  * @param t (E) Taula amb tota la informació dels usuaris.
  * @param n_elem (E) Nombre d'usuaris a guardar.
  * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
+ * @return bool True si s'han pogut guardar els usuaris, false altrament.
 */
 extern bool guardar_usuaris(persona_t *t, short n_elem);
 
