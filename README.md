@@ -35,6 +35,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
     <br>
     <li>FUNCION EXTRA PARA CONTROLAR RANGOS DE VALORES INTRODUCIDOS POR TECLADO (que no sean caracteres + rango).</li>
+    <li>ACABAR FUNCION AFEGIR USUARIS</li>
     
 </ul>
 <!-- Fi dels apunts d'Iván -->
