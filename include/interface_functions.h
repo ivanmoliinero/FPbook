@@ -7,6 +7,8 @@
 #define AFEGIR_AMISTAT 3
 #define ELIMINAR_AMISTAT 4
 #define AFEGIR_USUARI 5
+#define LLETRA_INTRODUIDA 0 // atoi retorna 0 si s'introdueixen lletres.
+#define EXIT -1
 
 #define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
 

@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
                                         usuaris_editats = true;
                                         break;
                 } // Es podria afegir cas DEFAULT, però com el rang de o està (per funció demanar_opcio) controlat no cal.
-            } while (o != 0);
+            } while (o != EXIT);
             if(usuaris_editats && !guardar_usuaris(usuaris, n_elem))
                 error_guardat_usuaris();
             if(amistats_editades && !guardar_amistats())
