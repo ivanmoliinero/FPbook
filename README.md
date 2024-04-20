@@ -1,4 +1,5 @@
 # FPBOOK - Pràctica de l'assignatura FP II
+
 <img alt="Static Badge" src="https://img.shields.io/badge/status-not_started-red">
 <br>
     En aquest document s'apunten els progressos, notes i tasques pendents de cada membre del grup. Un cop es faci un push, s'ha d'entrar al README.md de la branca main i actualitzar els status de cada membre.
@@ -23,9 +24,9 @@
     CARREGAR AMISTATS (HECHO)
 </P>
 <p>
-    AFEGIR AMISTAT (HECHO A FALTA DE REVISIÓN Y OPTIMIZACIÓN)
+    AFEGIR AMISTAT (HECHO)
 </p>
 <p>
-    ELIMINAR AMISTAT
+    ELIMINAR AMISTAT(ESTUDIAR METODOLOGÍA)
 </p>
 <br><br>
