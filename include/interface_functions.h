@@ -8,6 +8,8 @@
 #define ELIMINAR_AMISTAT 4
 #define AFEGIR_USUARI 5
 
+#define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
+
 // Capceleres de les funcions d'interfície.
 /**
  * @brief Mostra un missatge de benvinguda a FPbook.
@@ -57,5 +59,10 @@ extern void error_guardat_usuaris();
  * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades de les amistats.
 */
 extern void error_guardat_amistats();
+
+/**
+ * @brief Obté una opció introduïda per l'usuari per teclat i la converteix en un enter (short). Control d'errors d'entrada de dades numèriques.
+*/
+extern short obtenir_opcio_convertida();
 
 #endif

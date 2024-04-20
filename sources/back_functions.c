@@ -121,9 +121,9 @@ bool guardar_amistats(int *amistats, short n_elem)
 void afegir_usuaris(persona_t **usuaris, short n_usuaris)
 {
     // TODO: Demanar nombre nous usuaris en variable n_nous.
-    short n_finals = n_usuaris + n_nous;
-    realloc(*usuaris, sizeof(persona_t)*n_finals);
-    for(short i = n_usuaris; i < n_finals; i++)
-        afegir_usuari(&(*usuaris)[i]); // Implementar en interface_functions.  
+    // short n_finals = n_usuaris + n_nous;
+    // realloc(*usuaris, sizeof(persona_t)*n_finals);
+    // for(short i = n_usuaris; i < n_finals; i++)
+    //     afegir_usuari(&(*usuaris)[i]); // Implementar en interface_functions.  
 
 }
