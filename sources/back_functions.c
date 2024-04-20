@@ -4,6 +4,7 @@
 
 #include "estructures.h"
 #include "back_functions.h"
+#include "interface_functions.h"
 
 void carregar_data(FILE *f, persona_t *us)
 {
@@ -118,12 +119,22 @@ bool guardar_amistats(int *amistats, short n_elem)
     return(res);
 }
 
+void actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
+{
+    short n_finals = n_usuaris + n_nous;
+    realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació de la matriu d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
+    for(short i = n_usuaris; i < n_finals; i++)
+        afegir_usuari(&(*usuaris)[i]); // Implementar en interface_functions.  
+}   
+
+void actualitzacio_amistats()
+{
+
+}
+
 void afegir_usuaris(persona_t **usuaris, short n_usuaris)
 {
-    // TODO: Demanar nombre nous usuaris en variable n_nous.
-    // short n_finals = n_usuaris + n_nous;
-    // realloc(*usuaris, sizeof(persona_t)*n_finals);
-    // for(short i = n_usuaris; i < n_finals; i++)
-    //     afegir_usuari(&(*usuaris)[i]); // Implementar en interface_functions.  
-
+    short n_nous = demanar_n_usuaris_nous();
+    actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
+    actualitzacio_amistats();
 }

@@ -12,6 +12,8 @@
 
 #define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
 
+#define MAX_USUARIS 10000 // Màxims usuaris que es suportaran al sistema.
+
 // Capceleres de les funcions d'interfície.
 /**
  * @brief Mostra un missatge de benvinguda a FPbook.
@@ -64,7 +66,14 @@ extern void error_guardat_amistats();
 
 /**
  * @brief Obté una opció introduïda per l'usuari per teclat i la converteix en un enter (short). Control d'errors d'entrada de dades numèriques.
+ * @return short 0 en cas que s'hagi introduït un caràcter no numèric, el nombre introduït per teclat (dins del rang de short) altrament.
 */
 extern short obtenir_opcio_convertida();
 
+/**
+ * @brief Demana el nombre d'usuaris nous que s'introduiran a la base d'usuaris.
+ * @return short Nombre d'usuaris nous.
+ * @post 0 < n_nous && n_nous < MAX_USUARIS.
+*/
+extern short demanar_n_usuaris_nous();
 #endif
