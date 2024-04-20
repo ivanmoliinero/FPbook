@@ -24,7 +24,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <!-- Apunts d'Iván -->
 <ul>
     <li>Carregar usuaris, funcions per guardar fitxers, afegir usuaris</li>
-    <li>PROBAR CARREGAR USUARIS CON MOSTRAR PERFIL + BUCLE (esperar implementación Oscar)</li>
+    <br>
     <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE UQEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).</li>
     <li>PREGUNTAR SI SUPOSICION DE USUARIOS CORRECTA</li>
     <li>PREGUNTAR SI SUPOSICION DE ARCHIVOS DE USUARIO CORRECTA</li>
@@ -33,9 +33,10 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>VALORAR REDUCIR ESCALA INT AMISTATS!!! (+ PREGUNTAR FORMATO ARCHIVO propers.fpb)</li>
     <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
     <br>
-    <li>FUNCION EXTRA PARA CONTROLAR RANGOS DE VALORES INTRODUCIDOS POR TECLADO (que no sean caracteres + rango).</li>
     <li>ACABAR FUNCION AFEGIR USUARIS</li>
-    
+    <li>FUNCION DATA_COMPATIBLE + IMPLEMENTAR FUNCION DO - WHILE ERIC</li>
+    <br>
+    <li>DISCUTIR SI HACER UNSIGNED VARIABLES</li>    
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

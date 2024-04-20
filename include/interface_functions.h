@@ -76,4 +76,11 @@ extern short obtenir_opcio_convertida();
  * @post 0 < n_nous && n_nous < MAX_USUARIS.
 */
 extern short demanar_n_usuaris_nous();
+
+/**
+ * @brief Guarda les dades d'un usuari pel teclat en la variable passada per paràmetre.
+ * @param (S) usuari Variable de persona_t on es guarden les dades.
+*/
+extern void afegir_usuari(persona_t *usuari);
+
 #endif
