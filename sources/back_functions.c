@@ -104,7 +104,7 @@ bool guardar_amistats(int *amistats, short n_elem)
         for(short i = 0; i < n_elem; i++) // Files.
         {
             fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
-            dir = i * n_elem; // j = 0;
+            dir = (i * (i + 1))/2; // j = 0;
             while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
             {
                 if(amistats[dir] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.

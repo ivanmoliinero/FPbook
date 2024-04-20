@@ -26,8 +26,13 @@ int main()
     // if(!guardar_usuaris(usuaris, 11)) printf("GUARDAT INCORRECTE"); else printf("GUARDAR CORRECTE");
 
     // PROVA OBTENIR_OPCIO_CONVERTIDA
-    printf("Introdueix un nombre de 4 dígits\n");
-    short opcio = obtenir_opcio_convertida();
-    printf("La vostra opció és %hd", opcio);
+    // printf("Introdueix un nombre de 4 dígits\n");
+    // short opcio = obtenir_opcio_convertida();
+    // printf("La vostra opció és %hd", opcio);
+    
+    // PROVA GUARDAR AMISTATS
+    // int prova[10] = {0, 1, 0, 1, 2, 0, 1, 2, 3, 0};
+    // (guardar_amistats(prova, 4)) ? (printf("GUARDAT INCORRECTE")) : (printf("GUARDAT CORRECTE"));
+
     return 0;
 }
