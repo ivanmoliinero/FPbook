@@ -8,10 +8,11 @@
 int main()
 {
     // PROVA CARREGA USUARIS
-    // persona_t *usuaris;
-    // short n_elem = carregar_usuaris(&usuaris);
-    // realloc(usuaris, sizeof(persona_t)*11);
-    // usuaris[10].id = 130;    
+    persona_t *usuaris;
+    short n_elem = carregar_usuaris(&usuaris);    
+
+    // PROVA AFEGIR USUARIS
+    n_elem = afegir_usuaris(&usuaris, n_elem);
 
     // for(int i = 0; i < n_elem; i++)
     // {
@@ -23,12 +24,12 @@ int main()
     // }
 
     // PROVA GUARDAT D'USUARIS
-    // if(!guardar_usuaris(usuaris, 11)) printf("GUARDAT INCORRECTE"); else printf("GUARDAR CORRECTE");
+    if(!guardar_usuaris(usuaris, n_elem)) printf("GUARDAT INCORRECTE"); else printf("GUARDAR CORRECTE");
 
     // PROVA OBTENIR_OPCIO_CONVERTIDA
-    printf("Introdueix un nombre de 4 dígits\n");
-    short opcio = obtenir_opcio_convertida();
-    printf("La vostra opció és %hd", opcio);
+    // printf("Introdueix un nombre de 4 dígits\n");
+    // short opcio = obtenir_opcio_convertida();
+    // printf("La vostra opció és %hd", opcio);
 
     // PROVA GUARDAR AMISTATS
     // int prova[10] = {0, 1, 0, 1, 2, 0, 1, 2, 3, 0};

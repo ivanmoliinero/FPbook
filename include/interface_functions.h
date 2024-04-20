@@ -83,4 +83,15 @@ extern short demanar_n_usuaris_nous();
 */
 extern void afegir_usuari(persona_t *usuari);
 
+/**
+ * @brief Demana una data de naixement a un usuari per teclat i l'emmagatzema en la variable usuari passada com a paràmetre.
+ * @param usuari (S) Variable persona_t on es guarda la data de naixement.
+*/
+extern void demanar_data(persona_t *usuari);
+
+/**
+ * @brief Serial flush: Llegeix caràcters "brossa" fins haver llegit un salt de línia per no provocar problemes a l'hora de llegir una cadena de caràcters a posteriori.
+*/
+extern void serial_flush();
+
 #endif

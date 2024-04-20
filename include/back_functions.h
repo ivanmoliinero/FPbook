@@ -62,4 +62,31 @@ extern void guardar_usuari(FILE *f, persona_t *usuari);
 */
 extern bool guardar_amistats(int *amistats, short n_elem);
 
+/**
+ * @brief Comprova si una data és compatible (si un dia no supera els dies màxims d'un mes i si 29/2 és vàlid, és a dir, si l'any és estacionari).
+ * @param dia (E) Dia.
+ * @param mes (E) Mes.
+ * @param any (E) Any.
+ * @return bool True si és compatible, fals altrament.
+ * @pre 0 < mes <= 12 && 0 <= any (D.C).
+*/
+extern bool data_compatible(char dia, char mes, short any);
+
+/**
+ * @brief Afegeix un nombre d'usuaris especificats per terminal.
+ * @param usuaris (E/S) Taula d'usuaris.
+ * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
+ * @return short Nombre d'usuaris finals.
+*/
+extern short afegir_usuaris(persona_t **usuaris, short n_usuaris);
+
+/**
+ * @brief Actualitza la taula amb tots els usuaris del sistema.
+ * @param usuaris (S) Taula amb usuaris del sistema.
+ * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
+ * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
+ * @return short Nombre d'usuaris finals que constaran al sistema.
+*/
+extern short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous);
+
 #endif

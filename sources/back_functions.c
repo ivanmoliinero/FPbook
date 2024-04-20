@@ -16,8 +16,8 @@ void carregar_usuari(FILE *f, persona_t *usuari)
 {
     fscanf(f, "%hd", &usuari->id);
     fscanf(f, "%s", usuari->nom);
-    fscanf(f, "%s", usuari->genere);
-    fscanf(f, "%s", usuari->ciutat);
+    fgets(usuari->genere, MAX_GENERE, f);
+    fgets(usuari->ciutat, MAX_CIUTAT, f);
     carregar_data(f, usuari);
 }
 
@@ -56,9 +56,9 @@ void guardar_data(FILE *f, persona_t *usuari) // Es passa per referència per ev
 
 void guardar_usuari(FILE *f, persona_t *usuari)
 {
-   fprintf(f, "%hd", usuari->id);
-   fprintf(f, "%s", usuari->nom);
-   fprintf(f, "%s", usuari->nom);
+   fprintf(f, "%hd\n", usuari->id);
+   fprintf(f, "%s\n", usuari->nom);
+   fprintf(f, "%s\n", usuari->genere); // S'ha de posar \n perquè pel serial flush a l'hora de llegir-lo no s'inclou.
    fprintf(f, "%s", usuari->ciutat);
    guardar_data(f, usuari); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
    fprintf(f, "%c", '\n'); // Separador estètic entre usuaris.
@@ -81,7 +81,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
         if(!res) // Com es retorna 0 (false), s'ha de mirar el contrari (1, cert) per entrar al condicional. 
         {
             res = true;
-            fprintf(f, "\n\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
+            fprintf(f, "\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
             for(short i = n_elem - iteracions; i < n_elem; i++)
                 guardar_usuari(f, &t[i]);
         }
@@ -119,15 +119,17 @@ bool guardar_amistats(int *amistats, short n_elem)
     return(res);
 }
 
-void actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
+short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
     realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació de la matriu d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
-    for(short i = n_usuaris, j = 0; i < n_finals; i++, j++)
+    for(short i = n_usuaris, j = 1; i < n_finals; i++, j++)
     {
         printf("Nou usuari %hd\n", j);
-        afegir_usuari(&(*usuaris)[i]); // Implementar en interface_functions. 
+        afegir_usuari(&(*usuaris)[i]);
+        ((*usuaris)[i]).id = i; // S'afegeix l'identificador aquí per evitar sobresaturar la funció afegir_usuari().
     }   
+    return(n_finals);
 }   
 
 void actualitzacio_amistats()
@@ -135,9 +137,31 @@ void actualitzacio_amistats()
     
 }
 
-void afegir_usuaris(persona_t **usuaris, short n_usuaris)
+short afegir_usuaris(persona_t **usuaris, short n_usuaris)
 {
-    short n_nous = demanar_n_usuaris_nous();
-    actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
-    actualitzacio_amistats();
+    short n_nous;
+    // VALORAR SI IMPLEMENTAR CON LA NUEVA FUNCIÓN QUE HARÁ ERIC.
+    do
+    {
+        printf("NOUS USUARIS: ");
+        n_nous = obtenir_opcio_convertida();
+    } while (n_nous < 0 || (n_usuaris + n_nous) > MAX_USUARIS);
+    
+    short n_final = actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
+    // actualitzacio_amistats();
+    return(n_final);
+}
+
+bool data_compatible(char dia, char mes, short any)
+{
+    bool correcte;
+    if(mes == 2 && dia == 29) // Comprovació cas any estacionari.
+        correcte = (any % 4 == 0 && ((any % 100 == 0 && any % 400 == 0) || any % 100 != 0)); // Fórmula per veure si un any és estacionari.
+    else if (dia < 0) correcte = false; // S'evita ocupar la pilla innecessàriament.
+    else
+    {
+        int dies_mes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        correcte = 0 < dia && dia <= dies_mes[mes - 1];
+    }
+    return correcte;
 }

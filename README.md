@@ -25,7 +25,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <ul>
     <li>Carregar usuaris, funcions per guardar fitxers, afegir usuaris</li>
     <br>
-    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE UQEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).</li>
+    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE QUEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).</li>
     <li>PREGUNTAR SI SUPOSICION DE USUARIOS CORRECTA</li>
     <li>PREGUNTAR SI SUPOSICION DE ARCHIVOS DE USUARIO CORRECTA</li>
     <li>EN AFEGIR USUARIS, INCREMENTAR n_elem++;</li>
@@ -36,7 +36,9 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>ACABAR FUNCION AFEGIR USUARIS</li>
     <li>FUNCION DATA_COMPATIBLE + IMPLEMENTAR FUNCION DO - WHILE ERIC</li>
     <br>
-    <li>DISCUTIR SI HACER UNSIGNED VARIABLES</li>    
+    <li>DISCUTIR SI HACER UNSIGNED VARIABLES</li>
+    <br>
+    <li>COMENTAR PORQUE FGETS!!!!!</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
