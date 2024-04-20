@@ -66,7 +66,7 @@ extern void error_guardat_amistats();
 
 /**
  * @brief Obté una opció introduïda per l'usuari per teclat i la converteix en un enter (short). Control d'errors d'entrada de dades numèriques.
- * @return short 0 en cas que s'hagi introduït un caràcter no numèric, el nombre introduït per teclat (dins del rang de short) altrament.
+ * @return short -1 en cas que s'hagi introduït un caràcter no numèric, el nombre introduït per teclat (dins del rang de short) altrament.
 */
 extern short obtenir_opcio_convertida();
 

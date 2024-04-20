@@ -8,7 +8,10 @@ short obtenir_opcio_convertida()
 {
     char o[MAX_OPCIO];
     scanf("%s", o); // Obté l'opció escrita com un caràcter.
-    return((short)atoi(o)); // Conversió a enter, es guarda en short (màxima longitud de nombre emprada en el programa.)
+    short res = (short)atoi(o);
+    if(res == 0 && (o[0] != '0' || o[1] != 0)) // Si el retorn de l'atoi és 0 però l'usuari no havia introduït el dígit 0:
+        res = -1;                              // error, introducció de caràcter.
+    return(res); // Conversió a enter, es guarda en short (màxima longitud de nombre emprada en el programa.)
 }
 
 short demanar_n_usuaris_nous()
