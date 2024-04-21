@@ -3,7 +3,7 @@
 
 #define MAX_NOM 50
 #define MAX_CIUTAT 20 // Valors predeterminats necessaris per poder crear les estructures de dades necessàries.
-#define MAX_GENERE 10
+#define MAX_GENERE 20
 
 typedef struct 
 {
