@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include <time.h>
 
+#include "estructures.h"
 #include "back_functions.h"
 #include "interface_functions.h"
-#include "estructures.h"
 
 // Calen definir correctament les capceleres i paràmetres.
 int main(int argc, char *argv[])
@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     {
         char o;                                               // Opció seleccionada per l'usuari.
         persona_t *usuaris;                                   // Punter a taula d'usuaris.
-        short n_elem = carregar_usuaris(usuaris);             // Nombre d'usuaris registrats al sistema.
-        short usuari = obtenir_usuari(argv, usuaris, n_elem); // Id de l'usuari que ha iniciat el programa.
+        short n_elem = carregar_usuaris(&usuaris);            // Nombre d'usuaris registrats al sistema.
+        short usuari = obtenir_usuari(argv, n_elem);          // Id de l'usuari que ha iniciat el programa.
         if (usuari == -1)
             usuari_inexistent();
         else
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
             ini_llavor();
             int *amistats;                                           // Punter a taula d'amistats.
             bool usuaris_editats = false, amistats_editades = false; // Booleans per controlar l'edició de les dades.
-            if (!carregar_amistats(amistats))
+            if (!carregar_amistats(&amistats))
                 missatge_error_arxiu_amistats();
             else
             {
@@ -33,21 +33,22 @@ int main(int argc, char *argv[])
                 do
                 {
                     mostrar_menu_principal();
-                    demanar_opcio(&o, EXIT, AFEGIR_USUARI);
+                    demanar_opcio((short*)&o, AFEGIR_USUARI, EXIT);
                     switch (o)
                     {
                     case MOSTRAR_PERFIL_USUARI:
                         mostrar_perfil(usuari, usuaris);
                         break;
                     case MOSTRAR_AMISTATS:
-                        mostrar_amistats();
+                        // mostrar_amistats();
+                        printf("mostrar_amistats()");
                         break;
                     case AFEGIR_AMISTAT:
-                        afegir_amistat(amistats, n_elem, usuari);
+                        afegir_amistat(&amistats, n_elem, usuari);
                         amistats_editades = true;
                         break;
                     case ELIMINAR_AMISTAT:
-                        eliminar_amistat();
+                        eliminar_amistat(&amistats, n_elem, usuari);
                         amistats_editades = true;
                         break;
                     case AFEGIR_USUARI:
@@ -56,10 +57,9 @@ int main(int argc, char *argv[])
                         break;
                     } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                 } while (o != EXIT);
-                if (usuaris_editats && !guardar_usuaris(usuaris, n_elem))
-                    error_guardat_usuaris();
-                if (amistats_editades && !guardar_amistats(amistats, n_elem))
-                    error_guardat_amistats();                                   // S'avisa en casos d'error de guardat d'arxius.
+                if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))
+                    error_guardat_dades();
+                alliberacio_memoria(usuaris, amistats);
                 missatge_acomiadament();
             }
         }

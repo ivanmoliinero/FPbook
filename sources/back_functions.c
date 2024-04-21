@@ -16,7 +16,7 @@ void carregar_data(FILE *f, persona_t *us)
 void carregar_usuari(FILE *f, persona_t *usuari)
 {
     fscanf(f, "%hd", &usuari->id);
-    fscanf(f, "%s", usuari->nom);
+    fgets(usuari->nom, MAX_NOM, f);
     fgets(usuari->genere, MAX_GENERE, f);
     fgets(usuari->ciutat, MAX_CIUTAT, f);
     carregar_data(f, usuari);
@@ -62,64 +62,73 @@ void guardar_usuari(FILE *f, persona_t *usuari)
    fprintf(f, "%s\n", usuari->genere); // S'ha de posar \n perquè pel serial flush a l'hora de llegir-lo no s'inclou.
    fprintf(f, "%s", usuari->ciutat);
    guardar_data(f, usuari); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
-   fprintf(f, "%c", '\n'); // Separador estètic entre usuaris.
+   fprintf(f, "\n\n"); // Separador estètic entre usuaris.
 }
 
-bool guardar_usuaris(persona_t *t, short n_elem)
+bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris_editats, bool amistats_editades)
 {
-    FILE *f = fopen("data/usuaris.fpb", "r+"); // S'obre el fitxer d'usuaris per llegir/escriure. Així es força a que l'arxiu ja existeixi prèviament (s'eviten sobreescriure dades inútilment).
-    bool res;
-    short n_elem_antics, iteracions;
-    if(f == NULL)
-        res = false; 
-    else
-    {   
-        fscanf(f, "%hd", &n_elem_antics);
-        iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
-        rewind(f); // Es torna a l'inici de l'arxiu.
-        fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
-        res = fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
-        if(!res) // Com es retorna 0 (false), s'ha de mirar el contrari (1, cert) per entrar al condicional. 
-        {
-            res = true;
-            fprintf(f, "\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
-            for(short i = n_elem - iteracions; i < n_elem; i++)
-                guardar_usuari(f, &t[i]);
-        }
-        else res = false;
-    }
-    fclose(f);
-    return(res);
-}
-
-bool guardar_amistats(int *amistats, short n_elem)
-{
-    FILE *f = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
-                                                 s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
-                                                 existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
-    bool res;
-    if(f == NULL) 
-        res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
-    else
+    bool resultat;
+    if(amistats_editades && !usuaris_editats) // Només s'ha editat l'arxiu d'amistats.
     {
-        res = true;
-        int dir; // Variable per evitar recalcular constantment i * n_elem+ j
-        fprintf(f, "   %hd\n", n_elem);
-        for(short i = 0; i < n_elem; i++) // Files.
+        FILE *fitxer_amistats = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
+                                                                s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
+                                                                existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
+        if(fitxer_amistats != NULL)
         {
-            fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
-            dir = (i * (i + 1))/2; // j = 0;
-            while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
-            {
-                if(amistats[dir] >= 0) fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
-                fprintf(f, "%d ", amistats[dir]);
-                dir++; // j++;
-            }
-            fprintf(f, " 0\n"); // Sentinella 0 + salt de línia per separar files.
-        }        
+            resultat = true;
+            guardar_amistats(amistats, n_elem, fitxer_amistats);
+        }
+        else resultat = false;
+        fclose(fitxer_amistats);
     }
-    fclose(f);
-    return(res);
+    else if (usuaris_editats) // S'ha editat l'arxiu d'usuaris cal actualitzar ambdós.
+    {
+        FILE *fitxer_usuaris = fopen("data/usuaris.fpb", "r+"); // S'obre el fitxer d'usuaris per llegir/escriure. Així es força a que l'arxiu ja existeixi prèviament (s'eviten sobreescriure dades inútilment).
+        FILE *fitxer_amistats = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
+                                                                s'ha de reescriure sencer, ja que pot patir modificacions intermitges o addicions de columnes. En cas que no
+                                                                existeixi, s'intentarà crear, ja que ja es té la informació de totes les amistats*/
+        if(fitxer_usuaris != NULL && fitxer_amistats != NULL)
+        {
+            resultat = true;
+            guardar_usuaris(usuaris, n_elem, fitxer_usuaris);
+            guardar_amistats(amistats, n_elem, fitxer_amistats);
+        }
+        else resultat = false;
+        fclose(fitxer_amistats);
+        fclose(fitxer_usuaris);
+    }
+    return resultat;
+}
+
+void guardar_usuaris(persona_t *t, short n_elem, FILE *f)
+{
+    short n_elem_antics, iteracions;
+    fscanf(f, "%hd", &n_elem_antics);
+    iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
+    rewind(f); // Es torna a l'inici de l'arxiu.
+    fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
+    fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
+    fprintf(f, "\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
+    for(short i = n_elem - iteracions; i < n_elem; i++)
+        guardar_usuari(f, &t[i]);
+}
+
+void guardar_amistats(int *amistats, short n_elem, FILE *f)
+{
+    int dir; // Variable per evitar recalcular constantment i * n_elem+ j
+    fprintf(f, "   %hd\n", n_elem);
+    for(short i = 0; i < n_elem; i++) // Files.
+    {
+        fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
+        dir = (i * (i + 1))/2; // j = 0;
+        while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
+        {
+            if(amistats[dir] >= 0) fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
+            fprintf(f, "%d ", amistats[dir]);
+            dir++; // j++;
+        }
+        fprintf(f, " 0\n"); // Sentinella 0 + salt de línia per separar files.
+    }        
 }
 
 short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
@@ -244,6 +253,7 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
 
     while (!correcte)
     {
+        missatge_seleccio_amistat();
         demanar_opcio(&opcio, n_usuaris - 1, 0);
 
         if (opcio == usuari)
@@ -267,10 +277,10 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
             }
             else if (((*amistats)[columna]) > COMPATIBILIDAD)
             {
+                avis_compatibilitat_dolenta();
                 confirmar(&confirmacio, DENEGAR, ACCEPTAR);
                 if (confirmacio == ACCEPTAR)
                 {
-                    // avis_compatibilitat_dolenta();
                     correcte = true;
                     ((*amistats)[columna]) = -1;
                 }
@@ -282,4 +292,57 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
             }
         }
     }
+}
+
+void eliminar_amistat(int **amistats, short n_usuaris, short usuari)
+{
+    int columna;
+    short opcio, confirmacio;
+    bool correcte = false;
+
+    printf("mostar_amistats()");
+
+    while (!correcte)
+    {
+        missatge_esborrat_amistat();
+        demanar_opcio(&opcio, n_usuaris - 1, 0);
+
+        if (opcio == usuari)
+        {
+            printf("¡NO TE PUEDES ELIMINAR TU MISMO COMO AMIGO!");
+        }
+        else
+        {
+            if (opcio < usuari)
+            {
+                columna = (((usuari * (usuari + 1)) / 2) + opcio); // Cerca de fila
+            }
+            else
+            {
+                columna = (((opcio * (opcio + 1)) / 2) + usuari); // Cerca de columna
+            }
+
+            if (((*amistats)[columna]) == -1)
+            {
+                printf("¡ELIMINAR AMISTAD!");
+                confirmar(&confirmacio, DENEGAR, ACCEPTAR);
+
+                if (confirmacio == ACCEPTAR)
+                {
+                    correcte = true;
+                    ((*amistats)[columna]) = genera_aleatori(COMPATIBILIDAD, 9);
+                }
+            }
+            else
+            {
+                printf("¡NO ES TU AMIGO!");
+            }
+        }
+    }
+}
+
+void alliberacio_memoria(persona_t *usuaris, int *amistats)
+{
+    free(usuaris);
+    free(amistats);
 }

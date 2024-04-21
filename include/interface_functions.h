@@ -49,14 +49,9 @@ extern void mostrar_perfil(short id, persona_t t[]);
 extern void usuari_inexistent();
 
 /**
- * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades dels usuaris.
+ * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades als fitxers.
 */
-extern void error_guardat_usuaris();
-
-/**
- * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades de les amistats.
-*/
-extern void error_guardat_amistats();
+extern void error_guardat_dades();
 
 /**
  * @brief Obté una opció introduïda per l'usuari per teclat i la converteix en un enter (short). Control d'errors d'entrada de dades numèriques.
@@ -117,5 +112,20 @@ extern void mostrar_compatibles(int *amistats, int n_usuaris, int usuari);
  * @brief Avisa de compatibilitat dolenta entre usuaris.
 */
 extern void avis_compatibilitat_dolenta();
+
+/**
+ * @brief Avisa d'errors en la càrrega de dades d'amistats i proximitats d'usuaris.
+*/
+extern void missatge_error_arxiu_amistats();
+
+/**
+ * @brief Informa a l'usuari que ha d'escollir un usuari com a amic.
+*/
+extern void missatge_seleccio_amistat();
+
+/**
+ * @brief Informa a l'usuari que ha d'escollir un usuari per eliminar-lo dels seus amics.
+*/
+extern void missatge_esborrat_amistat();
 
 #endif

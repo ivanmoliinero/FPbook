@@ -29,13 +29,13 @@ extern short carregar_usuaris(persona_t **usuaris);
 extern void carregar_data(FILE *f, persona_t *us);
 
 /**
- * @brief Emmagatzema les dades dels usuaris en el fitxer usuaris.fpb.
+ * @brief Emmagatzema les dades dels usuaris en el fitxer passat com a paràmetre.
  * @param t (E) Taula amb tota la informació dels usuaris.
  * @param n_elem (E) Nombre d'usuaris a guardar.
+ * @param f (E/S) Arxiu on guardar les dades.
  * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
- * @return bool True si s'han pogut guardar els usuaris, false altrament.
 */
-extern bool guardar_usuaris(persona_t *t, short n_elem);
+extern void guardar_usuaris(persona_t *t, short n_elem, FILE *f);
 
 /**
  * @brief Emmagatzema les dades d'un usuari concret en un fitxer de text passat com a paràmetre.
@@ -45,11 +45,12 @@ extern bool guardar_usuaris(persona_t *t, short n_elem);
 extern void guardar_usuari(FILE *f, persona_t *usuari);
 
 /**
- * @brief Emmagatzema les dades dels estats de proximitat i amistat entre els usuaris.
+ * @brief Emmagatzema les dades dels estats de proximitat i amistat entre els usuaris en el fitxer passat com a paràmetre.
  * @param amistats (E) Direcció de memòria de la matriu d'amistats (interpretada com un vector).
  * @param n_elem (E) Nombre de files i columnes de la matriu (nombre d'usuaris del sistema).
+ * @param f (E/S) Arxiu on guardar les dades.
 */
-extern bool guardar_amistats(int *amistats, short n_elem);
+extern void guardar_amistats(int *amistats, short n_elem, FILE *f);
 
 /**
  * @brief Comprova si una data és compatible (si un dia no supera els dies màxims d'un mes i si 29/2 és vàlid, és a dir, si l'any és estacionari).
@@ -123,5 +124,32 @@ extern bool carregar_amistats(int **amistats);
  * @param usuari (E) ID de l'usuari actiu.
  */
 extern void afegir_amistat(int **amistats, short n_usuaris, short usuari);
+
+/**
+ * @brief Permet eliminar una amistat y actualitza la informació a la taula amistats.
+ * @pre Taula d'amistats carregada.
+ * @param amistats (E/S) Vector amb l'informació de cada amistat.
+ * @param n_usuaris (E) Nombre d'usuaris al sistema.
+ * @param usuari (E) ID de l'usuari actiu.
+ */
+extern void eliminar_amistat(int **amistats, short n_usuaris, short usuari);
+
+/**
+ * @brief Guarda les dades als arxius de manera controlada per tal de no provocar actualitzacions incorrectes.
+ * @param usuaris (E) Taula amb dades d'usuaris.
+ * @param amistats (E) Taula amb dades d'amistats i distàncies.
+ * @param n_elem (E) Nombre d'usuaris a registrar en el sistema (després de realitzar modificacions).
+ * @param usuaris_editats (E) Identificador de canvis en la taula d'usuaris.
+ * @param amistats_editades (E) Identificador de canvis en la taula d'amistats.
+ * @return bool True en cas de guardat de dades correctes, false altrament.
+*/
+extern bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris_editats, bool amistats_editades);
+
+/**
+ * @brief Allibera la memòria de les taules generades amb malloc.
+ * @param usuaris (E) Punter a la taula que s'ha d'alliberar.
+ * @param amistats (E) Punter a la taula que s'ha d'alliberar.
+*/
+extern void alliberacio_memoria(persona_t *usuaris, int *amistats);
 
 #endif

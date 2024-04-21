@@ -41,7 +41,10 @@ run_tests : build/tests.exe
 #------------------------------------------------------------------
 #	debug command
 #------------------------------------------------------------------
-debug : build/tests.exe
+debug : build/fpbook.exe
+	gdb build/fpbook.exe
+
+debug_tests : build/tests.exe
 	gdb build/tests.exe
 
 

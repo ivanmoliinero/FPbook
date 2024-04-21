@@ -8,10 +8,10 @@
 int main()
 {
     // PROVA CARREGA USUARIS I AMISTATS
-    persona_t *usuaris;
-    int *amistats;
-    short n_elem = carregar_usuaris(&usuaris);    
-    if(!carregar_amistats(&amistats)) printf("ERROR EN CÀRREGA D'AMISTATS\n");
+    // persona_t *usuaris;
+    // int *amistats;
+    // short n_elem = carregar_usuaris(&usuaris);    
+    // if(!carregar_amistats(&amistats)) printf("ERROR EN CÀRREGA D'AMISTATS\n");
 
     // PROVA ACTUALITTZACIÓ AMISTATS.
     // ini_llavor();
@@ -26,7 +26,7 @@ int main()
     // }
 
     // PROVA AFEGIR USUARIS
-    int n_final = afegir_usuaris(&usuaris, &amistats, n_elem);
+    // int n_final = afegir_usuaris(&usuaris, &amistats, n_elem);
 
     // for(int i = 0; i < n_elem; i++)
     // {
@@ -41,12 +41,12 @@ int main()
     // if(!guardar_usuaris(usuaris, n_elem)) printf("GUARDAT INCORRECTE"); else printf("GUARDAR CORRECTE");
 
     // PROVA OBTENIR_OPCIO_CONVERTIDA
-    // printf("Introdueix un nombre de 4 dígits\n");
-    // short opcio = obtenir_opcio_convertida();
-    // printf("La vostra opció és %hd", opcio);
+    printf("Introdueix un nombre de 4 dígits\n");
+    short opcio = obtenir_opcio_convertida();
+    printf("La vostra opció és %hd", opcio);
 
     // PROVA GUARDAR AMISTATS
-    (guardar_amistats(amistats, n_final)) ? (printf("GUARDAT CORRECTE")) : (printf("GUARDAT INCORRECTE"));    
+    // (guardar_amistats(amistats, n_final)) ? (printf("GUARDAT CORRECTE")) : (printf("GUARDAT INCORRECTE"));    
 
     return 0;
 }
