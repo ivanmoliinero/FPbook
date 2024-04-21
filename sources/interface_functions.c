@@ -60,7 +60,6 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 
 void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
-    
     printf("Introdueix el nom del nou usuari:\n");
     scanf("%s", usuari->nom);
     serial_flush();
@@ -81,3 +80,72 @@ void serial_flush()
     } while (temp != '\n');
 }
 
+void demanar_opcio(short *opcio, short rang_max, short rang_min)
+{
+    do
+    {
+        // printf("INTRODUCE EL ID DE TU NUEVO AMIGO [%hd ... %hd]", rang_min, rang_max);
+        scanf("%hd", opcio);
+    } while (*opcio < rang_min || *opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
+}
+
+void confirmar(short *confirmacio, short afirmacio, short denegacio)
+{
+    // printf("¿ESTAS SEGURO DE QUE QUIERES AÑADIR A ALGUIEN CON POCA COMPATIBILIDAD? [%hd para denegar y %hd para confirmar]", denegacio, afirmacio);
+    do
+    {
+        scanf("%hd", confirmacio);
+    } while (*confirmacio != denegacio && *confirmacio != afirmacio); // Procura que el valor introduït sigui binari(dues opcions posibles).
+}
+
+void mostrar_compatibles(int *amistats, int n_usuaris, int usuari)
+{
+    int valor;
+    for (short i = 0; i <= usuari; i++) // Només necessitem iterar fins a la fila 'usuari'.
+    {
+        if (usuari != i)
+        {
+            if (usuari > i)
+            {
+                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Calcular la posició en la matriu triangular.
+            }
+            else
+            {
+                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Si (usuari < i), intercanviem 'usuari' <--> 'i' per a mantenir la simetria.
+            }
+
+            if (valor <= COMPATIBILIDAD && valor > 0) // Comprova la compatibilidad y que no siguis ja amic.
+            {
+                printf("mostrar_perfil()\n");
+            }
+        }
+    }
+}
+
+void missatge_benvinguda()
+{
+    printf("Benvingut/da a FPbook! \n");
+}
+
+void missatge_acomiadament()
+{
+    printf("Fins aviat!");
+}
+
+void mostrar_perfil(short usuari, persona_t *usuaris)
+{
+    //usuaris.nom[o]
+   printf("%s \n", usuaris->nom);
+   printf("%s \n", usuaris->genere);
+   printf("%s \n", usuaris->ciutat);
+}
+
+extern void mostrar_menu_principal()
+{
+    printf("Que vols fer?: \n\n");
+    printf("[1] Mostrar el perfil de l'usuari. \n");
+    printf("[2] Mostrar les amistats. \n");
+    printf("[3] Afegir una nova amistat. \n");
+    printf("[4] Eliminar una amistat. \n");
+    printf("[5] Afegir un nou usuari. \n");
+}

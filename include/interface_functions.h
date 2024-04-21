@@ -7,12 +7,13 @@
 #define AFEGIR_AMISTAT 3
 #define ELIMINAR_AMISTAT 4
 #define AFEGIR_USUARI 5
-#define LLETRA_INTRODUIDA 0 // atoi retorna 0 si s'introdueixen lletres.
-#define EXIT -1
+#define EXIT 0
 
 #define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
 
 #define MAX_USUARIS 10000 // Màxims usuaris que es suportaran al sistema.
+
+#define COMPATIBILIDAD 3
 
 // Capceleres de les funcions d'interfície.
 /**
@@ -34,13 +35,6 @@ extern void mostrar_menu_principal();
  * @brief Mostra missatge informant que no s'ha passat l'identificador com a paràmetre del main.
 */
 extern void falta_identificador();
-
-/**
- * @brief Demana un nombre a l'usuari per seleccionar una opció del menú principal.
- * @return char Opció seleccionada per l'usuari.
- * @post o = 0 || o = 1 || o = 2 || o = 3 || o = 4 || o = 5
-*/
-extern char demanar_opcio();
 
 /**
  * @brief Mostra el perfil de l'usuari passat com a paràmetre.
@@ -93,5 +87,35 @@ extern void demanar_data(persona_t *usuari);
  * @brief Serial flush: Llegeix caràcters "brossa" fins haver llegit un salt de línia per no provocar problemes a l'hora de llegir una cadena de caràcters a posteriori.
 */
 extern void serial_flush();
+
+/**
+ * @brief Demana a l'usuari introduïr una opció en un rang de valors.
+ * @param opcio (E/S) Opció escollida per l'usuari.
+ * @param rang_max (E) Valor màxim permès.
+ * @param rang_min (E) Valor mínim permès.
+ */
+extern void demanar_opcio(short *opcio, short rang_max, short rang_min);
+
+/**
+ * @brief Demana a l'usuari confirmar si vol acceptar o denegar una acció.
+ * @param confirmacio (E/S) Decisio escollida per l'usuari.
+ * @param afirmacio (E) Valor que indica afirmació.
+ * @param denegacio (E) Valor que indicia denegació.
+ */
+extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
+
+/**
+ * @brief Mostra els usuaris compatibles amb un usuari.
+ * @pre Taula d'amistats carregada.
+ * @param amistats (E/S) Vector amb l'informació de cada amistat.
+ * @param n_usuaris (E) Nombre d'usuaris al sistema.
+ * @param usuari (E) ID de l'usuari actiu.
+ */
+extern void mostrar_compatibles(int *amistats, int n_usuaris, int usuari);
+
+/**
+ * @brief Avisa de compatibilitat dolenta entre usuaris.
+*/
+extern void avis_compatibilitat_dolenta();
 
 #endif

@@ -86,6 +86,7 @@ bool guardar_usuaris(persona_t *t, short n_elem)
             for(short i = n_elem - iteracions; i < n_elem; i++)
                 guardar_usuari(f, &t[i]);
         }
+        else res = false;
     }
     fclose(f);
     return(res);
@@ -101,6 +102,7 @@ bool guardar_amistats(int *amistats, short n_elem)
         res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {
+        res = true;
         int dir; // Variable per evitar recalcular constantment i * n_elem+ j
         fprintf(f, "%hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
@@ -186,4 +188,88 @@ void ini_llavor()
 int genera_aleatori(int min, int max)
 {
     return(min + rand()%(max-min));
+}
+
+short obtenir_usuari(char *argv[], short n_elem)
+{
+    short id = atoi(argv[1]); // Converteix la cadena de caràcters ASCII a un Integer(int).
+    if (((id > n_elem - 1) || (id < 0)) || (id == 0 && (argv[1][0] != '0' || argv[1][1] != 0))) // Comprova que no s'hagui introduït un id inexistent o un caràcter no numèric.
+        id = -1;
+    return (id);
+}
+
+bool carregar_amistats(int **amistats)
+{
+    bool resultat = true;
+    int dir, n_elem;
+    short i, j, fila_columna;
+    FILE *fitxer = fopen("propers.fpb", "r"); // Obrim fitxer amb les dades d'amistats.
+
+    if (fitxer == NULL)
+    {
+        resultat = false;
+    }
+    else
+    {
+        fscanf(fitxer, "%hd", &fila_columna); // Guardem el número de d'elements de cada fila/columna equivalent al número d'usuaris al sistema.
+
+        n_elem = (((fila_columna * (fila_columna + 1)) / 2)); // Mètode d'adreçament = ((N * (N + 1)) / 2)
+        *amistats = malloc(sizeof(int) * n_elem);             // Assignació dinàmica de memória.
+
+        for (i = 0; i < fila_columna; i++)
+        {
+            dir = ((i * (i + 1)) / 2);
+
+            for (j = 0; j <= i; j++, dir++)
+            {
+                fscanf(fitxer, "%d", &(*amistats)[dir]);
+            }
+        }
+        fclose(fitxer);
+    }
+    return resultat;
+}
+
+void afegir_amistat(int **amistats, short n_usuaris, short usuari)
+{
+    int columna;
+    bool correcte = false;
+    short opcio, confirmacio;
+
+    mostrar_compatibles(*amistats, n_usuaris, 0);
+
+    while (!correcte)
+    {
+        demanar_opcio(&opcio, n_usuaris - 1, 0);
+
+        if (opcio == usuari)
+        {
+            printf("¡NO TE PUEDES AÑADIR TU MISMO COMO AMIGO!");
+        }
+        else
+        {
+            columna = (((opcio * (opcio + 1)) / 2) + usuari); // Calculem l'adreça desitjada per l'usuari.
+
+            if (((*amistats)[columna]) == -1)
+            {
+                printf("¡YA ES TU AMIGO!");
+            }
+            else if (((*amistats)[columna]) > COMPATIBILIDAD)
+            {
+                avis_compatibilitat_dolenta();
+                confirmar(&confirmacio, DENEGAR, ACCEPTAR);
+
+                if (confirmacio == ACCEPTAR)
+                {
+                    correcte = true;
+                    ((*amistats)[columna]) = -1;
+                }
+            }
+            else
+            {
+                correcte = true;
+                ((*amistats)[columna]) = -1;
+            }
+        }
+    }
 }
