@@ -79,11 +79,6 @@ extern void afegir_usuari(persona_t *usuari);
 extern void demanar_data(persona_t *usuari);
 
 /**
- * @brief Serial flush: Llegeix caràcters "brossa" fins haver llegit un salt de línia per no provocar problemes a l'hora de llegir una cadena de caràcters a posteriori.
-*/
-extern void serial_flush();
-
-/**
  * @brief Demana a l'usuari introduïr una opció en un rang de valors.
  * @param opcio (E/S) Opció escollida per l'usuari.
  * @param rang_max (E) Valor màxim permès.

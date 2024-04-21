@@ -65,23 +65,15 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
     printf("Introdueix el nom del nou usuari:\n");
+    fflush(stdin);
     fgets(usuari->nom, MAX_NOM, stdin);
-    serial_flush();
+    fflush(stdin);
     printf("Introdueix el genere del nou usuari:\n");
     fgets(usuari->genere, MAX_GENERE, stdin);
-    serial_flush();
+    fflush(stdin);
     printf("Introdueix la ciutat del nou usuari:\n");
     fgets(usuari->ciutat, MAX_CIUTAT, stdin);
     demanar_data(usuari);
-}
-
-void serial_flush()
-{
-    char temp; // temp per serial flush.
-    do
-    {
-        scanf("%c", &temp); // serial flush.
-    } while (temp != '\n');
 }
 
 void demanar_opcio(short *opcio, short rang_max, short rang_min)

@@ -59,7 +59,7 @@ void guardar_usuari(FILE *f, persona_t *usuari)
 {
    fprintf(f, "%hd\n", usuari->id);
    fprintf(f, "%s\n", usuari->nom);
-   fprintf(f, "%s\n", usuari->genere); // S'ha de posar \n perquè pel serial flush a l'hora de llegir-lo no s'inclou.
+   fprintf(f, "%s\n", usuari->genere);
    fprintf(f, "%s", usuari->ciutat);
    guardar_data(f, usuari); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
    fprintf(f, "\n\n"); // Separador estètic entre usuaris.
@@ -134,11 +134,11 @@ void guardar_amistats(int *amistats, short n_elem, FILE *f)
 short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
-    realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació del vector d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
+    *usuaris = realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació del vector d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
     for(short i = n_usuaris, j = 1; i < n_finals; i++, j++)
     {
         printf("Nou usuari %hd\n", j);
-        afegir_usuari(&(*usuaris)[i]);
+        afegir_usuari(&((*usuaris)[i]));
         ((*usuaris)[i]).id = i; // S'afegeix l'identificador aquí per evitar sobresaturar la funció afegir_usuari().
     }   
     return(n_finals);
@@ -147,7 +147,7 @@ short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
-    realloc(*amistats, sizeof(int)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
+    *amistats = realloc(*amistats, sizeof(int)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
     int dir;
     for (short i = n_usuaris; i < n_finals; i++)
     {
