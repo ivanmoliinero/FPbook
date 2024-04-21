@@ -105,17 +105,17 @@ void mostrar_compatibles(int *amistats, int n_usuaris, int usuari)
     {
         if (usuari != i)
         {
-            if (usuari > i)
+            if (i > usuari)
             {
-                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Calcular la posició en la matriu triangular.
+                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
             }
             else
             {
-                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Si (usuari < i), intercanviem 'usuari' <--> 'i' per a mantenir la simetria.
+                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
             }
-
-            if (valor <= COMPATIBILIDAD && valor > 0) // Comprova la compatibilidad y que no siguis ja amic.
+            if (valor <= COMPATIBILIDAD && valor > 0)
             {
+                printf("%d,%d\n", i, usuari);
                 printf("mostrar_perfil()\n");
             }
         }

@@ -7,13 +7,23 @@
 
 int main()
 {
-    // PROVA CARREGA USUARIS
+    // PROVA CARREGA USUARIS I AMISTATS
     persona_t *usuaris;
+    int *amistats;
     short n_elem = carregar_usuaris(&usuaris);    
+    if(!carregar_amistats(&amistats)) printf("ERROR EN CÀRREGA D'AMISTATS\n");
 
-    // PROVA AMISTATS
-    int taula[14] = {0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4};
-    int *amistats = taula; // Change of pointer access to test.
+    // PROVA ACTUALITTZACIÓ AMISTATS.
+    // ini_llavor();
+    // int taula[15] = {0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4, 0}; // 5 usuarios.
+    // int *amistats = taula; // Change of pointer access to test.
+    // actualitzacio_amistats(&amistats, 5, 3); // n_elem queda actualitzat per actualització usuaris.
+    // for(int i = 0; i < 8; i++)
+    // {
+    //     for(int j = 0, dir = (i*(i+1))/2; j <= i; j++, dir++) 
+    //         printf("%d ", amistats[dir]);
+    //     printf("\n");
+    // }
 
     // PROVA AFEGIR USUARIS
     n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
@@ -36,15 +46,7 @@ int main()
     // printf("La vostra opció és %hd", opcio);
 
     // PROVA GUARDAR AMISTATS
-    // int prova[10] = {0, 1, 0, 1, 2, 0, 1, 2, 3, 0};
-    // (guardar_amistats(prova, 4)) ? (printf("GUARDAT INCORRECTE")) : (printf("GUARDAT CORRECTE"));
-
-    // COMPROVACIÓ ACTUALITTZACIÓ AMISTATS.
-    for(int i = 0; i < n_elem; i++)
-    {
-        for(int j = 0; i < n_elem; j++)
-            printf("%d", amistats[(i*(i+1))/2 + j]);
-    }
+    (guardar_amistats(amistats, n_elem)) ? (printf("GUARDAT INCORRECTE")) : (printf("GUARDAT CORRECTE"));    
 
     return 0;
 }

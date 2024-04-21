@@ -104,14 +104,14 @@ bool guardar_amistats(int *amistats, short n_elem)
     {
         res = true;
         int dir; // Variable per evitar recalcular constantment i * n_elem+ j
-        fprintf(f, "%hd\n", n_elem);
+        fprintf(f, "   %hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
         {
             fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
             dir = (i * (i + 1))/2; // j = 0;
             while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
             {
-                if(amistats[dir] >= 0)  fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
+                if(amistats[dir] >= 0) fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
                 fprintf(f, "%d ", amistats[dir]);
                 dir++; // j++;
             }
@@ -143,12 +143,12 @@ void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
     for (short i = n_usuaris; i < n_finals; i++)
     {
         dir = (i * (i + 1))/2;
-        for(short j = 0; j <= i; j++, dir++)
+        for(short j = 0; j < i; j++, dir++)
         {
-            (*amistats)[dir] = genera_aleatori(0, 9); // DISCUTIR INTERVAL AMB EQUIP.
+            (*amistats)[dir] = genera_aleatori(1, 9); // DISCUTIR INTERVAL AMB EQUIP.
         }
+        (*amistats)[dir] = 0; // Sentinella 0.
     }
-        
 }
 
 short afegir_usuaris(persona_t **usuaris, int **amistats, short n_usuaris)
@@ -187,7 +187,7 @@ void ini_llavor()
 
 int genera_aleatori(int min, int max)
 {
-    return(min + rand()%(max-min));
+    return(min + rand()%(max-min+1));
 }
 
 short obtenir_usuari(char *argv[], short n_elem)
@@ -203,7 +203,7 @@ bool carregar_amistats(int **amistats)
     bool resultat = true;
     int dir, n_elem;
     short i, j, fila_columna;
-    FILE *fitxer = fopen("propers.fpb", "r"); // Obrim fitxer amb les dades d'amistats.
+    FILE *fitxer = fopen("data/propers.fpb", "r"); // Obrim fitxer amb les dades d'amistats.
 
     if (fitxer == NULL)
     {
@@ -212,21 +212,25 @@ bool carregar_amistats(int **amistats)
     else
     {
         fscanf(fitxer, "%hd", &fila_columna); // Guardem el número de d'elements de cada fila/columna equivalent al número d'usuaris al sistema.
-
         n_elem = (((fila_columna * (fila_columna + 1)) / 2)); // Mètode d'adreçament = ((N * (N + 1)) / 2)
         *amistats = malloc(sizeof(int) * n_elem);             // Assignació dinàmica de memória.
-
-        for (i = 0; i < fila_columna; i++)
+        if (*amistats == NULL)
+            resultat = false;
+        else
         {
-            dir = ((i * (i + 1)) / 2);
-
-            for (j = 0; j <= i; j++, dir++)
+            resultat = true;
+            for (i = 0; i < fila_columna; i++)
             {
-                fscanf(fitxer, "%d", &(*amistats)[dir]);
+                dir = ((i * (i + 1)) / 2);
+
+                for (j = 0; j <= i; j++, dir++)
+                {
+                    fscanf(fitxer, "%d", &(*amistats)[dir]);
+                }
             }
         }
-        fclose(fitxer);
     }
+    fclose(fitxer);
     return resultat;
 }
 
@@ -236,7 +240,7 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
     bool correcte = false;
     short opcio, confirmacio;
 
-    mostrar_compatibles(*amistats, n_usuaris, 0);
+    mostrar_compatibles(*amistats, n_usuaris, usuari);
 
     while (!correcte)
     {
@@ -248,7 +252,14 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
         }
         else
         {
-            columna = (((opcio * (opcio + 1)) / 2) + usuari); // Calculem l'adreça desitjada per l'usuari.
+            if (opcio < usuari)
+            {
+                columna = (((usuari * (usuari + 1)) / 2) + opcio); // Cerca de fila
+            }
+            else
+            {
+                columna = (((opcio * (opcio + 1)) / 2) + usuari); // Cerca de columna
+            }
 
             if (((*amistats)[columna]) == -1)
             {
@@ -256,11 +267,10 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
             }
             else if (((*amistats)[columna]) > COMPATIBILIDAD)
             {
-                avis_compatibilitat_dolenta();
                 confirmar(&confirmacio, DENEGAR, ACCEPTAR);
-
                 if (confirmacio == ACCEPTAR)
                 {
+                    // avis_compatibilitat_dolenta();
                     correcte = true;
                     ((*amistats)[columna]) = -1;
                 }

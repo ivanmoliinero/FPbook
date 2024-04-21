@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
                         mostrar_amistats();
                         break;
                     case AFEGIR_AMISTAT:
-                        afegir_amistat();
+                        afegir_amistat(amistats, n_elem, usuari);
                         amistats_editades = true;
                         break;
                     case ELIMINAR_AMISTAT:
@@ -51,15 +51,15 @@ int main(int argc, char *argv[])
                         amistats_editades = true;
                         break;
                     case AFEGIR_USUARI:
-                        afegir_usuari();
+                        n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
                         usuaris_editats = true;
                         break;
-                    } // Es podria afegir cas DEFAULT, però com el rang de o està (per funció demanar_opcio) controlat no cal.
+                    } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                 } while (o != EXIT);
                 if (usuaris_editats && !guardar_usuaris(usuaris, n_elem))
                     error_guardat_usuaris();
-                if (amistats_editades && !guardar_amistats())
-                    error_guardat_amistats();
+                if (amistats_editades && !guardar_amistats(amistats, n_elem))
+                    error_guardat_amistats();                                   // S'avisa en casos d'error de guardat d'arxius.
                 missatge_acomiadament();
             }
         }
