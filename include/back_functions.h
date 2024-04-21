@@ -6,13 +6,6 @@
 #define DENEGAR -1 // Constants per escollir acció a l'hora d'afegir amistats incompatibles.
 
 // Capceleres de les funcions de càlculs interns.
-/**
- * @brief Obté l'identificador de l'usuari passat com a paràmetre.
- * @param argv (E) Taula amb paràmetres del main (d'on s'obté l'identificador esperat).
- * @param n_elem (E) Nombre d'elements de la taula usuaris.
- * @return char Id de l'usuari si existeix, -1 en cas que no existeixi.
-*/
-extern short obtenir_usuari(char *argv[], short n_elem);
 
 /**
  * @brief Carrega les dades de l'usuari indicat a partir d'un fitxer passat com a paràmetre.
@@ -27,13 +20,6 @@ extern void carregar_usuari(FILE *f, persona_t *usuari);
  * @return short Nombre d'usuaris registrats en el sistema, -1 en cas d'error.
 */
 extern short carregar_usuaris(persona_t **usuaris);
-
-/**
- * @brief Carrega les dades de les amistats del sistema en una taula passada com a punter.
- * @param amistats (E/S) Taula amb les informacions de les amistats. De tipus int (no sabem quin és el màxim nombre de distància).
- * @return char 0 si s'ha pogut carregar, -1 en cas contrari.
-*/
-extern char carregar_amistats(int *amistats);
 
 /**
  * @brief Carrega la data de naixement d'un arxiu de text a un usuari.
