@@ -26,7 +26,7 @@ int main()
     // }
 
     // PROVA AFEGIR USUARIS
-    n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
+    int n_final = afegir_usuaris(&usuaris, &amistats, n_elem);
 
     // for(int i = 0; i < n_elem; i++)
     // {
@@ -46,7 +46,7 @@ int main()
     // printf("La vostra opció és %hd", opcio);
 
     // PROVA GUARDAR AMISTATS
-    (guardar_amistats(amistats, n_elem)) ? (printf("GUARDAT INCORRECTE")) : (printf("GUARDAT CORRECTE"));    
+    (guardar_amistats(amistats, n_final)) ? (printf("GUARDAT CORRECTE")) : (printf("GUARDAT INCORRECTE"));    
 
     return 0;
 }

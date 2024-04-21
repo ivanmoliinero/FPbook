@@ -39,6 +39,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>DISCUTIR SI HACER UNSIGNED VARIABLES</li>
     <br>
     <li>COMENTAR PORQUE FGETS!!!!!</li>
+    <li>OPTIMIZAR ACCESO MATRIZ (reducir cálculo fórmula acceso).
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

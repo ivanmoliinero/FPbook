@@ -125,7 +125,7 @@ bool guardar_amistats(int *amistats, short n_elem)
 short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
-    realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació de la matriu d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
+    realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació del vector d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
     for(short i = n_usuaris, j = 1; i < n_finals; i++, j++)
     {
         printf("Nou usuari %hd\n", j);
@@ -138,7 +138,7 @@ short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
-    realloc(*amistats, sizeof(int)*n_finals);
+    realloc(*amistats, sizeof(int)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
     int dir;
     for (short i = n_usuaris; i < n_finals; i++)
     {
