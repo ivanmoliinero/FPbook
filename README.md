@@ -23,23 +23,18 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <p>
 <!-- Apunts d'Iván -->
 <ul>
-    <li>Carregar usuaris, funcions per guardar fitxers, afegir usuaris</li>
-    <br>
-    <li>UNSIGNED CHAR EN LOS AVACNES DE TABLA PORQUE SI NO SE QUEDA DEL TIPO DE ÍNDICE (PUEDE ADOPTAR VALORES NEGATIVOS).</li>
     <li>PREGUNTAR SI SUPOSICION DE USUARIOS CORRECTA</li>
     <li>PREGUNTAR SI SUPOSICION DE ARCHIVOS DE USUARIO CORRECTA</li>
-    <li>EN AFEGIR USUARIS, INCREMENTAR n_elem++;</li>
     <li>PREGUNTAR TEMA stdbool.h EN back_functions.h</li>
     <li>VALORAR REDUCIR ESCALA INT AMISTATS!!! (+ PREGUNTAR FORMATO ARCHIVO propers.fpb)</li>
     <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
     <br>
-    <li>ACABAR FUNCION AFEGIR USUARIS</li>
     <li>FUNCION DATA_COMPATIBLE + IMPLEMENTAR FUNCION DO - WHILE ERIC</li>
     <br>
     <li>DISCUTIR SI HACER UNSIGNED VARIABLES</li>
     <br>
-    <li>COMENTAR PORQUE FGETS!!!!!</li>
-    <li>OPTIMIZAR ACCESO MATRIZ (reducir cálculo fórmula acceso).
+    <li>OPTIMIZAR ACCESO MATRIZ (reducir cálculo fórmula acceso).</li>
+    <li>PREGUNTAR USO FFLUSH Y REALLOC</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

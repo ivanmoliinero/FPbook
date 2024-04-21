@@ -58,8 +58,8 @@ void guardar_data(FILE *f, persona_t *usuari) // Es passa per referència per ev
 void guardar_usuari(FILE *f, persona_t *usuari)
 {
    fprintf(f, "%hd\n", usuari->id);
-   fprintf(f, "%s\n", usuari->nom);
-   fprintf(f, "%s\n", usuari->genere);
+   fprintf(f, "%s", usuari->nom);
+   fprintf(f, "%s", usuari->genere);
    fprintf(f, "%s", usuari->ciutat);
    guardar_data(f, usuari); // Es passa per referència per evitar sobresaturar la pila innecessàriament.
    fprintf(f, "\n\n"); // Separador estètic entre usuaris.
@@ -108,7 +108,6 @@ void guardar_usuaris(persona_t *t, short n_elem, FILE *f)
     rewind(f); // Es torna a l'inici de l'arxiu.
     fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
     fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
-    fprintf(f, "\n"); // S'escriu el separador estètic per l'arxiu de salt de línia.
     for(short i = n_elem - iteracions; i < n_elem; i++)
         guardar_usuari(f, &t[i]);
 }
