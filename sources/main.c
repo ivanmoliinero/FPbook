@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
                 do
                 {
                     mostrar_menu_principal();
-                    demanar_opcio((short*)&o, AFEGIR_USUARI, EXIT);
+                    o = (char)demanar_opcio(AFEGIR_USUARI, EXIT);
                     switch (o)
                     {
                     case MOSTRAR_PERFIL_USUARI:

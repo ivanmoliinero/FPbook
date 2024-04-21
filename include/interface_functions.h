@@ -80,11 +80,11 @@ extern void demanar_data(persona_t *usuari);
 
 /**
  * @brief Demana a l'usuari introduïr una opció en un rang de valors.
- * @param opcio (E/S) Opció escollida per l'usuari.
  * @param rang_max (E) Valor màxim permès.
  * @param rang_min (E) Valor mínim permès.
+ * @return short Opcio escollida.
  */
-extern void demanar_opcio(short *opcio, short rang_max, short rang_min);
+extern short demanar_opcio(short rang_max, short rang_min);
 
 /**
  * @brief Demana a l'usuari confirmar si vol acceptar o denegar una acció.

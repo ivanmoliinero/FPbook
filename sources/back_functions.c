@@ -253,7 +253,7 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
     while (!correcte)
     {
         missatge_seleccio_amistat();
-        demanar_opcio(&opcio, n_usuaris - 1, 0);
+        opcio = demanar_opcio(n_usuaris - 1, 0);
 
         if (opcio == usuari)
         {
@@ -304,7 +304,7 @@ void eliminar_amistat(int **amistats, short n_usuaris, short usuari)
     while (!correcte)
     {
         missatge_esborrat_amistat();
-        demanar_opcio(&opcio, n_usuaris - 1, 0);
+        opcio = demanar_opcio(n_usuaris - 1, 0);
 
         if (opcio == usuari)
         {

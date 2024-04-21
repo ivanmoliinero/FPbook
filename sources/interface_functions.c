@@ -76,13 +76,15 @@ void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
     demanar_data(usuari);
 }
 
-void demanar_opcio(short *opcio, short rang_max, short rang_min)
+short demanar_opcio(short rang_max, short rang_min)
 {
+    short opcio;
     do
     {
-        *opcio = obtenir_opcio_convertida();
-        if (*opcio < rang_min || *opcio > rang_max) printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
-    } while (*opcio < rang_min || *opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
+        opcio = obtenir_opcio_convertida();
+        if (opcio < rang_min || opcio > rang_max) printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
+    } while (opcio < rang_min || opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
+    return opcio;
 }
 
 void confirmar(short *confirmacio, short afirmacio, short denegacio)
@@ -134,7 +136,7 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     // printf("%s \n", usuaris->nom);
     // printf("%s \n", usuaris->genere);
     // printf("%s \n", usuaris->ciutat);
-    printf("ES MOSTRA EL PERFIL");
+    printf("ES MOSTRA EL PERFIL %hd\n", usuari);
 }
 
 void mostrar_menu_principal()
