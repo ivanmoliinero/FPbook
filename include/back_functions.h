@@ -76,9 +76,10 @@ extern bool data_compatible(char dia, char mes, short any);
  * @brief Afegeix un nombre d'usuaris especificats per terminal.
  * @param usuaris (E/S) Taula d'usuaris.
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
+ * @param amistats (S) Taula d'amistats.
  * @return short Nombre d'usuaris finals.
 */
-extern short afegir_usuaris(persona_t **usuaris, short n_usuaris);
+extern short afegir_usuaris(persona_t **usuaris, int **amistats, short n_usuaris);
 
 /**
  * @brief Actualitza la taula amb tots els usuaris del sistema.
@@ -88,5 +89,26 @@ extern short afegir_usuaris(persona_t **usuaris, short n_usuaris);
  * @return short Nombre d'usuaris finals que constaran al sistema.
 */
 extern short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous);
+
+/**
+ * @brief Inicia la llavor per establir aleatoris.
+*/
+extern void ini_llavor();
+
+/**
+ * @brief Genera un nombre aleatori entre min i max passats per paràmetre.
+ * @param min (E) Nombre mínim per generar l'aleatori.
+ * @param max (E) Nombre màxim per generar l'aleatori.
+ * @return int Nombre aleatori generat.
+*/
+extern int genera_aleatori(int min, int max);
+
+/**
+ * @brief Actualitza la taula d'amistats.
+ * @param amistats (S) Taula d'amistats i distàncies entre usuaris.
+ * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
+ * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
+*/
+extern void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous);
 
 #endif

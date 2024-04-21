@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "estructures.h"
 #include "back_functions.h"
@@ -100,7 +101,7 @@ bool guardar_amistats(int *amistats, short n_elem)
         res = false; // L'arxiu s'ha creat (o no), no s'ha trobat un arxiu d'usuaris, no es pot guardar la informació correctament. Se suposa que com a mínim un arxiu tindrà el nombre d'usuaris.
     else
     {
-        short dir; // Variable per evitar recalcular constantment i * n_elem+ j
+        int dir; // Variable per evitar recalcular constantment i * n_elem+ j
         fprintf(f, "%hd\n", n_elem);
         for(short i = 0; i < n_elem; i++) // Files.
         {
@@ -132,12 +133,23 @@ short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
     return(n_finals);
 }   
 
-void actualitzacio_amistats()
+void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
 {
-    
+    short n_finals = n_usuaris + n_nous;
+    realloc(*amistats, sizeof(int)*n_finals);
+    int dir;
+    for (short i = n_usuaris; i < n_finals; i++)
+    {
+        dir = (i * (i + 1))/2;
+        for(short j = 0; j <= i; j++, dir++)
+        {
+            (*amistats)[dir] = genera_aleatori(0, 9); // DISCUTIR INTERVAL AMB EQUIP.
+        }
+    }
+        
 }
 
-short afegir_usuaris(persona_t **usuaris, short n_usuaris)
+short afegir_usuaris(persona_t **usuaris, int **amistats, short n_usuaris)
 {
     short n_nous;
     // VALORAR SI IMPLEMENTAR CON LA NUEVA FUNCIÓN QUE HARÁ ERIC.
@@ -148,7 +160,7 @@ short afegir_usuaris(persona_t **usuaris, short n_usuaris)
     } while (n_nous < 0 || (n_usuaris + n_nous) > MAX_USUARIS);
     
     short n_final = actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
-    // actualitzacio_amistats();
+    actualitzacio_amistats(amistats, n_usuaris, n_nous);
     return(n_final);
 }
 
@@ -164,4 +176,14 @@ bool data_compatible(char dia, char mes, short any)
         correcte = 0 < dia && dia <= dies_mes[mes - 1];
     }
     return correcte;
+}
+
+void ini_llavor()
+{
+    srand(time(NULL));
+}
+
+int genera_aleatori(int min, int max)
+{
+    return(min + rand()%(max-min));
 }

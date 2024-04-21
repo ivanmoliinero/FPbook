@@ -1,6 +1,7 @@
 #include <stdio.h> // Menús + interacció per terminal.
 #include <stdlib.h> 
 #include <stdbool.h>
+#include <time.h>
 
 #include "back_functions.h"
 #include "interface_functions.h"
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
             usuari_inexistent();
         else
         {
+            ini_llavor();
             int *amistats; // Punter a taula d'amistats.
             bool usuaris_editats = false, amistats_editades = false; // Booleans per controlar l'edició de les dades.
             carregar_amistats(amistats);
