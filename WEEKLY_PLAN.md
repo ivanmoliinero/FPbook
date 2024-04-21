@@ -21,7 +21,7 @@ Cada diumenge s'ha d'anotar en aquest document la setmana, els objectius i els p
 <p>
 <!-- Progressos d'ERIC -->
 <ul>
-<li><u>15/04 - 21/04</u>obtenir_usuari, carregar_amistats, afegir_amistats, cal revisar posicionament de la taula.</li>
+<li><u>15/04 - 21/04</u>obtenir_usuari, carregar_amistats, afegir_amistats.</li>
 
 </ul>
 <!-- Fi dels progressos d'ERIC -->
