@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         else
         {
             ini_llavor();
-            int *amistats;                                           // Punter a taula d'amistats.
+            char *amistats;                                           // Punter a taula d'amistats.
             bool usuaris_editats = false, amistats_editades = false; // Booleans per controlar l'edició de les dades.
             if (!carregar_amistats(&amistats))
                 missatge_error_arxiu_amistats();

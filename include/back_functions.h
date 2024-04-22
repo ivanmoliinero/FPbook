@@ -50,7 +50,7 @@ extern void guardar_usuari(FILE *f, persona_t *usuari);
  * @param n_elem (E) Nombre de files i columnes de la matriu (nombre d'usuaris del sistema).
  * @param f (E/S) Arxiu on guardar les dades.
 */
-extern void guardar_amistats(int *amistats, short n_elem, FILE *f);
+extern void guardar_amistats(char *amistats, short n_elem, FILE *f);
 
 /**
  * @brief Comprova si una data és compatible (si un dia no supera els dies màxims d'un mes i si 29/2 és vàlid, és a dir, si l'any és estacionari).
@@ -69,7 +69,7 @@ extern bool data_compatible(char dia, char mes, short any);
  * @param amistats (S) Taula d'amistats.
  * @return short Nombre d'usuaris finals.
 */
-extern short afegir_usuaris(persona_t **usuaris, int **amistats, short n_usuaris);
+extern short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris);
 
 /**
  * @brief Actualitza la taula amb tots els usuaris del sistema.
@@ -99,7 +99,7 @@ extern int genera_aleatori(int min, int max);
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
 */
-extern void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous);
+extern void actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous);
 
 /**
  * @brief Obté l'identificador de l'usuari passat com a paràmetre.
@@ -114,7 +114,7 @@ extern short obtenir_usuari(char *argv[], short n_elem);
  * @param amistats (E/S) Vector amb l'informació de cada amistat.
  * @return bool amb el resultat de l'operació; tot correcte --> true; error --> false
  */
-extern bool carregar_amistats(int **amistats);
+extern bool carregar_amistats(char **amistats);
 
 /**
  * @brief Permet afegir una amistat y actualitza la informació a la taula amistats.
@@ -123,7 +123,7 @@ extern bool carregar_amistats(int **amistats);
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void afegir_amistat(int **amistats, short n_usuaris, short usuari);
+extern void afegir_amistat(char **amistats, short n_usuaris, short usuari);
 
 /**
  * @brief Permet eliminar una amistat y actualitza la informació a la taula amistats.
@@ -132,7 +132,7 @@ extern void afegir_amistat(int **amistats, short n_usuaris, short usuari);
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void eliminar_amistat(int **amistats, short n_usuaris, short usuari);
+extern void eliminar_amistat(char **amistats, short n_usuaris, short usuari);
 
 /**
  * @brief Guarda les dades als arxius de manera controlada per tal de no provocar actualitzacions incorrectes.
@@ -143,13 +143,13 @@ extern void eliminar_amistat(int **amistats, short n_usuaris, short usuari);
  * @param amistats_editades (E) Identificador de canvis en la taula d'amistats.
  * @return bool True en cas de guardat de dades correctes, false altrament.
 */
-extern bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris_editats, bool amistats_editades);
+extern bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool usuaris_editats, bool amistats_editades);
 
 /**
  * @brief Allibera la memòria de les taules generades amb malloc.
  * @param usuaris (E) Punter a la taula que s'ha d'alliberar.
  * @param amistats (E) Punter a la taula que s'ha d'alliberar.
 */
-extern void alliberacio_memoria(persona_t *usuaris, int *amistats);
+extern void alliberacio_memoria(persona_t *usuaris, char *amistats);
 
 #endif

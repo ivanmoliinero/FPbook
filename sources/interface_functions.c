@@ -16,19 +16,9 @@ short obtenir_opcio_convertida()
     return (res);                               // Conversió a enter, es guarda en short (màxima longitud de nombre emprada en el programa.)
 }
 
-short demanar_n_usuaris_nous()
+void demanar_n_usuaris_nous()
 {
-    short n_nous;
-    do
-    {
-        printf("Quants usuaris nous vols introduir?\n");
-        n_nous = obtenir_opcio_convertida();
-        if (n_nous <= 0 || n_nous > MAX_USUARIS)
-            printf("Introdueix un nombre positiu menor a %hd\n", MAX_USUARIS);
-
-    } while (0 >= n_nous || n_nous >= MAX_USUARIS);
-
-    return (n_nous);
+    printf("Introdueix el nombre d'usuaris nous a afegir al sistema: ");
 }
 
 void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉRICA ERIC.
@@ -67,12 +57,15 @@ void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
     printf("Introdueix el nom del nou usuari:\n");
     fflush(stdin);
     fgets(usuari->nom, MAX_NOM, stdin);
+    usuari->nom[MAX_NOM-1] = '\n'; // Solució problemes format fitxer.
     fflush(stdin);
     printf("Introdueix el genere del nou usuari:\n");
     fgets(usuari->genere, MAX_GENERE, stdin);
+    usuari->genere[MAX_GENERE-1] = '\n'; // Solució problemes format fitxer.
     fflush(stdin);
     printf("Introdueix la ciutat del nou usuari:\n");
     fgets(usuari->ciutat, MAX_CIUTAT, stdin);
+    usuari->ciutat[MAX_CIUTAT-1] = '\n'; // Solució problemes format fitxer.
     demanar_data(usuari);
 }
 
@@ -96,7 +89,7 @@ void confirmar(short *confirmacio, short afirmacio, short denegacio)
     } while (*confirmacio != denegacio && *confirmacio != afirmacio); // Procura que el valor introduït sigui binari(dues opcions posibles).
 }
 
-void mostrar_compatibles(int *amistats, int n_usuaris, int usuari)
+void mostrar_compatibles(char *amistats, int n_usuaris, int usuari)
 {
     int valor;
     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
@@ -113,7 +106,7 @@ void mostrar_compatibles(int *amistats, int n_usuaris, int usuari)
             }
             if (valor <= COMPATIBILIDAD && valor > 0)
             {
-                printf("%d,%d\n", i, usuari);
+                printf("%hd, %hd\n", i, usuari);
                 printf("mostrar_perfil()\n");
             }
         }
@@ -132,12 +125,36 @@ void missatge_acomiadament()
 
 void mostrar_perfil(short usuari, persona_t *usuaris)
 {
-    // usuaris.nom[o]
-    // printf("%s \n", usuaris->nom);
-    // printf("%s \n", usuaris->genere);
-    // printf("%s \n", usuaris->ciutat);
-    printf("ES MOSTRA EL PERFIL %hd\n", usuari);
+    printf("%s", usuaris[usuari].nom);
+    printf("%s", usuaris[usuari].genere);
+    printf("%s", usuaris[usuari].ciutat);
+    printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);  
 }
+
+// void mostrar_amistats()
+// {
+
+//     int valor;
+//     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
+//     {
+//         if (usuari != i)
+//         {
+//             if (i > usuari)
+//             {
+//                 valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
+//             }
+//             else
+//             {
+//                 valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
+//             }
+//             if (valor == -1)
+//             {
+//                mostrar_perfil(&valors, )
+//             }
+//         }
+//     }
+// //if amistats [i][j]==-1 --> mostrar_perfil(calcul id, usuaris)
+// }
 
 void mostrar_menu_principal()
 {

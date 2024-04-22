@@ -15,7 +15,7 @@ void carregar_data(FILE *f, persona_t *us)
 
 void carregar_usuari(FILE *f, persona_t *usuari)
 {
-    fscanf(f, "%hd", &usuari->id);
+    fscanf(f, "%hd\n", &usuari->id);
     fgets(usuari->nom, MAX_NOM, f);
     fgets(usuari->genere, MAX_GENERE, f);
     fgets(usuari->ciutat, MAX_CIUTAT, f);
@@ -65,9 +65,9 @@ void guardar_usuari(FILE *f, persona_t *usuari)
    fprintf(f, "\n\n"); // Separador estètic entre usuaris.
 }
 
-bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris_editats, bool amistats_editades)
+bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool usuaris_editats, bool amistats_editades)
 {
-    bool resultat;
+    bool resultat = false;
     if(amistats_editades && !usuaris_editats) // Només s'ha editat l'arxiu d'amistats.
     {
         FILE *fitxer_amistats = fopen("data/propers.fpb", "w"); /* S'obre el fitxer de propers (totes les amistats del sistema) per escriure. A diferència del d'usuaris, aquest
@@ -78,7 +78,6 @@ bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris
             resultat = true;
             guardar_amistats(amistats, n_elem, fitxer_amistats);
         }
-        else resultat = false;
         fclose(fitxer_amistats);
     }
     else if (usuaris_editats) // S'ha editat l'arxiu d'usuaris cal actualitzar ambdós.
@@ -93,7 +92,6 @@ bool guardar_dades(persona_t *usuaris, int *amistats, short n_elem, bool usuaris
             guardar_usuaris(usuaris, n_elem, fitxer_usuaris);
             guardar_amistats(amistats, n_elem, fitxer_amistats);
         }
-        else resultat = false;
         fclose(fitxer_amistats);
         fclose(fitxer_usuaris);
     }
@@ -107,19 +105,18 @@ void guardar_usuaris(persona_t *t, short n_elem, FILE *f)
     iteracions = n_elem - n_elem_antics; // Nombre d'usuaris nous que s'afegeixen a la base d'usuaris.
     rewind(f); // Es torna a l'inici de l'arxiu.
     fprintf(f, "%hd", n_elem); // Es reescriu el nombre d'usuaris.
-    fseek(f, 0L, SEEK_END); // Es retorna 0 i es guarda en res. 0L perquè es demana un nombre de tipus long. Es col·loca el punter de l'arxiu al final d'aquest.
+    fseek(f, 0L, SEEK_END);
     for(short i = n_elem - iteracions; i < n_elem; i++)
         guardar_usuari(f, &t[i]);
 }
 
-void guardar_amistats(int *amistats, short n_elem, FILE *f)
+void guardar_amistats(char *amistats, short n_elem, FILE *f)
 {
-    int dir; // Variable per evitar recalcular constantment i * n_elem+ j
+    int valors = (n_elem*(n_elem+1))/2;
     fprintf(f, "   %hd\n", n_elem);
-    for(short i = 0; i < n_elem; i++) // Files.
+    for(int dir = 0; dir < valors; dir++) // Files.
     {
         fprintf(f, "  "); // Dos espais en blanc, d'acord amb el format dels fitxers proporcionats a la pràctica.
-        dir = (i * (i + 1))/2; // j = 0;
         while(amistats[dir] != 0) // Quan s'arriba al 0, es guarda aquest valor i es deixen de guardar dades.
         {
             if(amistats[dir] >= 0) fprintf(f, "%c", ' '); // En cas que el primer element sigui major o igual a 0, s'afegeix un espai més. Si no, aquesta posició l'ocuparà el signe negatiu.
@@ -143,10 +140,10 @@ short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
     return(n_finals);
 }   
 
-void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
+void actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
-    *amistats = realloc(*amistats, sizeof(int)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
+    *amistats = realloc(*amistats, sizeof(char)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
     int dir;
     for (short i = n_usuaris; i < n_finals; i++)
     {
@@ -159,15 +156,11 @@ void actualitzacio_amistats(int **amistats, short n_usuaris, short n_nous)
     }
 }
 
-short afegir_usuaris(persona_t **usuaris, int **amistats, short n_usuaris)
+short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
 {
-    short n_nous;
-    // VALORAR SI IMPLEMENTAR CON LA NUEVA FUNCIÓN QUE HARÁ ERIC.
-    do
-    {
-        printf("NOUS USUARIS: ");
-        n_nous = obtenir_opcio_convertida();
-    } while (n_nous < 0 || (n_usuaris + n_nous) > MAX_USUARIS);
+    demanar_n_usuaris_nous();
+    short n_maxim = MAX_USUARIS - n_usuaris;
+    short n_nous = demanar_opcio(n_maxim, 1);
     
     short n_final = actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
     actualitzacio_amistats(amistats, n_usuaris, n_nous);
@@ -206,10 +199,10 @@ short obtenir_usuari(char *argv[], short n_elem)
     return (id);
 }
 
-bool carregar_amistats(int **amistats)
+bool carregar_amistats(char **amistats)
 {
     bool resultat = true;
-    int dir, n_elem;
+    int dir = 0, n_elem;
     short i, j, fila_columna;
     FILE *fitxer = fopen("data/propers.fpb", "r"); // Obrim fitxer amb les dades d'amistats.
 
@@ -221,7 +214,7 @@ bool carregar_amistats(int **amistats)
     {
         fscanf(fitxer, "%hd", &fila_columna); // Guardem el número de d'elements de cada fila/columna equivalent al número d'usuaris al sistema.
         n_elem = (((fila_columna * (fila_columna + 1)) / 2)); // Mètode d'adreçament = ((N * (N + 1)) / 2)
-        *amistats = malloc(sizeof(int) * n_elem);             // Assignació dinàmica de memória.
+        *amistats = malloc(sizeof(char) * n_elem);             // Assignació dinàmica de memória.
         if (*amistats == NULL)
             resultat = false;
         else
@@ -229,11 +222,9 @@ bool carregar_amistats(int **amistats)
             resultat = true;
             for (i = 0; i < fila_columna; i++)
             {
-                dir = ((i * (i + 1)) / 2);
-
                 for (j = 0; j <= i; j++, dir++)
                 {
-                    fscanf(fitxer, "%d", &(*amistats)[dir]);
+                    fscanf(fitxer, "%hd", (short*)&(*amistats)[dir]);
                 }
             }
         }
@@ -242,7 +233,7 @@ bool carregar_amistats(int **amistats)
     return resultat;
 }
 
-void afegir_amistat(int **amistats, short n_usuaris, short usuari)
+void afegir_amistat(char **amistats, short n_usuaris, short usuari)
 {
     int columna;
     bool correcte = false;
@@ -293,7 +284,7 @@ void afegir_amistat(int **amistats, short n_usuaris, short usuari)
     }
 }
 
-void eliminar_amistat(int **amistats, short n_usuaris, short usuari)
+void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
 {
     int columna;
     short opcio, confirmacio;
@@ -340,7 +331,7 @@ void eliminar_amistat(int **amistats, short n_usuaris, short usuari)
     }
 }
 
-void alliberacio_memoria(persona_t *usuaris, int *amistats)
+void alliberacio_memoria(persona_t *usuaris, char *amistats)
 {
     free(usuaris);
     free(amistats);

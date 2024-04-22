@@ -61,10 +61,8 @@ extern short obtenir_opcio_convertida();
 
 /**
  * @brief Demana el nombre d'usuaris nous que s'introduiran a la base d'usuaris.
- * @return short Nombre d'usuaris nous.
- * @post 0 < n_nous && n_nous < MAX_USUARIS.
 */
-extern short demanar_n_usuaris_nous();
+extern void demanar_n_usuaris_nous();
 
 /**
  * @brief Guarda les dades d'un usuari pel teclat en la variable passada per paràmetre.
@@ -101,7 +99,7 @@ extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void mostrar_compatibles(int *amistats, int n_usuaris, int usuari);
+extern void mostrar_compatibles(char *amistats, int n_usuaris, int usuari);
 
 /**
  * @brief Avisa de compatibilitat dolenta entre usuaris.
