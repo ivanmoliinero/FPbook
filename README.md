@@ -26,6 +26,10 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>NOS SALDRIA MEJOR TRABAJAR CON UN ARCHIVO DE CHAR BINARIO PARA PROPERS??? (para usuarios valorar, pero mejor que no)</li>
     <li>mostrar_compatibles() i mostrar_amistats()</li>
     <li><a href = "https://stackoverflow.com/questions/37306000/performance-overhead-of-typecasting-variables-in-c">EXPLICACION COSTE ALGORITMICO CASTING</a></li>
+    <br>
+    <br>
+    <li>CAMBIOS EN PARAMETROS DE AFEGIR AMISTAT + NUEVA FUNCION MOSTRAR_AMISTAT</li>
+    <li>OPCIO AFEGIDA -1 A AFEGIR_AMISTAT (no s'afegeix cap, especificat per enunciat)</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

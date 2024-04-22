@@ -95,11 +95,12 @@ extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
 /**
  * @brief Mostra els usuaris compatibles amb un usuari.
  * @pre Taula d'amistats carregada.
+ * @param usuaris (E) Taula d'usuaris.
  * @param amistats (E/S) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void mostrar_compatibles(char *amistats, int n_usuaris, int usuari);
+extern void mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari);
 
 /**
  * @brief Avisa de compatibilitat dolenta entre usuaris.
@@ -120,5 +121,12 @@ extern void missatge_seleccio_amistat();
  * @brief Informa a l'usuari que ha d'escollir un usuari per eliminar-lo dels seus amics.
 */
 extern void missatge_esborrat_amistat();
+
+/**
+ * @brief Mostra la informació d'un usuari per afegir-lo com a amic.
+ * @param usuaris (E) Taula d'usuaris del sistema.
+ * @param usuari (E) Posició de la taula d'usuaris de l'usuari a mostrar.
+*/
+extern void mostrar_amistat(persona_t *usuaris, short usuari);
 
 #endif

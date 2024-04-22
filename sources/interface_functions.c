@@ -89,7 +89,7 @@ void confirmar(short *confirmacio, short afirmacio, short denegacio)
     } while (*confirmacio != denegacio && *confirmacio != afirmacio); // Procura que el valor introduït sigui binari(dues opcions posibles).
 }
 
-void mostrar_compatibles(char *amistats, int n_usuaris, int usuari)
+void mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari)
 {
     int valor;
     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
@@ -106,11 +106,16 @@ void mostrar_compatibles(char *amistats, int n_usuaris, int usuari)
             }
             if (valor <= COMPATIBILIDAD && valor > 0)
             {
-                printf("%hd, %hd\n", i, usuari);
-                printf("mostrar_perfil()\n");
+                mostrar_amistat(usuaris, i);
             }
         }
     }
+}
+
+void mostrar_amistat(persona_t *usuaris, short usuari)
+{
+    printf("ID: %hd\n", usuaris[usuari].id);
+    printf("NOM: %s\n", usuaris[usuari].nom); // \n per separar entre amistats.
 }
 
 void missatge_benvinguda()
@@ -194,7 +199,7 @@ void missatge_error_arxiu_amistats()
 
 void missatge_seleccio_amistat()
 {
-    printf("Escull un usuari per afegir-lo com a amic\n");
+    printf("Escull un usuari per afegir-lo com a amic o introdueix -1 per no afegir cap usuari.\n");
 }
 
 void missatge_esborrat_amistat()

@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
                         printf("mostrar_amistats()");
                         break;
                     case AFEGIR_AMISTAT:
-                        afegir_amistat(&amistats, n_elem, usuari);
+                        afegir_amistat(usuaris, &amistats, n_elem, usuari);
                         amistats_editades = true;
                         break;
                     case ELIMINAR_AMISTAT:

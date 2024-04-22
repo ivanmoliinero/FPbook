@@ -233,20 +233,21 @@ bool carregar_amistats(char **amistats)
     return resultat;
 }
 
-void afegir_amistat(char **amistats, short n_usuaris, short usuari)
+void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short usuari)
 {
     int columna;
     bool correcte = false;
     short opcio, confirmacio;
 
-    mostrar_compatibles(*amistats, n_usuaris, usuari);
+    mostrar_compatibles(usuaris, *amistats, n_usuaris, usuari);
 
     while (!correcte)
     {
         missatge_seleccio_amistat();
-        opcio = demanar_opcio(n_usuaris - 1, 0);
+        opcio = demanar_opcio(n_usuaris - 1, -1);
 
-        if (opcio == usuari)
+        if (opcio == -1) correcte = true; // Es surt del programa.
+        else if (opcio == usuari)
         {
             printf("¡NO TE PUEDES AÑADIR TU MISMO COMO AMIGO!");
         }

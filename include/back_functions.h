@@ -119,11 +119,12 @@ extern bool carregar_amistats(char **amistats);
 /**
  * @brief Permet afegir una amistat y actualitza la informació a la taula amistats.
  * @pre Taula d'amistats carregada.
+ * @param usuaris (E) Taula d'usuaris del sistema.
  * @param amistats (E/S) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void afegir_amistat(char **amistats, short n_usuaris, short usuari);
+extern void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short usuari);
 
 /**
  * @brief Permet eliminar una amistat y actualitza la informació a la taula amistats.
