@@ -30,6 +30,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <br>
     <li>CAMBIOS EN PARAMETROS DE AFEGIR AMISTAT + NUEVA FUNCION MOSTRAR_AMISTAT</li>
     <li>OPCIO AFEGIDA -1 A AFEGIR_AMISTAT (no s'afegeix cap, especificat per enunciat)</li>
+    <li>CONTROL ERRORES CADENA SUPER LARGA (no controlar, juego de pruebas y docuumentar)</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
