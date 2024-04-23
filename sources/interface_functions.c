@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include "estructures.h"
 #include "interface_functions.h"
@@ -8,6 +9,7 @@
 
 short obtenir_opcio_convertida()
 {
+    fflush(stdin); //Es neteja l'entrada per si de cas hi ha caràcters "brossa".
     char o[MAX_OPCIO];
     scanf("%s", o); // Obté l'opció escrita com un caràcter.
     short res = (short)atoi(o);
@@ -25,23 +27,13 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 {
     short temp;
     bool mes_correcte;
-    do
-    {
-        printf("Introdueix el mes de naixement de l'usuari:\n");
-        temp = obtenir_opcio_convertida();
-        if (temp < 1 || temp > 12)
-            printf("Introdueix un mes valid, entre 1 i 12\n");
-    } while (temp < 1 || temp > 12);
+    printf("Introdueix el mes de naixement de l'usuari: ");
+    temp = demanar_opcio(12, 1);
     usuari->data_neix.mes = (char)temp;
-    do
-    {
-        printf("Introdueix l'any de naixement de l'usuari:\n");
-        temp = obtenir_opcio_convertida();
-        if (temp < 0)
-            printf("Introdueix un any valid, no negatiu.\n");
-    } while (temp < 0);
+    printf("Introdueix l'any de naixement de l'usuari: ");
+    temp = demanar_opcio(SHRT_MAX, 0); // Cal passar un valor màxim, es passa el màxim valor de short per tal d'evitar conflictes amb anys negatius.
     usuari->data_neix.any = temp;
-    do
+    do // Com la condició per escollir el mes és més complicada (no és un interval simple), cal integrar un bucle addicional.
     {
         printf("Introdueix el dia de naixement de l'usuari:\n");
         temp = obtenir_opcio_convertida();
