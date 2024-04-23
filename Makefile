@@ -32,7 +32,7 @@ build/tests.exe : sources/tests.c sources/interface_functions.c sources/back_fun
 #	run commands
 #------------------------------------------------------------------
 run : build/fpbook.exe
-	build/fpbook.exe
+	build/fpbook.exe $(user)
 
 run_tests : build/tests.exe
 	build/tests.exe
@@ -45,7 +45,7 @@ debug : build/fpbook.exe
 	gdb build/fpbook.exe
 
 debug_tests : build/tests.exe
-	gdb build/tests.exe
+	gdb build/tests.exe 
 
 
 #------------------------------------------------------------------
