@@ -35,6 +35,8 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>CANVIAR RETURN EN MIG DE FUNCIONS</li>
     <br>
     <li>REVISAR PROBLEMAS CON EL HEAP</li>
+    <br>
+    <li>REVISAR LINEA 181 BACK_FUNCTIONS.c</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

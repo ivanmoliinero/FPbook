@@ -175,15 +175,15 @@ bool actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous)
     if (*amistats != NULL)
     {
         correcte = true;
-        int dir;
+        int dir = (n_usuaris * (n_usuaris + 1))/2;
         for (short i = n_usuaris; i < n_finals; i++)
         {
-            dir = (i * (i + 1))/2;
             for(short j = 0; j < i; j++, dir++)
             {
                 (*amistats)[dir] = (char)genera_aleatori(1, 9); // Casting necessari per no provocar conflictes al heap.
             }
             (*amistats)[dir] = 0; // Sentinella 0.
+            dir++;
         }
     }
     else
@@ -195,8 +195,8 @@ short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
 {
     persona_t *temp_usuaris = *usuaris;
     char *temp_amistats = *amistats; // Taules temporals per controlar els realloc.
-    demanar_n_usuaris_nous();
     short n_maxim = MAX_USUARIS - n_usuaris;
+    demanar_n_usuaris_nous();
     short n_nous = demanar_opcio(n_maxim, 1);
     
     short n_final = actualitzacio_usuaris(&temp_usuaris, n_usuaris, n_nous);
