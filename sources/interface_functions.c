@@ -44,22 +44,23 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
     usuari->data_neix.dia = (char)temp;
 }
 
-void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
+bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
     char dummy[MAX_DUMMY];
     fflush(stdin);
     printf("Introdueix el nom del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    string_copy_without_trash(dummy, &(usuari->nom));
+    if (!string_copy_without_trash(dummy, &(usuari->nom))) return false;
     fflush(stdin);
     printf("Introdueix el genere del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    string_copy_without_trash(dummy, &(usuari->genere));
+    if (!string_copy_without_trash(dummy, &(usuari->genere))) return false;
     fflush(stdin);
     printf("Introdueix la ciutat del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    string_copy_without_trash(dummy, &(usuari->ciutat));
+    if (!string_copy_without_trash(dummy, &(usuari->ciutat))) return false;
     demanar_data(usuari);
+    return true;
 }
 
 short demanar_opcio(short rang_max, short rang_min)
@@ -199,4 +200,23 @@ void missatge_seleccio_amistat()
 void missatge_esborrat_amistat()
 {
     printf("Escull un usuari per eliminar-lo com a amic\n");
+}
+
+void missatge_error_arxiu_usuaris()
+{
+    printf("No s'han pogut carregar els usuaris correctament\n");
+}
+
+bool mirar_errors(short control)
+{
+    if (control == -1)
+    {
+        printf("Error en el guardat de dades d'usuaris i/o amistats\n");
+        return false;
+    }
+    else 
+    {
+        printf("Guardat satisfactori!\n");
+        return true;
+    }
 }

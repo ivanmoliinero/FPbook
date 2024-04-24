@@ -69,8 +69,9 @@ extern void demanar_n_usuaris_nous();
 /**
  * @brief Guarda les dades d'un usuari pel teclat en la variable passada per paràmetre.
  * @param (S) usuari Variable de persona_t on es guarden les dades.
+ * @return bool True si s'ha pogut guardar l'usuari correctament, false altrament.
 */
-extern void afegir_usuari(persona_t *usuari);
+extern bool afegir_usuari(persona_t *usuari);
 
 /**
  * @brief Demana una data de naixement a un usuari per teclat i l'emmagatzema en la variable usuari passada com a paràmetre.
@@ -130,5 +131,18 @@ extern void missatge_esborrat_amistat();
  * @param usuari (E) Posició de la taula d'usuaris de l'usuari a mostrar.
 */
 extern void mostrar_amistat(persona_t *usuaris, short usuari);
+
+/**
+ *@brief Informa a l'usuari d'error en la càrrega del fitxer d'usuaris.
+*/
+extern void missatge_error_arxiu_usuaris();
+
+/**
+ * @brief Informa a l'usuari d'error en l'afegiment d'usuaris.
+ * @param control (E) Nombre d'usuaris final després d'intentar afegir-los.
+ * @return bool True si s'han pogut guardar els usuaris, false altrament.
+ * @pre Ha de ser -1 en cas que no s'hagin pogut guardar les dades.
+*/
+extern bool mirar_errors(short control);
 
 #endif

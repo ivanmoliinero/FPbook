@@ -11,8 +11,9 @@
  * @brief Carrega les dades de l'usuari indicat a partir d'un fitxer passat com a paràmetre.
  * @param f (E) Arxiu amb els usuaris.
  * @param usuari (S) Variable de persona on es carrega la info de l'arxiu.
+ * @return bool True si no hi ha cap error, false altrament.
 */
-extern void carregar_usuari(FILE *f, persona_t *usuari);
+extern bool carregar_usuari(FILE *f, persona_t *usuari);
 
 /**
  * @brief Carrega usuaris en una taula passada com a punter.
@@ -76,7 +77,7 @@ extern short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuari
  * @param usuaris (S) Taula amb usuaris del sistema.
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
- * @return short Nombre d'usuaris finals que constaran al sistema.
+ * @return short Nombre d'usuaris finals que constaran al sistema, -1 en cas d'error.
 */
 extern short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous);
 
@@ -99,7 +100,7 @@ extern int genera_aleatori(int min, int max);
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
 */
-extern void actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous);
+extern bool actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous);
 
 /**
  * @brief Obté l'identificador de l'usuari passat com a paràmetre.
@@ -159,7 +160,8 @@ extern void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usua
  * @param origin (E) String origen.
  * @param dest (S) Punter a l'string destí.
  * @pre Cal que origin tingui el caràcter sentinella '\n'.
+ * @return bool True si s'ha pogut completar l'operació, false altrament.
 */
-extern void string_copy_without_trash(char origin[], char **dest);
+extern bool string_copy_without_trash(char origin[], char **dest);
 
 #endif 

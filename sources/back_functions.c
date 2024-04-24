@@ -14,39 +14,48 @@ void carregar_data(FILE *f, persona_t *us)
                                                                                                            les dades. Quan es guardin, ja es guarden en un char */
 }
 
-void carregar_usuari(FILE *f, persona_t *usuari)
+bool carregar_usuari(FILE *f, persona_t *usuari)
 {
     char dummy[MAX_DUMMY], n_elem_dummy;
     fscanf(f, "%hd\n", &usuari->id);
     fgets(dummy, MAX_DUMMY, f);
-    n_elem_dummy = strlen(dummy);
+    n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
     usuari->nom = malloc(sizeof(char)*n_elem_dummy);
+    if (usuari->nom == NULL) return false;
     strcpy(usuari->nom, dummy);
+
     fgets(dummy, MAX_DUMMY, f);
-    n_elem_dummy = strlen(dummy);
+    n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
     usuari->genere = malloc(sizeof(char)*n_elem_dummy);
+    if (usuari->genere == NULL) return false;
     strcpy(usuari->genere, dummy);
+
     fgets(dummy, MAX_DUMMY, f);
-    n_elem_dummy = strlen(dummy);
+    n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
     usuari->ciutat = malloc(sizeof(char)*n_elem_dummy);
+    if (usuari->ciutat == NULL) return false;
     strcpy(usuari->ciutat, dummy);
+
     carregar_data(f, usuari);
+    return true;
 }
 
 short carregar_usuaris(persona_t **usuaris)
 {
     FILE *f = fopen("data/usuaris.fpb", "r");
     short n_usuaris; // short perquè com a màxim serà de 10000 (definit a l'enunciat de la pràctica".)
+    bool correcte = true;
     if(f != NULL)
     {
         fscanf(f, "%hd", &n_usuaris);
         *usuaris = malloc(sizeof(persona_t)*n_usuaris);
         if(*usuaris != NULL) // S'ha pogut crear la taula.
         {
-            for(short i = 0; i < n_usuaris; i++)
+            for(short i = 0; i < n_usuaris && correcte; i++)
             {
-                carregar_usuari(f, &((*usuaris)[i]));
+                correcte = carregar_usuari(f, &((*usuaris)[i]));
             }
+            if(!correcte) n_usuaris = -1;
         }
         else
             n_usuaris = -1; // No s'ha pogut crear la taula amb malloc.
@@ -141,40 +150,75 @@ void guardar_amistats(char *amistats, short n_elem, FILE *f)
 short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
+    bool correcte = true;
     *usuaris = realloc(*usuaris, sizeof(persona_t)*n_finals); // Ampliació del vector d'usuaris. CONSIDERAR CANVIAR PER CONTROL D'ERRORS.
-    for(short i = n_usuaris, j = 1; i < n_finals; i++, j++)
+    if (*usuaris != NULL)
     {
-        printf("Nou usuari %hd\n", j);
-        afegir_usuari(&((*usuaris)[i]));
-        ((*usuaris)[i]).id = i; // S'afegeix l'identificador aquí per evitar sobresaturar la funció afegir_usuari().
-    }   
+        for(short i = n_usuaris, j = 1; i < n_finals && correcte; i++, j++)
+        {
+            printf("Nou usuari %hd\n", j);
+            correcte = afegir_usuari(&((*usuaris)[i]));
+            ((*usuaris)[i]).id = i; // S'afegeix l'identificador aquí per evitar sobresaturar la funció afegir_usuari().
+        }
+        if(!correcte) n_finals = -1;   
+    }
+    else
+        n_finals = -1;
     return(n_finals);
 }   
 
-void actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous)
+bool actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous)
 {
     short n_finals = n_usuaris + n_nous;
+    bool correcte;
     *amistats = realloc(*amistats, sizeof(char)*(((n_finals * (n_finals + 1)) / 2))); // Amplicació de la taula amistats.
-    int dir;
-    for (short i = n_usuaris; i < n_finals; i++)
+    if (*amistats != NULL)
     {
-        dir = (i * (i + 1))/2;
-        for(short j = 0; j < i; j++, dir++)
+        correcte = true;
+        int dir;
+        for (short i = n_usuaris; i < n_finals; i++)
         {
-            (*amistats)[dir] = genera_aleatori(1, 9); // DISCUTIR INTERVAL AMB EQUIP.
+            dir = (i * (i + 1))/2;
+            for(short j = 0; j < i; j++, dir++)
+            {
+                (*amistats)[dir] = (char)genera_aleatori(1, 9); // Casting necessari per no provocar conflictes al heap.
+            }
+            (*amistats)[dir] = 0; // Sentinella 0.
         }
-        (*amistats)[dir] = 0; // Sentinella 0.
     }
+    else
+        correcte = false;
+    return correcte;
 }
 
 short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
 {
+    persona_t *temp_usuaris = *usuaris;
+    char *temp_amistats = *amistats; // Taules temporals per controlar els realloc.
     demanar_n_usuaris_nous();
     short n_maxim = MAX_USUARIS - n_usuaris;
     short n_nous = demanar_opcio(n_maxim, 1);
     
-    short n_final = actualitzacio_usuaris(usuaris, n_usuaris, n_nous);
-    actualitzacio_amistats(amistats, n_usuaris, n_nous);
+    short n_final = actualitzacio_usuaris(&temp_usuaris, n_usuaris, n_nous);
+    if(n_final != -1)
+    {
+        if(!actualitzacio_amistats(&temp_amistats, n_usuaris, n_nous))
+        {
+            n_final = -1;
+            free(temp_usuaris);
+            free(temp_amistats); // No s'ha acabat de completar el guardat de noves dades, free a les temporals.
+        }
+        else // S'ha executat correctament.
+        {
+            *usuaris = temp_usuaris;
+            *amistats = temp_amistats; // Col·locació d'adreces amb tota la info carregada als paràmetres.
+        }
+    }
+    else
+    {
+        free(temp_usuaris); // Buidem el que s'hagi omplert.
+    }
+    
     return(n_final);
 }
 
@@ -216,6 +260,7 @@ bool carregar_amistats(char **amistats)
     int dir = 0, n_elem;
     short i, j, fila_columna;
     FILE *fitxer = fopen("data/propers.fpb", "r"); // Obrim fitxer amb les dades d'amistats.
+    short temp; // To charge values without over exceeding.
 
     if (fitxer == NULL)
     {
@@ -235,7 +280,8 @@ bool carregar_amistats(char **amistats)
             {
                 for (j = 0; j <= i; j++, dir++)
                 {
-                    fscanf(fitxer, "%hd", (short*)&(*amistats)[dir]);
+                    fscanf(fitxer, "%hd", &temp);
+                    (*amistats)[dir] = (char)temp;
                 }
             }
         }
@@ -355,9 +401,10 @@ void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usuaris)
     free(amistats);
 }
 
-void string_copy_without_trash(char origin[], char **dest)
+bool string_copy_without_trash(char origin[], char **dest)
 {
     short last_index, i;
+    bool correcte;
     for (i = 0; origin[i] != '\n'; i++)
         if(origin[i] != ' ') last_index = i;
     last_index++;
@@ -365,7 +412,16 @@ void string_copy_without_trash(char origin[], char **dest)
     char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
     new_lenght+=2; // Pel caràcter \n.
     *dest = malloc(sizeof(char)*new_lenght);
-    strcpy(*dest, origin);
-    (*dest)[new_lenght-2] = '\n'; // Caràcter necessari per fer correctament els printf.
-    (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
+    if(*dest == NULL)
+        correcte = false;
+    else
+    {
+        correcte = true;
+        strcpy(*dest, origin);
+        /* Les següents modificacions poden ser estudiades per veure si realment calen, però per evitar problemes de format
+           i de heap s'inclouen */
+        (*dest)[new_lenght-2] = '\n'; // Caràcter necessari per fer correctament els printf.
+        (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
+    }
+    return correcte;
 }
