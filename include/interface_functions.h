@@ -11,6 +11,8 @@
 
 #define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
 
+#define MAX_DUMMY 100 // Constant per guardar dades en taula temporal.
+
 #define MAX_USUARIS 10000 // Màxims usuaris que es suportaran al sistema.
 
 #define COMPATIBILIDAD 3

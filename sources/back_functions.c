@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <string.h>
 
 #include "estructures.h"
 #include "back_functions.h"
@@ -15,10 +16,20 @@ void carregar_data(FILE *f, persona_t *us)
 
 void carregar_usuari(FILE *f, persona_t *usuari)
 {
+    char dummy[MAX_DUMMY], n_elem_dummy;
     fscanf(f, "%hd\n", &usuari->id);
-    fgets(usuari->nom, MAX_NOM, f);
-    fgets(usuari->genere, MAX_GENERE, f);
-    fgets(usuari->ciutat, MAX_CIUTAT, f);
+    fgets(dummy, MAX_DUMMY, f);
+    n_elem_dummy = strlen(dummy);
+    usuari->nom = malloc(sizeof(char)*n_elem_dummy);
+    strcpy(usuari->nom, dummy);
+    fgets(dummy, MAX_DUMMY, f);
+    n_elem_dummy = strlen(dummy);
+    usuari->genere = malloc(sizeof(char)*n_elem_dummy);
+    strcpy(usuari->genere, dummy);
+    fgets(dummy, MAX_DUMMY, f);
+    n_elem_dummy = strlen(dummy);
+    usuari->ciutat = malloc(sizeof(char)*n_elem_dummy);
+    strcpy(usuari->ciutat, dummy);
     carregar_data(f, usuari);
 }
 
@@ -336,4 +347,19 @@ void alliberacio_memoria(persona_t *usuaris, char *amistats)
 {
     free(usuaris);
     free(amistats);
+}
+
+void string_copy_without_trash(char origin[], char **dest)
+{
+    short last_index, i;
+    for (i = 0; origin[i] != '\n'; i++)
+        if(origin[i] != ' ') last_index = i;
+    last_index++;
+    origin[last_index] = '\0'; // additional spaces ignored.
+    char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
+    new_lenght+=2; // Pel caràcter \n.
+    *dest = malloc(sizeof(char)*new_lenght);
+    strcpy(*dest, origin);
+    (*dest)[new_lenght-2] = '\n'; // Caràcter necessari per fer correctament els printf.
+    (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
 }

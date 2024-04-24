@@ -46,18 +46,19 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 
 void afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
-    printf("Introdueix el nom del nou usuari:\n");
+    char dummy[MAX_DUMMY];
     fflush(stdin);
-    fgets(usuari->nom, MAX_NOM, stdin);
-    usuari->nom[MAX_NOM-1] = '\n'; // Solució problemes format fitxer.
+    printf("Introdueix el nom del nou usuari:\n");
+    fgets(dummy, MAX_DUMMY, stdin);
+    string_copy_without_trash(dummy, &(usuari->nom));
     fflush(stdin);
     printf("Introdueix el genere del nou usuari:\n");
-    fgets(usuari->genere, MAX_GENERE, stdin);
-    usuari->genere[MAX_GENERE-1] = '\n'; // Solució problemes format fitxer.
+    fgets(dummy, MAX_DUMMY, stdin);
+    string_copy_without_trash(dummy, &(usuari->genere));
     fflush(stdin);
     printf("Introdueix la ciutat del nou usuari:\n");
-    fgets(usuari->ciutat, MAX_CIUTAT, stdin);
-    usuari->ciutat[MAX_CIUTAT-1] = '\n'; // Solució problemes format fitxer.
+    fgets(dummy, MAX_DUMMY, stdin);
+    string_copy_without_trash(dummy, &(usuari->ciutat));
     demanar_data(usuari);
 }
 

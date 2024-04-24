@@ -153,4 +153,12 @@ extern bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool
 */
 extern void alliberacio_memoria(persona_t *usuaris, char *amistats);
 
-#endif
+/**
+ * @brief Copia una string a una altra sense espais addicionals al darrere.
+ * @param origin (E) String origen.
+ * @param dest (S) Punter a l'string destí.
+ * @pre Cal que origin tingui el caràcter sentinella '\n'.
+*/
+extern void string_copy_without_trash(char origin[], char **dest);
+
+#endif 
