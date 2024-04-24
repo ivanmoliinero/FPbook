@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
                 } while (o != EXIT);
                 if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))
                     error_guardat_dades();
-                alliberacio_memoria(usuaris, amistats);
+                alliberacio_memoria(usuaris, amistats, n_elem);
                 missatge_acomiadament();
             }
         }

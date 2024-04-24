@@ -32,7 +32,7 @@ build/tests.exe : sources/tests.c sources/interface_functions.c sources/back_fun
 #	run commands
 #------------------------------------------------------------------
 run : build/fpbook.exe
-	build/fpbook.exe $(user)
+	build\fpbook.exe $(user)
 
 run_tests : build/tests.exe
 	build/tests.exe

@@ -343,8 +343,14 @@ void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
     }
 }
 
-void alliberacio_memoria(persona_t *usuaris, char *amistats)
+void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usuaris)
 {
+    for(short i = 0; i < n_usuaris; i++)
+    {
+        free(usuaris[i].nom);
+        free(usuaris[i].genere);
+        free(usuaris[i].ciutat);
+    }
     free(usuaris);
     free(amistats);
 }

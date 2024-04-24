@@ -9,7 +9,7 @@
 #define AFEGIR_USUARI 5
 #define EXIT 0
 
-#define MAX_OPCIO 4 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari).
+#define MAX_OPCIO 6 // Longitud de la dada numèrica màxima que s'espera obtenir per teclat en tot el codi (l'any de naixement de l'usuari) + \n + \0.
 
 #define MAX_DUMMY 100 // Constant per guardar dades en taula temporal.
 

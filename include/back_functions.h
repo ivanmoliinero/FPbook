@@ -150,8 +150,9 @@ extern bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool
  * @brief Allibera la memòria de les taules generades amb malloc.
  * @param usuaris (E) Punter a la taula que s'ha d'alliberar.
  * @param amistats (E) Punter a la taula que s'ha d'alliberar.
+ * @param n_usuaris (E) Nombre d'usuaris del sistema.
 */
-extern void alliberacio_memoria(persona_t *usuaris, char *amistats);
+extern void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usuaris);
 
 /**
  * @brief Copia una string a una altra sense espais addicionals al darrere.

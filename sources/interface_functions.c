@@ -9,13 +9,13 @@
 
 short obtenir_opcio_convertida()
 {
-    fflush(stdin); //Es neteja l'entrada per si de cas hi ha caràcters "brossa".
+    fflush(stdin); // Es neteja l'entrada per si de cas hi ha caràcters "brossa".
     char o[MAX_OPCIO];
-    scanf("%s", o); // Obté l'opció escrita com un caràcter.
+    fgets(o, MAX_OPCIO, stdin); // Obté l'opció escrita com un caràcter.
     short res = (short)atoi(o);
-    if (res == 0 && (o[0] != '0' || o[1] != 0)) // Si el retorn de l'atoi és 0 però l'usuari no havia introduït el dígit 0:
-        res = -1;                               // error, introducció de caràcter.
-    return (res);                               // Conversió a enter, es guarda en short (màxima longitud de nombre emprada en el programa.)
+    if (res == 0 && (o[0] != '0' || o[1] != '\n' || o[2] != 0)) // Si el retorn de l'atoi és 0 però l'usuari no havia introduït el dígit 0:
+        res = -1;                                               // error, introducció de caràcter.
+    return (res);                                               // Conversió a enter, es guarda en short (màxima longitud de nombre emprada en el programa.)
 }
 
 void demanar_n_usuaris_nous()
@@ -68,8 +68,9 @@ short demanar_opcio(short rang_max, short rang_min)
     do
     {
         opcio = obtenir_opcio_convertida();
-        if (opcio < rang_min || opcio > rang_max) printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
-    } while (opcio < rang_min || opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
+        if (opcio < rang_min || opcio > rang_max)
+            printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
+    } while (opcio < rang_min || opcio > rang_max);                               // Procura que el valor introduït estigui entre l'interval establert.
     return opcio;
 }
 
@@ -126,7 +127,7 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     printf("%s", usuaris[usuari].nom);
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
-    printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);  
+    printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
 }
 
 // void mostrar_amistats()
