@@ -12,7 +12,7 @@ Cada diumenge s'ha d'anotar en aquest document la setmana, els objectius i els p
 <!-- Progressos d'Iván -->
 <ul>
 <li><u>15/04 - 21/04</u>: Anàlisi de funcions bàsiques a desenvolupar + estructura esquemàtica del main (pseudocodi + C), funció carregar_usuaris() desenvolupada, provada en tests.c. Funció guardar_amistats() desenvolupada i provada en tests.c. Funció guardar_usuaris() desenvolupada i provada en tests.c. Funció obtenir_opcio_convertida() desenvolupada i provada en tests.c. Funció afegir_usuaris() desenvolupada i provada mínimament en tests.c (cal fer un testing més exhaustiu).</li>
-<li><u>22/04 - 28/04</u>: Nova funció mostrar_amistat() + funcionalitat de sortida sense afegir cap amistat de la funció afegir_amistat() + adaptacions afegir_amistat() per poder mostrar usuaris. Nom, genere i ciutat de cada usuari fets com a taules amb malloc.</li>
+<li><u>22/04 - 28/04</u>: Nova funció mostrar_amistat() + funcionalitat de sortida sense afegir cap amistat de la funció afegir_amistat() + adaptacions afegir_amistat() per poder mostrar usuaris. Nom, genere i ciutat de cada usuari fets com a taules amb malloc. Modificacions de codi per controlar realloc i malloc degudament, actualitzacions free + alguns canvis per evitar problemes amb el heap.</li>
 </ul>
 
 <!-- Fi dels progressos d'Iván -->
