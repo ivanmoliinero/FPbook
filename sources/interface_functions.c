@@ -229,9 +229,10 @@ void netejar_terminal()
 
 void sortir_menu()
 {
+    fflush(stdin); // Evitem la sortida del menú per entrada de brossa. 
     printf("\nPrem la tecla intro per sortir del menu actual");
     char o[1];
-    fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
     fgets(o, 1, stdin);
     fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
+    netejar_terminal();
 }

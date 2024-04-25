@@ -10,6 +10,7 @@
 // Calen definir correctament les capceleres i paràmetres.
 int main(int argc, char *argv[])
 {
+    netejar_terminal(); // Netejem la terminal per començar el programa.
     if (argc != 2) // No s'ha passat com a paràmetre l'identificador de l'usuari.
         falta_identificador();
     else
@@ -67,6 +68,7 @@ int main(int argc, char *argv[])
                         netejar_terminal(); // Es neteja la terminal per facilitar la lectura del programa.
                         } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                     } while (o != EXIT);
+                    netejar_terminal(); // Es borra el menú principal per deixar espai per informar de possibles errors de guardat + acomiadar a l'usuari.
                     if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))
                         error_guardat_dades();
                     alliberacio_memoria(usuaris, amistats, n_elem);
