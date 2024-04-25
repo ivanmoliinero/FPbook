@@ -296,8 +296,8 @@ void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short 
     bool correcte = false;
     short opcio, confirmacio;
 
-    mostrar_compatibles(usuaris, *amistats, n_usuaris, usuari);
-
+    if(!mostrar_compatibles(usuaris, *amistats, n_usuaris, usuari))
+        sense_compatibles();
     while (!correcte)
     {
         missatge_seleccio_amistat();
@@ -348,7 +348,7 @@ void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
     short opcio, confirmacio;
     bool correcte = false;
 
-    printf("mostar_amistats()");
+    printf("mostar_amistats()"); // FER QUE ES RETORNI BOOLEÀ PER CONTROLAR SI ES TENEN AMISTATS.
 
     while (!correcte)
     {

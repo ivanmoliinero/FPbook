@@ -84,9 +84,10 @@ void confirmar(short *confirmacio, short afirmacio, short denegacio)
     } while (*confirmacio != denegacio && *confirmacio != afirmacio); // Procura que el valor introduït sigui binari(dues opcions posibles).
 }
 
-void mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari)
+bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari)
 {
     int valor;
+    bool te_compatibles = false;
     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
     {
         if (usuari != i)
@@ -101,10 +102,12 @@ void mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int 
             }
             if (valor <= COMPATIBILIDAD && valor > 0)
             {
+                te_compatibles = true; // Com a mínim un compatible trobat.
                 mostrar_amistat(usuaris, i);
             }
         }
     }
+    return te_compatibles;
 }
 
 void mostrar_amistat(persona_t *usuaris, short usuari)
@@ -234,4 +237,9 @@ void sortir_menu()
     fgets(o, 3, stdin);
     fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
     netejar_terminal();
+}
+
+void sense_compatibles()
+{
+    printf("No hi ha cap usuari amb el qual siguis compatible. Tot i aixo, pots afegir usuaris de FPbook tot i que no sigueu compatibles.\n");
 }

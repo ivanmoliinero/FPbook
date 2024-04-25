@@ -102,8 +102,9 @@ extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
  * @param amistats (E/S) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
+ * @return bool True si es tenen usuaris compatibles per afegir, fals en cas contrari.
  */
-extern void mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari);
+extern bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari);
 
 /**
  * @brief Avisa de compatibilitat dolenta entre usuaris.
@@ -154,5 +155,10 @@ extern void netejar_terminal();
  * @brief Surt del menu especificat.
 */
 extern void sortir_menu();
+
+/**
+ * @brief Mostra un missatge avisant que no hi ha usuaris compatibles amb l'usuari que ha iniciat sessió.
+*/
+extern void sense_compatibles();
 
 #endif

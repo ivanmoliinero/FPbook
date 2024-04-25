@@ -48,16 +48,18 @@ int main(int argc, char *argv[])
                             break;
                         case MOSTRAR_AMISTATS:
                             // mostrar_amistats();
-                            printf("mostrar_amistats()");
-                            sortir_menu(); // Implementar en mostrar amistats.
+                            printf("mostrar_amistats()\n");
+                            sortir_menu();
                             break;
                         case AFEGIR_AMISTAT:
                             afegir_amistat(usuaris, &amistats, n_elem, usuari);
                             amistats_editades = true;
+                            netejar_terminal();
                             break;
                         case ELIMINAR_AMISTAT:
                             eliminar_amistat(&amistats, n_elem, usuari);
                             amistats_editades = true;
+                            netejar_terminal();
                             break;
                         case AFEGIR_USUARI:
                             n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
