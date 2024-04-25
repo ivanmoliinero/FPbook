@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
                     {
                         mostrar_menu_principal();
                         o = (char)demanar_opcio(AFEGIR_USUARI, EXIT);
+                        netejar_terminal(); // Es neteja la terminal per tal de mostrar el menú de l'opció seleccionada.
                         switch (o)
                         {
                         case MOSTRAR_PERFIL_USUARI:
@@ -53,12 +54,10 @@ int main(int argc, char *argv[])
                         case AFEGIR_AMISTAT:
                             afegir_amistat(usuaris, &amistats, n_elem, usuari);
                             amistats_editades = true;
-                            sortir_menu();
                             break;
                         case ELIMINAR_AMISTAT:
                             eliminar_amistat(&amistats, n_elem, usuari);
                             amistats_editades = true;
-                            sortir_menu();
                             break;
                         case AFEGIR_USUARI:
                             n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
@@ -68,7 +67,6 @@ int main(int argc, char *argv[])
                         netejar_terminal(); // Es neteja la terminal per facilitar la lectura del programa.
                         } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                     } while (o != EXIT);
-                    netejar_terminal(); // Es borra el menú principal per deixar espai per informar de possibles errors de guardat + acomiadar a l'usuari.
                     if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))
                         error_guardat_dades();
                     alliberacio_memoria(usuaris, amistats, n_elem);

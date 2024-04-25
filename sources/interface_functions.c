@@ -129,7 +129,6 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
     printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
-    sortir_menu();
 }
 
 // void mostrar_amistats()
@@ -231,8 +230,8 @@ void sortir_menu()
 {
     fflush(stdin); // Evitem la sortida del menú per entrada de brossa. 
     printf("\nPrem la tecla intro per sortir del menu actual");
-    char o[1];
-    fgets(o, 1, stdin);
+    char o[3];
+    fgets(o, 3, stdin);
     fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
     netejar_terminal();
 }
