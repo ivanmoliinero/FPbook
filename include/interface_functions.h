@@ -145,4 +145,14 @@ extern void missatge_error_arxiu_usuaris();
 */
 extern bool mirar_errors(short control);
 
+/**
+ * @brief Neteja la terminal per una lectura més fàcil del codi.
+*/
+extern void netejar_terminal();
+
+/**
+ * @brief Surt del menu especificat.
+*/
+extern void sortir_menu();
+
 #endif

@@ -42,23 +42,29 @@ int main(int argc, char *argv[])
                         {
                         case MOSTRAR_PERFIL_USUARI:
                             mostrar_perfil(usuari, usuaris);
+                            sortir_menu();
                             break;
                         case MOSTRAR_AMISTATS:
                             // mostrar_amistats();
                             printf("mostrar_amistats()");
+                            sortir_menu(); // Implementar en mostrar amistats.
                             break;
                         case AFEGIR_AMISTAT:
                             afegir_amistat(usuaris, &amistats, n_elem, usuari);
                             amistats_editades = true;
+                            sortir_menu();
                             break;
                         case ELIMINAR_AMISTAT:
                             eliminar_amistat(&amistats, n_elem, usuari);
                             amistats_editades = true;
+                            sortir_menu();
                             break;
                         case AFEGIR_USUARI:
                             n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
                             usuaris_editats = mirar_errors(n_elem);
+                            sortir_menu();
                             break;
+                        netejar_terminal(); // Es neteja la terminal per facilitar la lectura del programa.
                         } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                     } while (o != EXIT);
                     if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))

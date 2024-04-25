@@ -129,6 +129,7 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
     printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
+    sortir_menu();
 }
 
 // void mostrar_amistats()
@@ -219,4 +220,18 @@ bool mirar_errors(short control)
         printf("Guardat satisfactori!\n");
         return true;
     }
+}
+
+void netejar_terminal()
+{
+    system("cls");
+}
+
+void sortir_menu()
+{
+    printf("\nPrem la tecla intro per sortir del menu actual");
+    char o[1];
+    fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
+    fgets(o, 1, stdin);
+    fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
 }
