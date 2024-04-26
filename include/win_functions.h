@@ -11,9 +11,22 @@
 extern void setup(finestra_t *win);
 
 /**
- * @brief Mostra la finestra passada com a paràmetre.
- * @param win Finestra a mostrar.
+ * @brief Defineix les diferents funcionalitats dels diferents botons que el programa té per actuar degudament.
+ * @param win Estructura amb tota la informació de la finestra principal del programa.
 */
-extern void show_window(GtkWindow *win);
+extern void functionalities(finestra_t *win);
+
+/**
+ * @brief Tanca la finestra i finalitza el programa.
+ * @param wid Widget que provoca la crida a aquesta funció.
+ * @param ptr Punter obligatori de funcions handler en cas de retorn de quelcom necessari (no és el cas, però cal posar-lo).
+*/
+extern void close_window(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Defineix les funcionalitats de la pantalla del programa principal.
+ * @param win Estructura amb tota la informació de la finestra principal del programa.
+*/
+extern void main_screen_functionalities(finestra_t *win);
 
 #endif

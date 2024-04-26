@@ -28,7 +28,9 @@ typedef struct
     GtkWidget *afegir_usuaris; // Punter a botó per afegir usuaris.
     GtkWidget *titol; // Titol principal del programa.
     GtkWidget *missatge_benvinguda; // Missatge de benvinguda al programa.
-    GtkWidget *grid; // Grid on es guardaran s'agrupen tots els elements de la finestra per poder ser mostrats.
+    GtkWidget *main_box;
+    GtkWidget *main_third_row_box;
+    GtkWidget *main_fourth_row_box; // Boxes per guardar de manera ordenada els widgets de la finestra principal.
 } finestra_t;
 
 #endif

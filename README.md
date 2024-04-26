@@ -35,10 +35,16 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>CANVIAR RETURN EN MIG DE FUNCIONS</li>
     <br>
     <li>DOCUMENTAR PROBLEMAS CON EL HEAP</li>
+    <br>
+    <li>REVISAR CUANDO HAY QUE HACER LOS FREE EN EL MAIN</li>
 </ul>
 <h3>UI</h3>
 <ul>
-    <li>a</li>
+    <li>1.Mostrar perfil</li>
+    <li>2.Afegir usuaris</li>
+    <li>3.Mostrar amistats (EL MAS COMPLICADO)</li>
+    <li>4.Afegir amistats</li>
+    <li>5.Eliminar amistats</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

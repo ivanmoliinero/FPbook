@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include "estructures.h"
+#include "win_functions.h"
 
 void setup(finestra_t *win)
 {
@@ -12,24 +13,35 @@ void setup(finestra_t *win)
     win->eliminar_amistats = gtk_button_new_with_label("Eliminar amistats");
     win->afegir_usuaris = gtk_button_new_with_label("Mostrar usuaris");
 
-    win->grid = gtk_grid_new();
-    gtk_grid_attach(GTK_GRID(win->grid), win->titol, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->missatge_benvinguda, 0, 1, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->perfil, 0, 2, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->mostrar_amistats, 1, 2, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->afegir_amistats, 2, 2, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->eliminar_amistats, 0, 3, 1, 1);
-    gtk_grid_attach(GTK_GRID(win->grid), win->afegir_usuaris, 1, 3, 1, 1);
+    win->main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    win->main_third_row_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    win->main_fourth_row_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_box_pack_start(GTK_BOX(win->main_box), win->titol, TRUE, TRUE, 5);
+    gtk_box_pack_start(GTK_BOX(win->main_box), win->missatge_benvinguda, TRUE, TRUE, 2);
+    gtk_box_pack_start(GTK_BOX(win->main_third_row_box), win->perfil, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_third_row_box), win->mostrar_amistats, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_third_row_box), win->afegir_amistats, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_fourth_row_box), win->eliminar_amistats, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_fourth_row_box), win->afegir_usuaris, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_box), win->main_third_row_box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->main_box), win->main_fourth_row_box, TRUE, TRUE, 0);
 
-    gtk_container_add(GIT_CONTAINER(win->main), win->grid);
+    gtk_container_add(GTK_CONTAINER(win->main), win->main_box);
 
-    gtk_main(); // Prepara el programa per anar executant les instruccions d'actualització de la finestra.
-
-    show_window(win->main);
-    return win;
+    gtk_widget_show_all(win->main);
 }
 
-void show_window(GtkWindow *win)
+void main_screen_functionalities(finestra_t *win)
 {
-    gtk_widget_show_all(win);
+    g_signal_connect(win->main, "delete_event", G_CALLBACK (close_window), NULL); // Creu per tancar el programa.
+}
+
+void functionalities(finestra_t *win)
+{
+    main_screen_functionalities(win);
+}
+
+void close_window(GtkWidget *wid, gpointer ptr)
+{
+    gtk_main_quit();
 }
