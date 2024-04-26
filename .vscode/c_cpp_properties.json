@@ -1,0 +1,49 @@
+{
+    "configurations": [
+      {
+        "name": "C Linux GTK3",
+        "includePath": [
+          "${workspaceFolder}/**",
+          "C:\\msys64\\mingw64\\lib\\glib-2.0/include/",
+          "C:\\msys64\\mingw64\\include\\gtk-3.0",
+          "C:\\msys64\\mingw64\\include\\/pango-1.0",
+          "C:\\msys64\\mingw64\\include\\/glib-2.0",
+          "C:\\msys64\\mingw64\\lib\\libffi-3.2.1",
+          "C:\\msys64\\mingw64\\include\\/harfbuzz",
+          "C:\\msys64\\mingw64\\include\\/fribidi",
+          "C:\\msys64\\mingw64\\include\\freetype",
+          "C:\\msys64\\mingw64\\include\\/libpng16",
+          "C:\\msys64\\mingw64\\include\\/cairo",
+          "C:\\msys64\\mingw64\\include\\/pixman-1",
+          "C:\\msys64\\mingw64\\include\\/gdk-pixbuf-2.0",
+          "C:\\msys64\\mingw64\\include\\/libmount",
+          "C:\\msys64\\mingw64\\include\\/blkid",
+          "C:\\msys64\\mingw64\\include\\/gio-unix-2.0",
+          "C:\\msys64\\mingw64\\include\\/atk-1.0",
+          "C:\\msys64\\mingw64\\include\\/at-spi2-atk/2.0",
+          "C:\\msys64\\mingw64\\include\\/at-spi-2.0",
+          "C:\\msys64\\mingw64\\include\\/dbus-1.0",
+          "C:\\msys64\\mingw64\\lib\\dbus-1.0/include",
+          "C:\\msys64\\mingw64\\lib\\gcc/x86_64-pc-linux-gnu/9.2.0/include",
+          "/usr/local/include",
+          "C:\\msys64\\mingw64\\lib\\gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed",
+          "C:\\msys64\\mingw64\\include\\"
+        ],
+        "defines": [],
+        "compilerPath": "/usr/bin/gcc",
+        "cStandard": "c11",
+        "cppStandard": "c++17",
+        "intelliSenseMode": "clang-x64",
+        "compilerArgs": [
+          "-Wall",
+          "-Wextra",
+          "-mtune=native",
+          "-no-pie",
+          "`pkg-config gtk+-3.0 --cflags`",
+          "`pkg-config --libs gtk+-3.0`",
+          "-lm"
+        ]
+      }
+    ],
+    "version": 4
+  }

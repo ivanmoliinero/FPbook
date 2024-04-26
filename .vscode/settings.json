@@ -2,6 +2,8 @@
     "files.associations": {
         "estructures.h": "c",
         "interface_functions.h": "c",
-        "back_functions.h": "c"
+        "back_functions.h": "c",
+        "win_functions.h": "c",
+        "gtk.h": "c"
     }
 }
