@@ -40,7 +40,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 </ul>
 <h3>UI</h3>
 <ul>
-    <li>1.Mostrar perfil</li>
+    <li>1.Mostrar perfil (FORMATO)</li>
     <li>2.Afegir usuaris</li>
     <li>3.Mostrar amistats (EL MAS COMPLICADO)</li>
     <li>4.Afegir amistats</li>
