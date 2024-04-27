@@ -4,11 +4,15 @@
 #include <gtk/gtk.h>
 #include <estructures.h>
 
+#define MAX_CHAR_DATE 11
+
 /**
  * @brief Crea tots els widgets de la finestra principal del programa.
  * @param win (S) Punter amb tota la informació de la finestra principal del codi.
+ * @param usuaris (E) Taula amb els usuaris del sistema.
+ * @param usuari (E) Id de l'usuari que ha iniciat sessió.
 */
-extern void setup(finestra_t *win);
+extern void setup(finestra_t *win, persona_t *usuaris, short usuari);
 
 /**
  * @brief Defineix les diferents funcionalitats dels diferents botons que el programa té per actuar degudament.
@@ -64,7 +68,9 @@ extern void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr);
 /**
  * @brief Setup del menú mostrar_perfil.
  * @param win (E/S) Finestra principal del programa.
+ * @param usuaris (E) Taula amb els usuaris del sistema.
+ * @param usuari (E) Id de l'usuari que ha iniciat sessió.
 */
-extern void mostrar_perfil_setup(finestra_t *win);
+extern void mostrar_perfil_setup(finestra_t *win, persona_t *usuaris, short usuari);
 
 #endif

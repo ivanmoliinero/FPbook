@@ -1,12 +1,13 @@
 #include <gtk/gtk.h>
 #include "estructures.h"
 #include "win_functions.h"
+#include <stdio.h>
 
-void setup(finestra_t *win)
+void setup(finestra_t *win, persona_t *usuaris, short usuari)
 {
     win->main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
     main_window_setup(win);
-    mostrar_perfil_setup(win);
+    mostrar_perfil_setup(win, usuaris, usuari);
     show_main_window(win);
 }
 
@@ -33,13 +34,21 @@ void main_window_setup(finestra_t *win)
     gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_box), win->finestra_principal.main_fourth_row_box, TRUE, TRUE, 0);
 }
 
-void mostrar_perfil_setup(finestra_t *win)
+void mostrar_perfil_setup(finestra_t *win, persona_t *usuaris, short usuari)
 {
     win->mostrar_perfil.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     win->mostrar_perfil.main_label = gtk_label_new("El meu perfil");
     win->mostrar_perfil.back_button = gtk_button_new_with_label("<--"); // La resta de widgets no s'inicialitzen ja que depenen de l'usuari.
+    win->mostrar_perfil.name_label = gtk_label_new(usuaris[usuari].nom);
+    win->mostrar_perfil.genre_label = gtk_label_new(usuaris[usuari].genere);
+    char date[MAX_CHAR_DATE];
+    sprintf(date, "%hd/%hd/%hd", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, (short)usuaris[usuari].data_neix.any);
+    win->mostrar_perfil.date_label = gtk_label_new(date);
     gtk_box_pack_end(GTK_BOX(win->mostrar_perfil.main_box), win->mostrar_perfil.back_button, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(win->mostrar_perfil.main_box), win->mostrar_perfil.main_label, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->mostrar_perfil.main_box), win->mostrar_perfil.name_label, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->mostrar_perfil.main_box), win->mostrar_perfil.genre_label, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->mostrar_perfil.main_box), win->mostrar_perfil.date_label, TRUE, TRUE, 0);
 }
 
 void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)

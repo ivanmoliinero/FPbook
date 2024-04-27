@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
                     bool amistats_editades = false, usuaris_editats = false; // REVISAR ON GUARDAR AQUESTES VARIABLES.
                     gtk_init(&argc, &argv); // Passa els paràmetres del main al gtk per poder treballar correctament.
                     finestra_t win; // Struct amb tota la informació de la finestra principal del programa.
-                    setup(&win); // Prepara la finestra principal del programa.
+                    setup(&win, usuaris, usuari); // Prepara la finestra principal del programa.
                     functionalities(&win);
                     gtk_main(); // Prepara el programa per anar executant les instruccions d'actualització de la finestra.
                 }
