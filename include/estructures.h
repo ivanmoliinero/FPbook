@@ -20,7 +20,6 @@ typedef struct
 
 typedef struct
 {
-    GtkWidget *main; // Finestra principal.
     GtkWidget *perfil; // Punter a botó per mostrar perfil.
     GtkWidget *mostrar_amistats; // Punter a botó per mostrar amistats.
     GtkWidget *afegir_amistats; // Punter a botó per afegir amistats.
@@ -31,6 +30,24 @@ typedef struct
     GtkWidget *main_box;
     GtkWidget *main_third_row_box;
     GtkWidget *main_fourth_row_box; // Boxes per guardar de manera ordenada els widgets de la finestra principal.
+} main_t;
+
+typedef struct 
+{
+    GtkWidget *main_label; // Etiqueta principal del menú.
+    GtkWidget *name_label; // Etiqueta del nom.
+    GtkWidget *genre_label; // Etiqueta del gènere.
+    GtkWidget *city_label; // Etiqueta de la ciutat.
+    GtkWidget *date_label; // Etiqueta de la data de naixement de l'usuari.
+    GtkWidget *back_button; // Botó per tornar al menú principal.
+    GtkWidget *main_box; // Main box de mostrar perfil.
+} mostrar_perfil_t;
+
+typedef struct
+{
+    GtkWidget *main; // Finestra principal.
+    main_t finestra_principal;
+    mostrar_perfil_t mostrar_perfil;
 } finestra_t;
 
 #endif
