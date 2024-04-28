@@ -205,8 +205,8 @@ short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
         if(!actualitzacio_amistats(&temp_amistats, n_usuaris, n_nous))
         {
             n_final = -1;
-            free(temp_usuaris);
-            free(temp_amistats); // No s'ha acabat de completar el guardat de noves dades, free a les temporals.
+            *usuaris = realloc(temp_usuaris, sizeof(persona_t)*n_usuaris);
+            *amistats = realloc(temp_amistats, sizeof(char)*n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
         }
         else // S'ha executat correctament.
         {
@@ -216,7 +216,7 @@ short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
     }
     else
     {
-        free(temp_usuaris); // Buidem el que s'hagi omplert.
+        *usuaris = realloc(temp_usuaris, sizeof(persona_t)*n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
     }
     
     return(n_final);
