@@ -43,11 +43,46 @@ typedef struct
     GtkWidget *main_box; // Main box de mostrar perfil.
 } mostrar_perfil_t;
 
+typedef struct 
+{
+    GtkWidget *main_label; // Afegir usuaris.
+    GtkWidget *name_label;
+    GtkWidget *genre_label;
+    GtkWidget *city_label;
+    GtkWidget *date_label;
+    GtkWidget *bar_label1;
+    GtkWidget *bar_label2; // Per separar dd/mm/aaaa.
+    GtkWidget *name_entry;
+    GtkWidget *genre_entry;
+    GtkWidget *city_entry;
+    GtkWidget *day_entry;
+    GtkWidget *month_entry;
+    GtkWidget *year_entry;
+    GtkWidget *confirm_button;
+    GtkWidget *go_back_button;
+    GtkWidget *main_box;
+    GtkWidget *funct_box;
+    GtkWidget *labels_box;
+    GtkWidget *entry_box;
+    GtkWidget *date_box; // Per l'organització en la UI de la data.
+} afegir_usuari_t;
+
+
 typedef struct
 {
     GtkWidget *main; // Finestra principal.
     main_t finestra_principal;
     mostrar_perfil_t mostrar_perfil;
+    afegir_usuari_t afegir_usuari;
 } finestra_t;
+
+typedef struct
+{
+    finestra_t win;
+    persona_t *usuaris;
+    char *amistats;
+    short usuari;
+    short n_elem;
+} info_t;
 
 #endif

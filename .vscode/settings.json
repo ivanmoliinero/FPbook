@@ -4,6 +4,7 @@
         "interface_functions.h": "c",
         "back_functions.h": "c",
         "win_functions.h": "c",
-        "gtk.h": "c"
+        "gtk.h": "c",
+        "stdio.h": "c"
     }
 }

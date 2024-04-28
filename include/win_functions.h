@@ -3,22 +3,22 @@
 
 #include <gtk/gtk.h>
 #include <estructures.h>
+#include <stdbool.h>
 
 #define MAX_CHAR_DATE 11
+#define MAX_DUMMY 100
 
 /**
  * @brief Crea tots els widgets de la finestra principal del programa.
- * @param win (S) Punter amb tota la informació de la finestra principal del codi.
- * @param usuaris (E) Taula amb els usuaris del sistema.
- * @param usuari (E) Id de l'usuari que ha iniciat sessió.
+ * @param dades_sis (E/S) Estructura amb TOTES les dades del programa.
 */
-extern void setup(finestra_t *win, persona_t *usuaris, short usuari);
+extern void setup(info_t *dades_sis);
 
 /**
  * @brief Defineix les diferents funcionalitats dels diferents botons que el programa té per actuar degudament.
- * @param win (E/S) Estructura amb tota la informació de la finestra principal del programa.
+ * @param dades_sis (E/S) Estructura amb tota la informació del programa.
 */
-extern void functionalities(finestra_t *win);
+extern void functionalities(info_t *dades_sis);
 
 /**
  * @brief Tanca la finestra i finalitza el programa.
@@ -52,11 +52,11 @@ extern void show_main_window(finestra_t *win);
 extern void mostrar_perfil_functionalities(finestra_t *win);
 
 /**
- * @brief Funció per mostrar la finestra principal amb callbacks.
+ * @brief Funció per passar del menú de mostrar perfil a la finestra principal del programa.
  * @param wid (E) Widget que provoca la crida a aquesta funció.
  * @param ptr (E/S) Finestra principal.
 */
-extern void callback_show_main_window(GtkWidget *wid, gpointer ptr);
+extern void mostrar_perfil_to_main_window(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Mostra la info del perfil de l'usuari.
@@ -67,10 +67,53 @@ extern void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Setup del menú mostrar_perfil.
- * @param win (E/S) Finestra principal del programa.
- * @param usuaris (E) Taula amb els usuaris del sistema.
- * @param usuari (E) Id de l'usuari que ha iniciat sessió.
+ * @param dades_sis (E/S) Estructura amb totes les dades del sistema.
 */
-extern void mostrar_perfil_setup(finestra_t *win, persona_t *usuaris, short usuari);
+extern void mostrar_perfil_setup(info_t *dades_sis);
+
+/**
+ * @brief Setup del menú afegir_usuaris.
+ * @param win (E/S) Finestra principal del programa.
+*/
+extern void afegir_usuaris_setup(finestra_t *win);
+
+/**
+ * @brief Funcionalitats del menú d'afegir usuaris.
+ * @param dades_sis (E/S) Dades de TOT el programa.
+*/
+extern void afegir_usuaris_functionalities(info_t *dades_sis);
+
+/**
+ * @brief Mostra la pantalla per afegir usuaris.
+*/
+extern void afegir_usuaris_activate(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Funció per passar de mostrar perfil a la finestra principal del programa.
+*/
+extern void afegir_usuaris_to_main_window(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Afegeix un nou usuari a la base de dades.
+ * @pre EL PUNTER PASSAT CORRESPON AL PUNTER QUE APUNTA ON ES TROBEN TOTES LES DADES DEL SISTEMA.
+*/
+extern void afegir_usuari_entry(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Rep la informació d'un usuari de la info introduïda pel terminal.
+ * @param dades_sis (E) TOTA la info del sistema.
+ * @param temp_usuaris (E/S) Punter que apunta a la taula d'usuaris temporal en el procés de creació d'un nou usuari.
+ * @return short n_finals en cas d'execució correcta, -1 en cas d'error.
+*/
+extern short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris);
+
+/**
+ * @brief Copia una string a una altra sense espais addicionals al darrere (ADAPTAT PER LA VERSIÓ DE FINESTRA, ON L'ÚLTIM CARÀCTER ÉS 0).
+ * @param origin (E) String origen.
+ * @param dest (S) Punter a l'string destí.
+ * @pre Cal que origin tingui el caràcter sentinella '\0'.
+ * @return bool True si s'ha pogut completar l'operació, false altrament.
+*/
+extern bool string_copy_without_trash_for_win(char origin[], char **dest);
 
 #endif
