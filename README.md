@@ -41,7 +41,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <h3>UI</h3>
 <ul>
     <li>1.Mostrar perfil (FORMATO)</li>
-    <li>2.Afegir usuaris - ACABAR DE RECOLECTAR DATOS DEL USUARIO INTRODUCIDO POR TERMINAL</li>
+    <li>2.Afegir usuaris - REVISAR CONTROL DE ERRORES DE NO GENERACION CORRECTA DE TABLA (temp_usuaris == NULL !!!). En programa por terminal y despues en programa por UI.</li>
     <li>3.Mostrar amistats (EL MAS COMPLICADO)</li>
     <li>4.Afegir amistats</li>
     <li>5.Eliminar amistats</li>

@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
                     printf("No s'han pogut carregar les amistats\n");
                 else
                 {
-                    bool amistats_editades = false, usuaris_editats = false; // REVISAR ON GUARDAR AQUESTES VARIABLES.
+                    dades_sis.amistats_editades = false, dades_sis.usuaris_editats = false;
                     gtk_init(&argc, &argv); // Passa els paràmetres del main al gtk per poder treballar correctament.
                     setup(&dades_sis); // Prepara la finestra principal del programa.
                     functionalities(&dades_sis);

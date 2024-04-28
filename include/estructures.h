@@ -2,6 +2,7 @@
 #define estructures_h // En cas de no estar definit, definir les estructures i constants presents en aquest arxiu de capceleres.
 
 #include <gtk/gtk.h> // Capçaleres per l'struct per les dependències gràfiques.
+#include <stdbool.h>
 
 typedef struct 
 {
@@ -83,6 +84,7 @@ typedef struct
     char *amistats;
     short usuari;
     short n_elem;
+    bool usuaris_editats, amistats_editades;
 } info_t;
 
 #endif

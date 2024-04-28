@@ -23,15 +23,16 @@ extern void functionalities(info_t *dades_sis);
 /**
  * @brief Tanca la finestra i finalitza el programa.
  * @param wid (E) Widget que provoca la crida a aquesta funció.
+ * @param event (E) Event que fa que la senyal s'executi (automàtic per GTK).
  * @param ptr (E/S) Punter obligatori de funcions handler en cas de retorn de quelcom necessari (no és el cas, però cal posar-lo).
 */
-extern void close_window(GtkWidget *wid, gpointer ptr);
+extern void close_window(GtkWidget *wid, GdkEvent *event, gpointer ptr);
 
 /**
  * @brief Defineix les funcionalitats de la pantalla del programa principal.
- * @param win (E/S) Estructura amb tota la informació de la finestra principal del programa.
+ * @param dades_sis (E/S) Dades de tot el programa.
 */
-extern void main_screen_functionalities(finestra_t *win);
+extern void main_screen_functionalities(info_t *dades_sis);
 
 /**
  * @brief Prepara els widgets del menu principal del programa.
@@ -112,7 +113,7 @@ extern short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuar
  * @param origin (E) String origen.
  * @param dest (S) Punter a l'string destí.
  * @pre Cal que origin tingui el caràcter sentinella '\0'.
- * @return bool True si s'ha pogut completar l'operació, false altrament.
+ * @return bool True si s'ha pogut completar l'operació i no s'ha passat com a paràmetre original una string buida (o plena d'espais), false altrament.
 */
 extern bool string_copy_without_trash_for_win(char origin[], char **dest);
 
