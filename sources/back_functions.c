@@ -412,32 +412,37 @@ void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usuaris)
 bool string_copy_without_trash(char origin[], char **dest)
 {
     short last_index = -1, i;
-    bool correcte;
-    for (i = 0; origin[i] != '\n'; i++)
-        if (origin[i] != ' ')
-            last_index = i;
-    if (last_index == -1)
-    {
+    bool correcte = true;
+
+    if (origin[0] == ' ')
         correcte = false;
-    }
     else
     {
-        last_index++;
-        origin[last_index] = '\0';        // additional spaces ignored.
-        char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
-        new_lenght += 2;                  // Pel caràcter \n.
-
-        *dest = malloc(sizeof(char) * new_lenght);
-        if (*dest == NULL)
+        for (i = 0; origin[i] != '\n'; i++)
+            if (origin[i] != ' ')
+                last_index = i;
+        if (last_index == -1)
+        {
             correcte = false;
+        }
         else
         {
-            correcte = true;
-            strcpy(*dest, origin);
-            /* Les següents modificacions poden ser estudiades per veure si realment calen, però per evitar problemes de format
-               i de heap s'inclouen */
-            (*dest)[new_lenght - 2] = '\n'; // Caràcter necessari per fer correctament els printf.
-            (*dest)[new_lenght - 1] = '\0'; // Caràcter per indicar fi sentinella.
+            last_index++;
+            origin[last_index] = '\0';        // additional spaces ignored.
+            char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
+            new_lenght += 2;                  // Pel caràcter \n.
+
+            *dest = malloc(sizeof(char) * new_lenght);
+            if (*dest == NULL)
+                correcte = false;
+            else
+            {
+                strcpy(*dest, origin);
+                /* Les següents modificacions poden ser estudiades per veure si realment calen, però per evitar problemes de format
+                   i de heap s'inclouen */
+                (*dest)[new_lenght - 2] = '\n'; // Caràcter necessari per fer correctament els printf.
+                (*dest)[new_lenght - 1] = '\0'; // Caràcter per indicar fi sentinella.
+            }
         }
     }
     return correcte;
