@@ -117,4 +117,22 @@ extern short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuar
 */
 extern bool string_copy_without_trash_for_win(char origin[], char **dest);
 
+/**
+ * @brief Inicia les funcionalitats del menú mostrar amistats.
+ * @param dades_sis (E/S) Dades de TOT el programa.
+*/
+extern void mostrar_amistats_functionalities(info_t *dades_sis);
+
+/**
+ * @brief Genera el menú de mostrar amistats i el mostra per pantalla.
+ * @param origin Widget que provoca la crida a la funció callback.
+ * @param ptr Punter amb la informació necessària pel programa (en aquest cas tota la info del sistema).
+*/
+extern void generar_mostrar_amistats(GtkWidget *origin, gpointer ptr);
+
+/**
+ * @brief Genera alguns dels widgets de mostrar_amistats (els constants).
+ * @param win Finestra principal del programa.
+*/
+
 #endif

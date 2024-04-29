@@ -11,6 +11,7 @@ void setup(info_t *dades_sis)
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
+    mostrar_amistats_setup(&(dades_sis->win));
     show_main_window(&(dades_sis->win));
 }
 
@@ -19,6 +20,7 @@ void functionalities(info_t *dades_sis)
     main_screen_functionalities(dades_sis);
     mostrar_perfil_functionalities(&(dades_sis->win));
     afegir_usuaris_functionalities(dades_sis);
+    mostrar_amistats_functionalities(dades_sis);
 }
 
 void afegir_usuaris_setup(finestra_t *win)
@@ -119,6 +121,25 @@ void mostrar_perfil_setup(info_t *dades_sis)
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.date_label, TRUE, TRUE, 0);
 }
 
+void mostrar_amistats_setup(finestra_t *win)
+{
+    win->mostrar_amistats.go_back_button = gtk_button_new_with_label("<--");
+    win->mostrar_amistats.confirm_button = gtk_button_new_with_label("CONFIRMAR");
+    
+    win->mostrar_amistats.main_label = gtk_label_new("Les meves amistats");
+
+    win->mostrar_amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_box_pack_start(GTK_BOX(win->mostrar_amistats.buttons_box), win->mostrar_amistats.go_back_button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->mostrar_amistats.buttons_box), win->mostrar_amistats.confirm_button, TRUE, TRUE, 0);
+
+    win->mostrar_amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
+}
+
+void mostrar_amistats_functionalities(info_t *dades_sis)
+{
+
+}
+
 void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)
 {
     finestra_t *win = ptr;
@@ -128,11 +149,28 @@ void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)
     gtk_widget_show_all(win->main);
 }
 
+void generar_mostrar_amistats(GtkWidget *origin, gpointer ptr)
+{
+    info_t *dades_sis = ptr; // Reanomenació del punter enviat per facilitar el tractament de les dades.
+    dades_sis->win.mostrar_amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
+    short n_usuaris = dades_sis->n_elem; // Assignació per evitar accesos a memòria constant.
+    char buffer[111]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data. Es podria fer amb malloc i strlen, però el cost algorítmic seria
+                         massa elevat i caldria controlar errors. */
+    for(short i = 0; i < n_usuaris; i++)
+    {
+        sprintf(buffer, "%s %s %s %hd / %hd / %hd\n", dades_sis->usuaris[i].nom, dades_sis->usuaris[i].genere, dades_sis->usuaris[i].ciutat, (short)dades_sis->usuaris[i].data_neix.dia, (short)dades_sis->usuaris[i].data_neix.mes, dades_sis->usuaris[i].data_neix.any);
+        gtk_list_store_insert_with_values(dades_sis->win.mostrar_amistats.friend_list, NULL, i, 0, buffer, -1);
+    }
+    dades_sis->win.mostrar_amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(dades_sis->win.mostrar_amistats.friend_list));
+    gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(dades_sis->win.mostrar_amistats.tree_view), )
+}
+
 void main_screen_functionalities(info_t *dades_sis)
 {
     g_signal_connect(dades_sis->win.main, "delete_event", G_CALLBACK (close_window), (gpointer)dades_sis); // Creu per tancar el programa.
     g_signal_connect(dades_sis->win.finestra_principal.perfil, "clicked", G_CALLBACK (mostrar_perfil_activate), (gpointer)(&(dades_sis->win)));
     g_signal_connect(dades_sis->win.finestra_principal.afegir_usuaris, "clicked", G_CALLBACK (afegir_usuaris_activate), (gpointer)(&(dades_sis->win)));
+    g_signal_connect(dades_sis->win.finestra_principal.mostrar_amistats, "clicked", G_CALLBACK(generar_mostrar_amistats), (gpointer)dades_sis);
 }
 
 void afegir_usuaris_activate(GtkWidget *wid, gpointer ptr)
@@ -238,7 +276,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
         char *dummy, temp_dia, temp_mes;
 
         temp_any = (short)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.year_entry)));
-        if (temp_any < 0) return -1;
+        if (temp_any < 0 || temp_any > 2024) return -1; // Es podria agafar l'any actual amb time.h.
         temp_mes = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.month_entry)));
         if(temp_mes <= 0 || temp_mes > 12) return -1;
         temp_dia = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.day_entry)));

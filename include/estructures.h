@@ -68,6 +68,17 @@ typedef struct
     GtkWidget *date_box; // Per l'organització en la UI de la data.
 } afegir_usuari_t;
 
+typedef struct
+{
+    GtkWidget *main_label;
+    GtkWidget *main_box;
+    GtkListStore *friend_list;
+    GtkWidget *tree_view; // Per poder mostrar la friends_list.
+    GtkCellRenderer *text_renderer; // Per poder mostrar el text.
+    GtkWidget *confirm_button;
+    GtkWidget *go_back_button;
+    GtkWidget *buttons_box; 
+} mostrar_amistats_t;
 
 typedef struct
 {
@@ -75,6 +86,7 @@ typedef struct
     main_t finestra_principal;
     mostrar_perfil_t mostrar_perfil;
     afegir_usuari_t afegir_usuari;
+    mostrar_amistats_t mostrar_amistats;
 } finestra_t;
 
 typedef struct
