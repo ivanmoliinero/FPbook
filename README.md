@@ -42,10 +42,10 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <ul>
     <li>1.Mostrar perfil (FORMATO)</li>
     <li>2.Afegir usuaris - REVISAR CONTROL DE ERRORES DE NO GENERACION CORRECTA DE TABLA (temp_usuaris == NULL !!!). En programa por terminal y despues en programa por UI.</li>
-    <li>3.Mostrar amistats (EL MAS COMPLICADO)</li>
-    <li>4.Afegir amistats - REVISAR MODO DIRECCIONAMIENTO DE LA TABLA.</li>
+    <li>3.Mostrar amistats</li>
+    <li>4.Afegir amistats - (FORMATO).</li>
     <li>5.Eliminar amistats</li>
-    <li>EXTRA: win_functions.c:13</li>
+    <li>EXTRA: Mida de la finestra adaptable</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
