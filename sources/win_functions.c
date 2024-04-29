@@ -10,6 +10,8 @@
 void setup(info_t *dades_sis)
 {
     dades_sis->win.main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
+    dades_sis->win.logo = gdk_pixbuf_new_from_file("data/fpbook_logo.png", NULL);
+    gtk_window_set_icon(GTK_WINDOW(dades_sis->win.main), GDK_PIXBUF(dades_sis->win.logo));
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
@@ -131,6 +133,8 @@ void afegir_amistats_setup(finestra_t *win)
     win->afegir_amistats.main_label = gtk_label_new("Afegir noves amistats");
 
     win->afegir_amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
+
+    win->afegir_amistats.scrolled_window = gtk_scrolled_window_new(NULL, NULL); // Per poder moure la llista d'amistats.
 }
 
 void afegir_amistats_functionalities(info_t *dades_sis)
@@ -207,7 +211,7 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
             gtk_list_store_insert_with_values(dades_sis->win.afegir_amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
-        else dir+=
+        else dir += i + 1; // Avenç columna a columna.
     }
     if(!te_compatibilitat)
         printf("NO TENS COMPATIBILITAT AMB CAP USUARI!!!\n");
@@ -224,10 +228,12 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
         gtk_box_pack_start(GTK_BOX(win->afegir_amistats.buttons_box), win->afegir_amistats.go_back_button, TRUE, TRUE, 0);
         gtk_box_pack_start(GTK_BOX(win->afegir_amistats.buttons_box), win->afegir_amistats.confirm_button, TRUE, TRUE, 0);
 
-        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.main_label, TRUE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.tree_view, TRUE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.buttons_box, TRUE, TRUE, 0);
-    
+        gtk_container_add(GTK_CONTAINER(win->afegir_amistats.scrolled_window), win->afegir_amistats.tree_view); // Possibilitat d'scroll al tree view.
+
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.main_label, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.buttons_box, FALSE, FALSE, 0);
+
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
         gtk_container_add(GTK_CONTAINER(win->main), win->afegir_amistats.main_box);

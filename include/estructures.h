@@ -78,11 +78,13 @@ typedef struct
     GtkWidget *confirm_button;
     GtkWidget *go_back_button;
     GtkWidget *buttons_box; 
+    GtkWidget *scrolled_window; // Per poder lliscar les opcions d'amistats.
 } afegir_amistats_t;
 
 typedef struct
 {
     GtkWidget *main; // Finestra principal.
+    GdkPixbuf *logo; // Logotip de l'aplicació.
     main_t finestra_principal;
     mostrar_perfil_t mostrar_perfil;
     afegir_usuari_t afegir_usuari;

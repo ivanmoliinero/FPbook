@@ -45,6 +45,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>3.Mostrar amistats (EL MAS COMPLICADO)</li>
     <li>4.Afegir amistats - REVISAR MODO DIRECCIONAMIENTO DE LA TABLA.</li>
     <li>5.Eliminar amistats</li>
+    <li>EXTRA: win_functions.c:13</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>
