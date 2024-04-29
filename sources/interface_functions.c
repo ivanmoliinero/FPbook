@@ -50,15 +50,18 @@ bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
     fflush(stdin);
     printf("Introdueix el nom del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->nom))) return false;
+    if (!string_copy_without_trash(dummy, &(usuari->nom)))
+        return false;
     fflush(stdin);
     printf("Introdueix el genere del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->genere))) return false;
+    if (!string_copy_without_trash(dummy, &(usuari->genere)))
+        return false;
     fflush(stdin);
     printf("Introdueix la ciutat del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->ciutat))) return false;
+    if (!string_copy_without_trash(dummy, &(usuari->ciutat)))
+        return false;
     demanar_data(usuari);
     return true;
 }
@@ -134,30 +137,31 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
 }
 
-// void mostrar_amistats()
-// {
+void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris)
+{
+    short i;
+    int valor;
 
-//     int valor;
-//     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
-//     {
-//         if (usuari != i)
-//         {
-//             if (i > usuari)
-//             {
-//                 valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
-//             }
-//             else
-//             {
-//                 valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
-//             }
-//             if (valor == -1)
-//             {
-//                mostrar_perfil(&valors, )
-//             }
-//         }
-//     }
-// //if amistats [i][j]==-1 --> mostrar_perfil(calcul id, usuaris)
-// }
+    for (i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
+    {
+        if (usuari != i)
+        {
+            if (i > usuari)
+            {
+                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
+            }
+            else
+            {
+                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
+            }
+            if (valor == -1)
+            {
+                //asassq
+                mostrar_perfil(i, usuaris);
+            }
+        }
+    }
+}
 
 void mostrar_menu_principal()
 {
@@ -217,7 +221,7 @@ bool mirar_errors(short control)
         printf("Error en el guardat de dades d'usuaris i/o amistats\n");
         return false;
     }
-    else 
+    else
     {
         printf("Guardat satisfactori!\n");
         return true;
@@ -231,7 +235,7 @@ void netejar_terminal()
 
 void sortir_menu()
 {
-    fflush(stdin); // Evitem la sortida del menú per entrada de brossa. 
+    fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
     printf("\nPrem la tecla intro per sortir del menu actual");
     char o[3];
     fgets(o, 3, stdin);
