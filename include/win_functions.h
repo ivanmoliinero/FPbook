@@ -118,21 +118,36 @@ extern short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuar
 extern bool string_copy_without_trash_for_win(char origin[], char **dest);
 
 /**
- * @brief Inicia les funcionalitats del menú mostrar amistats.
+ * @brief Inicia les funcionalitats del menú afegir amistats.
  * @param dades_sis (E/S) Dades de TOT el programa.
 */
-extern void mostrar_amistats_functionalities(info_t *dades_sis);
+extern void afegir_amistats_functionalities(info_t *dades_sis);
 
 /**
- * @brief Genera el menú de mostrar amistats i el mostra per pantalla.
+ * @brief Genera el menú d'afegir amistats i el mostra per pantalla.
  * @param origin Widget que provoca la crida a la funció callback.
  * @param ptr Punter amb la informació necessària pel programa (en aquest cas tota la info del sistema).
 */
-extern void generar_mostrar_amistats(GtkWidget *origin, gpointer ptr);
+extern void generar_afegir_amistats(GtkWidget *origin, gpointer ptr);
 
 /**
- * @brief Genera alguns dels widgets de mostrar_amistats (els constants).
- * @param win Finestra principal del programa.
+ * @brief Genera alguns dels widgets d'afegir_amistats (els constants).
+ * @param win (E/S) Finestra principal del programa.
 */
+extern void afegir_amistats_setup(finestra_t *win);
+
+/**
+ * @brief Canvia de la pantalla d'afegir amistats al menu principal.
+ * @param wid (E) Widget que provoca la crida (en aquest cas l'ignorem):
+ * @param ptr Punter enviat des del callback. En aquesta funció, la finestra principal del programa.
+*/
+extern void afegir_amistats_to_main_window(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Afegeix l'amistat seleccionada (en cas d'haver-hi alguna opció seleccinada).
+ * @param wid (E) Widget que crida a la funció de callback (no s'empra per res en aquesta funció).
+ * @param ptr (E/S) Punter amb les dades enviades des del callback. En aquesta funció, tota la informació del sistema.
+*/
+extern void afegir_amistats_win(GtkWidget *wid, gpointer ptr);
 
 #endif

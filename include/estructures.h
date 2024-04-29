@@ -78,7 +78,7 @@ typedef struct
     GtkWidget *confirm_button;
     GtkWidget *go_back_button;
     GtkWidget *buttons_box; 
-} mostrar_amistats_t;
+} afegir_amistats_t;
 
 typedef struct
 {
@@ -86,7 +86,7 @@ typedef struct
     main_t finestra_principal;
     mostrar_perfil_t mostrar_perfil;
     afegir_usuari_t afegir_usuari;
-    mostrar_amistats_t mostrar_amistats;
+    afegir_amistats_t afegir_amistats;
 } finestra_t;
 
 typedef struct

@@ -5,13 +5,15 @@
 #include <string.h>
 #include "back_functions.h" // Per l'obtencio de dades dels nous usuaris.
 
+#define COMPATIBILIDAD 3
+
 void setup(info_t *dades_sis)
 {
     dades_sis->win.main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
-    mostrar_amistats_setup(&(dades_sis->win));
+    afegir_amistats_setup(&(dades_sis->win));
     show_main_window(&(dades_sis->win));
 }
 
@@ -20,7 +22,7 @@ void functionalities(info_t *dades_sis)
     main_screen_functionalities(dades_sis);
     mostrar_perfil_functionalities(&(dades_sis->win));
     afegir_usuaris_functionalities(dades_sis);
-    mostrar_amistats_functionalities(dades_sis);
+    afegir_amistats_functionalities(dades_sis);
 }
 
 void afegir_usuaris_setup(finestra_t *win)
@@ -121,23 +123,57 @@ void mostrar_perfil_setup(info_t *dades_sis)
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.date_label, TRUE, TRUE, 0);
 }
 
-void mostrar_amistats_setup(finestra_t *win)
+void afegir_amistats_setup(finestra_t *win)
 {
-    win->mostrar_amistats.go_back_button = gtk_button_new_with_label("<--");
-    win->mostrar_amistats.confirm_button = gtk_button_new_with_label("CONFIRMAR");
+    win->afegir_amistats.go_back_button = gtk_button_new_with_label("<--");
+    win->afegir_amistats.confirm_button = gtk_button_new_with_label("CONFIRMAR");
     
-    win->mostrar_amistats.main_label = gtk_label_new("Les meves amistats");
+    win->afegir_amistats.main_label = gtk_label_new("Afegir noves amistats");
 
-    win->mostrar_amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-    gtk_box_pack_start(GTK_BOX(win->mostrar_amistats.buttons_box), win->mostrar_amistats.go_back_button, TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(win->mostrar_amistats.buttons_box), win->mostrar_amistats.confirm_button, TRUE, TRUE, 0);
-
-    win->mostrar_amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
+    win->afegir_amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
 }
 
-void mostrar_amistats_functionalities(info_t *dades_sis)
+void afegir_amistats_functionalities(info_t *dades_sis)
 {
+    g_signal_connect(dades_sis->win.afegir_amistats.go_back_button, "clicked", G_CALLBACK(afegir_amistats_to_main_window), (gpointer)(&(dades_sis->win)));
+    g_signal_connect(dades_sis->win.afegir_amistats.confirm_button, "clicked", G_CALLBACK(afegir_amistats_win), (gpointer)dades_sis);
+    g_signal_connect(dades_sis->win.afegir_amistats.confirm_button, "clicked", G_CALLBACK(afegir_amistats_to_main_window), (gpointer)(&(dades_sis->win)));  
+}
 
+void afegir_amistats_win(GtkWidget *wid, gpointer ptr)
+{
+    info_t *dades_sis = ptr; // Reanomenació del punter passat com a paràmetre per facilitar l'accés a les dades.
+    char *opcio; // Dades de l'usuari escollit.
+    GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.afegir_amistats.tree_view));
+    GtkTreeModel *model; // ls amb les dades del tree view.
+    GtkTreeIter iter; // fila seleccionada per l'usuari.
+    if(gtk_tree_selection_get_selected(sel, &model, &iter)) // Comprovem si l'usuari realment ha seleccionat una amistat.
+    {
+        gtk_tree_model_get(model, &iter, 0, &opcio, -1);
+        short id_sel = atoi(opcio); // Com el primer que es troba en aquesta string és l'id de l'usuari, l'atoi retorna aquest valor enter sense tenir en compte la resta d'informació.
+        int columna; // Direcció de l'amistat en la taula d'amistats.
+        short usuari = dades_sis->usuari; // Un únic accés a memòria.
+        if (id_sel < usuari)
+        {
+            columna = (((usuari * (usuari + 1)) / 2) + id_sel); // Cerca de fila
+        }
+        else
+        {
+            columna = (((id_sel * (id_sel + 1)) / 2) + usuari); // Cerca de columna
+        }
+        dades_sis->amistats[columna] = -1;
+        dades_sis->amistats_editades = true; // Identifica l'edició de l'arxiu amistats.
+    }
+    else
+        printf("CAP AMISTAT SELECCIONADA\n");
+}
+
+void afegir_amistats_to_main_window(GtkWidget *wid, gpointer ptr)
+{
+    finestra_t *win = ptr; // Es transforma el punter general en un finestra_t *.
+    win->afegir_amistats.main_box = g_object_ref(win->afegir_amistats.main_box);
+    gtk_container_remove(GTK_CONTAINER(win->main), win->afegir_amistats.main_box); 
+    show_main_window(win);
 }
 
 void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)
@@ -149,20 +185,54 @@ void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)
     gtk_widget_show_all(win->main);
 }
 
-void generar_mostrar_amistats(GtkWidget *origin, gpointer ptr)
+void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
 {
     info_t *dades_sis = ptr; // Reanomenació del punter enviat per facilitar el tractament de les dades.
-    dades_sis->win.mostrar_amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
-    short n_usuaris = dades_sis->n_elem; // Assignació per evitar accesos a memòria constant.
-    char buffer[111]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data. Es podria fer amb malloc i strlen, però el cost algorítmic seria
+    dades_sis->win.afegir_amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
+    short n_usuaris = dades_sis->n_elem;
+    short id_usuari = dades_sis->usuari; 
+    char *amistats = dades_sis->amistats; 
+    persona_t *usuaris = dades_sis->usuaris; // Assignació per evitar accesos a memòria constant.
+    short index = 0; // Index per anar afegint dades a la taula.
+    bool te_compatibilitat = false; // Suposem que no té compatibilitat amb ningú.
+    char buffer[115]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data, 4 max per id. Es podria fer amb malloc i strlen, però el cost algorítmic seria
                          massa elevat i caldria controlar errors. */
+    int dir = (id_usuari*(id_usuari+1))/2; // Fórmula per accedir a les amistats de l'usuari.
     for(short i = 0; i < n_usuaris; i++)
     {
-        sprintf(buffer, "%s %s %s %hd / %hd / %hd\n", dades_sis->usuaris[i].nom, dades_sis->usuaris[i].genere, dades_sis->usuaris[i].ciutat, (short)dades_sis->usuaris[i].data_neix.dia, (short)dades_sis->usuaris[i].data_neix.mes, dades_sis->usuaris[i].data_neix.any);
-        gtk_list_store_insert_with_values(dades_sis->win.mostrar_amistats.friend_list, NULL, i, 0, buffer, -1);
+        if(amistats[dir] > 0 && amistats[dir] <= COMPATIBILIDAD)
+        {
+            te_compatibilitat = true;
+            sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
+            gtk_list_store_insert_with_values(dades_sis->win.afegir_amistats.friend_list, NULL, index++, 0, buffer, -1);
+        }
+        if(i < id_usuari) dir++; // Avenç fila a fila.
+        else dir+=
     }
-    dades_sis->win.mostrar_amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(dades_sis->win.mostrar_amistats.friend_list));
-    gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(dades_sis->win.mostrar_amistats.tree_view), )
+    if(!te_compatibilitat)
+        printf("NO TENS COMPATIBILITAT AMB CAP USUARI!!!\n");
+    else
+    {
+        finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
+        afegir_amistats_setup(win);
+        afegir_amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
+        win->afegir_amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->afegir_amistats.friend_list));
+        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->afegir_amistats.tree_view), -1, "Selecciona una amistat:", win->afegir_amistats.text_renderer, "text", 0, NULL);
+        win->afegir_amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+
+        win->afegir_amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.buttons_box), win->afegir_amistats.go_back_button, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.buttons_box), win->afegir_amistats.confirm_button, TRUE, TRUE, 0);
+
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.main_label, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.tree_view, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->afegir_amistats.main_box), win->afegir_amistats.buttons_box, TRUE, TRUE, 0);
+    
+        win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
+        gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
+        gtk_container_add(GTK_CONTAINER(win->main), win->afegir_amistats.main_box);
+        gtk_widget_show_all(win->main);
+    }
 }
 
 void main_screen_functionalities(info_t *dades_sis)
@@ -170,7 +240,7 @@ void main_screen_functionalities(info_t *dades_sis)
     g_signal_connect(dades_sis->win.main, "delete_event", G_CALLBACK (close_window), (gpointer)dades_sis); // Creu per tancar el programa.
     g_signal_connect(dades_sis->win.finestra_principal.perfil, "clicked", G_CALLBACK (mostrar_perfil_activate), (gpointer)(&(dades_sis->win)));
     g_signal_connect(dades_sis->win.finestra_principal.afegir_usuaris, "clicked", G_CALLBACK (afegir_usuaris_activate), (gpointer)(&(dades_sis->win)));
-    g_signal_connect(dades_sis->win.finestra_principal.mostrar_amistats, "clicked", G_CALLBACK(generar_mostrar_amistats), (gpointer)dades_sis);
+    g_signal_connect(dades_sis->win.finestra_principal.afegir_amistats, "clicked", G_CALLBACK(generar_afegir_amistats), (gpointer)dades_sis);
 }
 
 void afegir_usuaris_activate(GtkWidget *wid, gpointer ptr)
@@ -301,6 +371,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
     
 bool string_copy_without_trash_for_win(char origin[], char **dest)
 {
+    if(origin[0] == ' ') return false;
     short last_index = -1, i; // -1, si no es modifica siginifica que només hi ha espais.
     bool correcte;
     for (i = 0; origin[i] != '\0'; i++)
