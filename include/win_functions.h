@@ -131,17 +131,17 @@ extern void afegir_amistats_functionalities(info_t *dades_sis);
 extern void generar_afegir_amistats(GtkWidget *origin, gpointer ptr);
 
 /**
- * @brief Genera alguns dels widgets d'afegir_amistats (els constants).
+ * @brief Genera alguns dels widgets d'afegir_amistats i eliminar amistats (els constants).
  * @param win (E/S) Finestra principal del programa.
 */
-extern void afegir_amistats_setup(finestra_t *win);
+extern void afegir_i_eliminar_amistats_setup(finestra_t *win);
 
 /**
- * @brief Canvia de la pantalla d'afegir amistats al menu principal.
+ * @brief Canvia de la pantalla d'afegir amistats o eliminar amistats al menu principal.
  * @param wid (E) Widget que provoca la crida (en aquest cas l'ignorem):
  * @param ptr Punter enviat des del callback. En aquesta funció, la finestra principal del programa.
 */
-extern void afegir_amistats_to_main_window(GtkWidget *wid, gpointer ptr);
+extern void afegir_o_eliminar_amistats_to_main_window(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Afegeix l'amistat seleccionada (en cas d'haver-hi alguna opció seleccinada).

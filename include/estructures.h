@@ -79,7 +79,12 @@ typedef struct
     GtkWidget *go_back_button;
     GtkWidget *buttons_box; 
     GtkWidget *scrolled_window; // Per poder lliscar les opcions d'amistats.
-} afegir_amistats_t;
+} afegir_i_eliminar_amistats_t;
+
+typedef struct
+{
+    GtkWidget *main_label;
+} mostrar_amistats_t;
 
 typedef struct
 {
@@ -88,7 +93,7 @@ typedef struct
     main_t finestra_principal;
     mostrar_perfil_t mostrar_perfil;
     afegir_usuari_t afegir_usuari;
-    afegir_amistats_t afegir_amistats;
+    afegir_i_eliminar_amistats_t afegir_i_eliminar_amistats;
 } finestra_t;
 
 typedef struct

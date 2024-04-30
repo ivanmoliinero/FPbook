@@ -42,9 +42,9 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
 <ul>
     <li>1.Mostrar perfil (FORMATO)</li>
     <li>2.Afegir usuaris - REVISAR CONTROL DE ERRORES DE NO GENERACION CORRECTA DE TABLA (temp_usuaris == NULL !!!). En programa por terminal y despues en programa por UI.</li>
-    <li>3.Mostrar amistats</li>
+    <li>3.Mostrar amistats - ANALITZAR SI ES POT FER REAPROFITANT l'STRUCT EXISTENT D'AMISTATS!!!</li>
     <li>4.Afegir amistats - (FORMATO).</li>
-    <li>5.Eliminar amistats</li>
+    <li>5.Eliminar amistats - FER APROFITANT AFEGIR AMISTATS!!!</li>
     <li>EXTRA: Mida de la finestra adaptable</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
