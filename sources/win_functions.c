@@ -15,7 +15,7 @@ void setup(info_t *dades_sis)
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
-    afegir_i_eliminar_amistats_setup(&(dades_sis->win));
+    amistats_setup(&(dades_sis->win));
     show_main_window(&(dades_sis->win));
 }
 
@@ -24,7 +24,7 @@ void functionalities(info_t *dades_sis)
     main_screen_functionalities(dades_sis);
     mostrar_perfil_functionalities(&(dades_sis->win));
     afegir_usuaris_functionalities(dades_sis);
-    afegir_i_eliminar_amistats_functionalities(dades_sis);
+    amistats_functionalities(dades_sis);
 }
 
 void afegir_usuaris_setup(finestra_t *win)
@@ -125,31 +125,32 @@ void mostrar_perfil_setup(info_t *dades_sis)
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.date_label, TRUE, TRUE, 0);
 }
 
-void afegir_i_eliminar_amistats_setup(finestra_t *win)
+void amistats_setup(finestra_t *win)
 {
-    win->afegir_i_eliminar_amistats.go_back_button = gtk_button_new_with_label("<--");
-    win->afegir_i_eliminar_amistats.confirm_button = gtk_button_new_with_label("CONFIRMAR");
-    win->afegir_i_eliminar_amistats.eliminar_button = gtk_button_new_with_label("ELIMINAR");
+    win->amistats.go_back_button = gtk_button_new_with_label("<--");
+    win->amistats.confirm_button = gtk_button_new_with_label("CONFIRMAR");
+    win->amistats.eliminar_button = gtk_button_new_with_label("ELIMINAR");
+    win->amistats.blank_label = gtk_label_new("");
     
-    win->afegir_i_eliminar_amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
+    win->amistats.text_renderer = gtk_cell_renderer_text_new(); // Renderer per poder mostrar text.
 
-    win->afegir_i_eliminar_amistats.scrolled_window = gtk_scrolled_window_new(NULL, NULL); // Per poder moure la llista d'amistats.
+    win->amistats.scrolled_window = gtk_scrolled_window_new(NULL, NULL); // Per poder moure la llista d'amistats.
 }
 
-void afegir_i_eliminar_amistats_functionalities(info_t *dades_sis)
+void amistats_functionalities(info_t *dades_sis)
 {
-    g_signal_connect(dades_sis->win.afegir_i_eliminar_amistats.go_back_button, "clicked", G_CALLBACK(afegir_o_eliminar_amistats_to_main_window), (gpointer)(&(dades_sis->win)));
-    g_signal_connect(dades_sis->win.afegir_i_eliminar_amistats.confirm_button, "clicked", G_CALLBACK(afegir_amistats_win), (gpointer)dades_sis);
-    g_signal_connect(dades_sis->win.afegir_i_eliminar_amistats.confirm_button, "clicked", G_CALLBACK(afegir_o_eliminar_amistats_to_main_window), (gpointer)(&(dades_sis->win))); 
-    g_signal_connect(dades_sis->win.afegir_i_eliminar_amistats.eliminar_button, "clicked", G_CALLBACK(afegir_o_eliminar_amistats_to_main_window), (gpointer)(&(dades_sis->win)));
-    g_signal_connect(dades_sis->win.afegir_i_eliminar_amistats.eliminar_button, "clicked", G_CALLBACK(eliminar_amistats_win), (gpointer)dades_sis); 
+    g_signal_connect(dades_sis->win.amistats.go_back_button, "clicked", G_CALLBACK(amistats_to_main_window), (gpointer)(&(dades_sis->win)));
+    g_signal_connect(dades_sis->win.amistats.confirm_button, "clicked", G_CALLBACK(afegir_amistats_win), (gpointer)dades_sis);
+    g_signal_connect(dades_sis->win.amistats.confirm_button, "clicked", G_CALLBACK(amistats_to_main_window), (gpointer)(&(dades_sis->win))); 
+    g_signal_connect(dades_sis->win.amistats.eliminar_button, "clicked", G_CALLBACK(amistats_to_main_window), (gpointer)(&(dades_sis->win)));
+    g_signal_connect(dades_sis->win.amistats.eliminar_button, "clicked", G_CALLBACK(eliminar_amistats_win), (gpointer)dades_sis); 
 }
 
 void eliminar_amistats_win(GtkWidget *wid, gpointer ptr)
 {
     info_t *dades_sis = ptr; // Reanomenació del punter passat com a paràmetre per facilitar l'accés a les dades.
     char *opcio; // Dades de l'usuari escollit.
-    GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.afegir_i_eliminar_amistats.tree_view));
+    GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.amistats.tree_view));
     GtkTreeModel *model; // ls amb les dades del tree view.
     GtkTreeIter iter; // fila seleccionada per l'usuari.
     if(gtk_tree_selection_get_selected(sel, &model, &iter)) // Comprovem si l'usuari realment ha seleccionat una amistat.
@@ -177,7 +178,7 @@ void afegir_amistats_win(GtkWidget *wid, gpointer ptr)
 {
     info_t *dades_sis = ptr; // Reanomenació del punter passat com a paràmetre per facilitar l'accés a les dades.
     char *opcio; // Dades de l'usuari escollit.
-    GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.afegir_i_eliminar_amistats.tree_view));
+    GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.amistats.tree_view));
     GtkTreeModel *model; // ls amb les dades del tree view.
     GtkTreeIter iter; // fila seleccionada per l'usuari.
     if(gtk_tree_selection_get_selected(sel, &model, &iter)) // Comprovem si l'usuari realment ha seleccionat una amistat.
@@ -201,11 +202,11 @@ void afegir_amistats_win(GtkWidget *wid, gpointer ptr)
         printf("CAP AMISTAT SELECCIONADA\n");
 }
 
-void afegir_o_eliminar_amistats_to_main_window(GtkWidget *wid, gpointer ptr)
+void amistats_to_main_window(GtkWidget *wid, gpointer ptr)
 {
     finestra_t *win = ptr; // Es transforma el punter general en un finestra_t *.
-    win->afegir_i_eliminar_amistats.main_box = g_object_ref(win->afegir_i_eliminar_amistats.main_box);
-    gtk_container_remove(GTK_CONTAINER(win->main), win->afegir_i_eliminar_amistats.main_box); 
+    win->amistats.main_box = g_object_ref(win->amistats.main_box);
+    gtk_container_remove(GTK_CONTAINER(win->main), win->amistats.main_box); 
     show_main_window(win);
 }
 
@@ -221,7 +222,7 @@ void mostrar_perfil_activate(GtkWidget *wid, gpointer ptr)
 void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
 {
     info_t *dades_sis = ptr; // Reanomenació del punter enviat per facilitar el tractament de les dades.
-    dades_sis->win.afegir_i_eliminar_amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
+    dades_sis->win.amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
     short n_usuaris = dades_sis->n_elem;
     short id_usuari = dades_sis->usuari; 
     char *amistats = dades_sis->amistats; 
@@ -237,7 +238,7 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
         {
             te_compatibilitat = true;
             sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
-            gtk_list_store_insert_with_values(dades_sis->win.afegir_i_eliminar_amistats.friend_list, NULL, index++, 0, buffer, -1);
+            gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
         else dir += i + 1; // Avenç columna a columna.
@@ -247,26 +248,26 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
     else
     {
         finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
-        win->afegir_i_eliminar_amistats.main_label = gtk_label_new("Afegir amistats: ");
-        afegir_i_eliminar_amistats_setup(win);
-        afegir_i_eliminar_amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
-        win->afegir_i_eliminar_amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->afegir_i_eliminar_amistats.friend_list));
-        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->afegir_i_eliminar_amistats.tree_view), -1, "Selecciona una amistat:", win->afegir_i_eliminar_amistats.text_renderer, "text", 0, NULL);
-        win->afegir_i_eliminar_amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+        win->amistats.main_label = gtk_label_new("Afegir amistats: ");
+        amistats_setup(win);
+        amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
+        win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
+        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->amistats.tree_view), -1, "Selecciona una amistat:", win->amistats.text_renderer, "text", 0, NULL);
+        win->amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
-        win->afegir_i_eliminar_amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.buttons_box), win->afegir_i_eliminar_amistats.go_back_button, TRUE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.buttons_box), win->afegir_i_eliminar_amistats.confirm_button, TRUE, TRUE, 0);
+        win->amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.go_back_button, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.confirm_button, TRUE, TRUE, 0);
 
-        gtk_container_add(GTK_CONTAINER(win->afegir_i_eliminar_amistats.scrolled_window), win->afegir_i_eliminar_amistats.tree_view); // Possibilitat d'scroll al tree view.
+        gtk_container_add(GTK_CONTAINER(win->amistats.scrolled_window), win->amistats.tree_view); // Possibilitat d'scroll al tree view.
 
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.main_label, FALSE, FALSE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.buttons_box, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.main_label, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.buttons_box, FALSE, FALSE, 0);
 
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
-        gtk_container_add(GTK_CONTAINER(win->main), win->afegir_i_eliminar_amistats.main_box);
+        gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
         gtk_widget_show_all(win->main);
     }
 }
@@ -278,12 +279,14 @@ void main_screen_functionalities(info_t *dades_sis)
     g_signal_connect(dades_sis->win.finestra_principal.afegir_usuaris, "clicked", G_CALLBACK (afegir_usuaris_activate), (gpointer)(&(dades_sis->win)));
     g_signal_connect(dades_sis->win.finestra_principal.afegir_amistats, "clicked", G_CALLBACK(generar_afegir_amistats), (gpointer)dades_sis);
     g_signal_connect(dades_sis->win.finestra_principal.eliminar_amistats, "clicked", G_CALLBACK(generar_eliminar_amistats), (gpointer)dades_sis);
+    g_signal_connect(dades_sis->win.finestra_principal.mostrar_amistats, "clicked", G_CALLBACK(generar_mostrar_amistats), (gpointer)dades_sis);
+
 }
 
 void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
 {
     info_t *dades_sis = ptr; // Reanomenació del punter enviat per facilitar el tractament de les dades.
-    dades_sis->win.afegir_i_eliminar_amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
+    dades_sis->win.amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
     short n_usuaris = dades_sis->n_elem;
     short id_usuari = dades_sis->usuari; 
     char *amistats = dades_sis->amistats; 
@@ -299,7 +302,7 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
         {
             te_amics = true;
             sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
-            gtk_list_store_insert_with_values(dades_sis->win.afegir_i_eliminar_amistats.friend_list, NULL, index++, 0, buffer, -1);
+            gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
         else dir += i + 1; // Avenç columna a columna.
@@ -309,26 +312,26 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
     else
     {
         finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
-        win->afegir_i_eliminar_amistats.main_label = gtk_label_new("Eliminar amistats: ");
-        afegir_i_eliminar_amistats_setup(win);
-        afegir_i_eliminar_amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
-        win->afegir_i_eliminar_amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->afegir_i_eliminar_amistats.friend_list));
-        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->afegir_i_eliminar_amistats.tree_view), -1, "Selecciona una amistat:", win->afegir_i_eliminar_amistats.text_renderer, "text", 0, NULL);
-        win->afegir_i_eliminar_amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+        win->amistats.main_label = gtk_label_new("Eliminar amistats: ");
+        amistats_setup(win);
+        amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
+        win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
+        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->amistats.tree_view), -1, "Selecciona una amistat:", win->amistats.text_renderer, "text", 0, NULL);
+        win->amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
-        win->afegir_i_eliminar_amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.buttons_box), win->afegir_i_eliminar_amistats.go_back_button, TRUE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.buttons_box), win->afegir_i_eliminar_amistats.eliminar_button, TRUE, TRUE, 0);
+        win->amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.go_back_button, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.eliminar_button, TRUE, TRUE, 0);
 
-        gtk_container_add(GTK_CONTAINER(win->afegir_i_eliminar_amistats.scrolled_window), win->afegir_i_eliminar_amistats.tree_view); // Possibilitat d'scroll al tree view.
+        gtk_container_add(GTK_CONTAINER(win->amistats.scrolled_window), win->amistats.tree_view); // Possibilitat d'scroll al tree view.
 
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.main_label, FALSE, FALSE, 0);
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
-        gtk_box_pack_start(GTK_BOX(win->afegir_i_eliminar_amistats.main_box), win->afegir_i_eliminar_amistats.buttons_box, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.main_label, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.buttons_box, FALSE, FALSE, 0);
 
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
-        gtk_container_add(GTK_CONTAINER(win->main), win->afegir_i_eliminar_amistats.main_box);
+        gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
         gtk_widget_show_all(win->main);
     }
 }
@@ -488,4 +491,57 @@ bool string_copy_without_trash_for_win(char origin[], char **dest)
         (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
     }
     return correcte;
+}
+
+void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr)
+{
+    info_t *dades_sis = ptr; // Reanomenació del punter enviat per facilitar el tractament de les dades.
+    dades_sis->win.amistats.friend_list = gtk_list_store_new(1, G_TYPE_STRING); // Es crea la llista amb les dades.
+    short n_usuaris = dades_sis->n_elem;
+    short id_usuari = dades_sis->usuari; 
+    char *amistats = dades_sis->amistats; 
+    persona_t *usuaris = dades_sis->usuaris; // Assignació per evitar accesos a memòria constant.
+    short index = 0; // Index per anar afegint dades a la taula.
+    bool te_amics = false; // Suposem que no té amics.
+    char buffer[115]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data, 4 max per id. Es podria fer amb malloc i strlen, però el cost algorítmic seria
+                         massa elevat i caldria controlar errors. */
+    int dir = (id_usuari*(id_usuari+1))/2; // Fórmula per accedir a les amistats de l'usuari.
+    for(short i = 0; i < n_usuaris; i++)
+    {
+        if(amistats[dir] == -1)
+        {
+            te_amics = true;
+            sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
+            gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
+        }
+        if(i < id_usuari) dir++; // Avenç fila a fila.
+        else dir += i + 1; // Avenç columna a columna.
+    }
+    if(!te_amics)
+        printf("NO TENS AMICS!\n");
+    else
+    {
+        finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
+        win->amistats.main_label = gtk_label_new("Les meves amistats: ");
+        amistats_setup(win);
+        amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
+        win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
+        gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(win->amistats.tree_view), -1, NULL, win->amistats.text_renderer, "text", 0, NULL);
+        win->amistats.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+
+        win->amistats.buttons_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.go_back_button, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.buttons_box), win->amistats.blank_label, TRUE, TRUE, 0);
+
+        gtk_container_add(GTK_CONTAINER(win->amistats.scrolled_window), win->amistats.tree_view); // Possibilitat d'scroll al tree view.
+
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.main_label, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.scrolled_window, TRUE, TRUE, 0); // Tree view amb scroll.
+        gtk_box_pack_start(GTK_BOX(win->amistats.main_box), win->amistats.buttons_box, FALSE, FALSE, 0);
+
+        win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
+        gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
+        gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
+        gtk_widget_show_all(win->main);
+    }
 }

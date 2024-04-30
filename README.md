@@ -45,7 +45,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>3.Mostrar amistats - ANALITZAR SI ES POT FER REAPROFITANT l'STRUCT EXISTENT D'AMISTATS!!!g</li>
     <li>4.Afegir amistats - (FORMATO).</li>
     <li>5.Eliminar amistats - FER APROFITANT AFEGIR AMISTATS!!!</li>
-    <li>EXTRA: Mida de la finestra adaptable</li>
+    <li>EXTRA: Mida de la finestra adaptable / Optimitzar càlcul amistats constant. / CANVIAR TREE VIEW DE MOSTRAR AMISTATS.</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

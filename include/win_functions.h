@@ -118,10 +118,10 @@ extern short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuar
 extern bool string_copy_without_trash_for_win(char origin[], char **dest);
 
 /**
- * @brief Inicia les funcionalitats del menú afegir amistats i eliminar amistats.
+ * @brief Inicia les funcionalitats del menú afegir amistats, mostrar amistats i eliminar amistats.
  * @param dades_sis (E/S) Dades de TOT el programa.
 */
-extern void afegir_i_eliminar_amistats_functionalities(info_t *dades_sis);
+extern void amistats_functionalities(info_t *dades_sis);
 
 /**
  * @brief Genera el menú d'afegir amistats i el mostra per pantalla.
@@ -131,17 +131,17 @@ extern void afegir_i_eliminar_amistats_functionalities(info_t *dades_sis);
 extern void generar_afegir_amistats(GtkWidget *origin, gpointer ptr);
 
 /**
- * @brief Genera alguns dels widgets d'afegir_amistats i eliminar amistats (els constants).
+ * @brief Genera alguns dels widgets d'afegir_amistats, eliminar amistats i mostrar amistats (els constants).
  * @param win (E/S) Finestra principal del programa.
 */
-extern void afegir_i_eliminar_amistats_setup(finestra_t *win);
+extern void amistats_setup(finestra_t *win);
 
 /**
- * @brief Canvia de la pantalla d'afegir amistats o eliminar amistats al menu principal.
+ * @brief Canvia de la pantalla d'afegir amistats, eliminar amistats o mostrar al menú principal.
  * @param wid (E) Widget que provoca la crida (en aquest cas l'ignorem):
  * @param ptr Punter enviat des del callback. En aquesta funció, la finestra principal del programa.
 */
-extern void afegir_o_eliminar_amistats_to_main_window(GtkWidget *wid, gpointer ptr);
+extern void amistats_to_main_window(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Afegeix l'amistat seleccionada (en cas d'haver-hi alguna opció seleccinada).
@@ -163,5 +163,12 @@ extern void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr);
  * @param ptr (E/S) Punter passat des de la crida de la funció per callback. En aquesta funció, tota la info del sistema.
 */
 extern void eliminar_amistats_win(GtkWidget *wid, gpointer ptr);
+
+/**
+ * @brief Genera el menú per mostrar amistats.
+ * @param wid (E) Widget que provoca la trucada a la funció (no s'empra en aquesta funció).
+ * @param ptr (E/S) Punter passat des de la crida de la funció per callback. En aquesta funció, tota la info del sistema.
+*/
+extern void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr);
 
 #endif
