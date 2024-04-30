@@ -75,7 +75,8 @@ typedef struct
     GtkListStore *friend_list;
     GtkWidget *tree_view; // Per poder mostrar la friends_list.
     GtkCellRenderer *text_renderer; // Per poder mostrar el text.
-    GtkWidget *confirm_button;
+    GtkWidget *confirm_button; // Per afegir amistats.
+    GtkWidget *eliminar_button; // Per eliminar amistats.
     GtkWidget *go_back_button;
     GtkWidget *buttons_box; 
     GtkWidget *scrolled_window; // Per poder lliscar les opcions d'amistats.
