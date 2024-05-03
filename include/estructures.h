@@ -85,11 +85,6 @@ typedef struct
 
 typedef struct
 {
-    GtkWidget *main_label;
-} mostrar_amistats_t;
-
-typedef struct
-{
     GtkWidget *main; // Finestra principal.
     GdkPixbuf *logo; // Logotip de l'aplicació.
     main_t finestra_principal;

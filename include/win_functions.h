@@ -171,4 +171,10 @@ extern void eliminar_amistats_win(GtkWidget *wid, gpointer ptr);
 */
 extern void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr);
 
+/**
+ * @brief Genera les dependències necessàries per tal de poder afegir estils de CSS al programa.
+ * @param dades_sis (E/S) Informació de tot el programa.
+*/
+extern void styles_setup(info_t *dades_sis);
+
 #endif

@@ -11,12 +11,21 @@ void setup(info_t *dades_sis)
 {
     dades_sis->win.main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
     dades_sis->win.logo = gdk_pixbuf_new_from_file("data/fpbook_logo.png", NULL);
-    gtk_window_set_icon(GTK_WINDOW(dades_sis->win.main), GDK_PIXBUF(dades_sis->win.logo));
+    gtk_window_set_icon(GTK_WINDOW(dades_sis->win.main), GDK_PIXBUF(dades_sis->win.logo)); // Logo
+    gtk_style_context_save(dades_sis->win.styles);
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
     amistats_setup(&(dades_sis->win));
+    styles_setup(dades_sis);
     show_main_window(&(dades_sis->win));
+}
+
+void styles_setup(info_t *dades_sis)
+{
+    GtkCssProvider *css_provider = gtk_css_provider_new(); // Nova ruta d'accés a arxiu CSS amb estils.
+    gtk_css_provider_load_from_path(css_provider, "styles/styles_sheet.css", NULL); // Càrrega de la ruta del fitxer CSS amb els estils.
+    gtk_style_context_add_provider(dades_sis->win.styles, GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER); // Full d'estils carregat.
 }
 
 void functionalities(info_t *dades_sis)
@@ -237,7 +246,7 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
         if(amistats[dir] > 0 && amistats[dir] <= COMPATIBILIDAD)
         {
             te_compatibilitat = true;
-            sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
+            sprintf(buffer, "%hd\n%s%s%s%hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
             gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
@@ -301,7 +310,7 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
         if(amistats[dir] == -1)
         {
             te_amics = true;
-            sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
+            sprintf(buffer, "%hd\n%s%s%s%hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
             gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
@@ -511,7 +520,7 @@ void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr)
         if(amistats[dir] == -1)
         {
             te_amics = true;
-            sprintf(buffer, "%hd\n%s %s %s %hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
+            sprintf(buffer, "%hd\n%s%s%s%hd / %hd / %hd\n", i, usuaris[i].nom, usuaris[i].genere, usuaris[i].ciutat, (short)usuaris[i].data_neix.dia, (short)usuaris[i].data_neix.mes, usuaris[i].data_neix.any);
             gtk_list_store_insert_with_values(dades_sis->win.amistats.friend_list, NULL, index++, 0, buffer, -1);
         }
         if(i < id_usuari) dir++; // Avenç fila a fila.
