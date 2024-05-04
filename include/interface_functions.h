@@ -88,14 +88,6 @@ extern void demanar_data(persona_t *usuari);
 extern short demanar_opcio(short rang_max, short rang_min);
 
 /**
- * @brief Demana a l'usuari confirmar si vol acceptar o denegar una acció.
- * @param confirmacio (E/S) Decisio escollida per l'usuari.
- * @param afirmacio (E) Valor que indica afirmació.
- * @param denegacio (E) Valor que indicia denegació.
- */
-extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
-
-/**
  * @brief Mostra els usuaris compatibles amb un usuari.
  * @pre Taula d'amistats carregada.
  * @param usuaris (E) Taula d'usuaris.
@@ -169,5 +161,25 @@ extern void sense_compatibles();
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  */
 extern void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris);
+
+/**
+ * @brief Mostra un missatge d'error si l'usuari intenta afegir-se a si mateix com a amic o eliminar-se a si mateix de la llista d'amistats.
+*/
+extern void missatge_error_un_mateix();
+
+/**
+ * @brief Demana a l'usuari confirmació addicional per eliminar una amistat.
+*/
+extern void missatge_confirmacio_eliminacio_amistat();
+
+/**
+ * @brief Informa a l'usuari de la dolenta selecció a l'hora d'intentar afegir una amistat quan ja és amic seu.
+*/
+extern void missatge_error_ja_amic();
+
+/**
+ * @brief Informa a l'usuari de l'intent d'eliminar un usuari del llistat d'amics quan aquest usuari no és amic.
+*/
+extern void missatge_error_no_amic();
 
 #endif

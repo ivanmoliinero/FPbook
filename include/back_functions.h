@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #define ACCEPTAR 1
-#define DENEGAR -1 // Constants per escollir acció a l'hora d'afegir amistats incompatibles.
+#define DENEGAR 0 // Constants per escollir acció a l'hora d'afegir amistats incompatibles.
 
 // Capceleres de les funcions de càlculs interns.
 

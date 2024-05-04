@@ -16,31 +16,42 @@ void carregar_data(FILE *f, persona_t *us)
 
 bool carregar_usuari(FILE *f, persona_t *usuari)
 {
+    bool resultat = true;
     char dummy[MAX_DUMMY], n_elem_dummy;
+
     fscanf(f, "%hd\n", &usuari->id);
     fgets(dummy, MAX_DUMMY, f);
     n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
     usuari->nom = malloc(sizeof(char) * n_elem_dummy);
     if (usuari->nom == NULL)
-        return false;
-    strcpy(usuari->nom, dummy);
+        resultat = false;
+    if (resultat)
+    {
+        strcpy(usuari->nom, dummy);
+        fgets(dummy, MAX_DUMMY, f);
+        n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
+        usuari->genere = malloc(sizeof(char) * n_elem_dummy);
+        if (usuari->genere == NULL)
+            resultat = false;
 
-    fgets(dummy, MAX_DUMMY, f);
-    n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
-    usuari->genere = malloc(sizeof(char) * n_elem_dummy);
-    if (usuari->genere == NULL)
-        return false;
-    strcpy(usuari->genere, dummy);
+        if (resultat)
+        {
+            strcpy(usuari->genere, dummy);
 
-    fgets(dummy, MAX_DUMMY, f);
-    n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
-    usuari->ciutat = malloc(sizeof(char) * n_elem_dummy);
-    if (usuari->ciutat == NULL)
-        return false;
-    strcpy(usuari->ciutat, dummy);
+            fgets(dummy, MAX_DUMMY, f);
+            n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
+            usuari->ciutat = malloc(sizeof(char) * n_elem_dummy);
+        }
+        if (usuari->ciutat == NULL)
+            resultat = false;
+        if (resultat)
+        {
+            strcpy(usuari->ciutat, dummy);
 
-    carregar_data(f, usuari);
-    return true;
+            carregar_data(f, usuari);
+        }
+    }
+    return resultat;
 }
 
 short carregar_usuaris(persona_t **usuaris)
@@ -211,8 +222,10 @@ short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
         if (!actualitzacio_amistats(&temp_amistats, n_usuaris, n_nous))
         {
             n_final = -1;
-            *usuaris = realloc(temp_usuaris, sizeof(persona_t) * n_usuaris);
-            *amistats = realloc(temp_amistats, sizeof(char) * n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
+            if (temp_usuaris != NULL)
+                *usuaris = realloc(temp_usuaris, sizeof(persona_t) * n_usuaris);
+            if (temp_amistats != NULL)
+                *amistats = realloc(temp_amistats, sizeof(char) * n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
         }
         else // S'ha executat correctament.
         {
@@ -222,7 +235,8 @@ short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris)
     }
     else
     {
-        *usuaris = realloc(temp_usuaris, sizeof(persona_t) * n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
+        if (temp_usuaris != NULL)
+            *usuaris = realloc(temp_usuaris, sizeof(persona_t) * n_usuaris); // Es torna a reubicar la memòria en el seu lloc.
     }
 
     return (n_final);
@@ -314,7 +328,7 @@ void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short 
             correcte = true; // Es surt del programa.
         else if (opcio == usuari)
         {
-            printf("¡NO TE PUEDES AÑADIR TU MISMO COMO AMIGO!");
+            missatge_error_un_mateix();
         }
         else
         {
@@ -329,12 +343,12 @@ void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short 
 
             if (((*amistats)[columna]) == -1)
             {
-                printf("¡YA ES TU AMIGO!");
+                missatge_error_ja_amic();
             }
             else if (((*amistats)[columna]) > COMPATIBILIDAD)
             {
                 avis_compatibilitat_dolenta();
-                confirmar(&confirmacio, DENEGAR, ACCEPTAR);
+                confirmacio = demanar_opcio(ACCEPTAR, DENEGAR);
                 if (confirmacio == ACCEPTAR)
                 {
                     correcte = true;
@@ -365,7 +379,7 @@ void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
 
         if (opcio == usuari)
         {
-            printf("¡NO TE PUEDES ELIMINAR TU MISMO COMO AMIGO!");
+            missatge_error_un_mateix();
         }
         else
         {
@@ -380,8 +394,8 @@ void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
 
             if (((*amistats)[columna]) == -1)
             {
-                printf("¡ELIMINAR AMISTAD!");
-                confirmar(&confirmacio, DENEGAR, ACCEPTAR);
+                missatge_confirmacio_eliminacio_amistat();
+                confirmacio = demanar_opcio(ACCEPTAR, DENEGAR);
 
                 if (confirmacio == ACCEPTAR)
                 {
@@ -391,7 +405,7 @@ void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
             }
             else
             {
-                printf("¡NO ES TU AMIGO!");
+                missatge_error_no_amic();
             }
         }
     }
