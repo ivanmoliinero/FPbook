@@ -159,8 +159,9 @@ extern void sense_compatibles();
  * @param usuari (E) ID de l'usuari actiu.
  * @param amistats (E) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
+ * @return bool True en cas de trobar una amistat, false si no té cap amistat.
  */
-extern void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris);
+extern bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris);
 
 /**
  * @brief Mostra un missatge d'error si l'usuari intenta afegir-se a si mateix com a amic o eliminar-se a si mateix de la llista d'amistats.
@@ -181,5 +182,10 @@ extern void missatge_error_ja_amic();
  * @brief Informa a l'usuari de l'intent d'eliminar un usuari del llistat d'amics quan aquest usuari no és amic.
 */
 extern void missatge_error_no_amic();
+
+/**
+ * @brief Informa a l'usuari de que no té cap amistat.
+*/
+extern void missatge_error_no_amics();
 
 #endif

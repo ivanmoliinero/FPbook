@@ -364,48 +364,58 @@ void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short 
     }
 }
 
-void eliminar_amistat(char **amistats, short n_usuaris, short usuari)
+void eliminar_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short usuari)
 {
     int columna;
     short opcio, confirmacio;
     bool correcte = false;
 
-    printf("mostar_amistats()"); // FER QUE ES RETORNI BOOLEÀ PER CONTROLAR SI ES TENEN AMISTATS.
+    bool te_amics = mostrar_amistats(usuaris, usuari, *amistats, n_usuaris);
 
-    while (!correcte)
+    if (!te_amics)
     {
-        missatge_esborrat_amistat();
-        opcio = demanar_opcio(n_usuaris - 1, 0);
-
-        if (opcio == usuari)
+        sortir_menu();
+    }
+    else
+    {
+        while (!correcte)
         {
-            missatge_error_un_mateix();
-        }
-        else
-        {
-            if (opcio < usuari)
+            missatge_esborrat_amistat();
+            opcio = demanar_opcio(n_usuaris - 1, -1);
+            if (opcio == -1)
             {
-                columna = (((usuari * (usuari + 1)) / 2) + opcio); // Cerca de fila
+                correcte = true;
+            }
+            else if (opcio == usuari)
+            {
+                missatge_error_un_mateix();
             }
             else
             {
-                columna = (((opcio * (opcio + 1)) / 2) + usuari); // Cerca de columna
-            }
-
-            if (((*amistats)[columna]) == -1)
-            {
-                missatge_confirmacio_eliminacio_amistat();
-                confirmacio = demanar_opcio(ACCEPTAR, DENEGAR);
-
-                if (confirmacio == ACCEPTAR)
+                if (opcio < usuari)
                 {
-                    correcte = true;
-                    ((*amistats)[columna]) = genera_aleatori(COMPATIBILIDAD, 9);
+                    columna = (((usuari * (usuari + 1)) / 2) + opcio); // Cerca de fila
                 }
-            }
-            else
-            {
-                missatge_error_no_amic();
+                else
+                {
+                    columna = (((opcio * (opcio + 1)) / 2) + usuari); // Cerca de columna
+                }
+
+                if (((*amistats)[columna]) == -1)
+                {
+                    missatge_confirmacio_eliminacio_amistat();
+                    confirmacio = demanar_opcio(ACCEPTAR, DENEGAR);
+
+                    if (confirmacio == ACCEPTAR)
+                    {
+                        correcte = true;
+                        ((*amistats)[columna]) = genera_aleatori(COMPATIBILIDAD, 9);
+                    }
+                }
+                else
+                {
+                    missatge_error_no_amic();
+                }
             }
         }
     }

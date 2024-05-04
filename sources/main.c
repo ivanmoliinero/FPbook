@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
                             netejar_terminal();
                             break;
                         case ELIMINAR_AMISTAT:
-                            eliminar_amistat(&amistats, n_elem, usuari);
+                            eliminar_amistat(usuaris, &amistats, n_elem, usuari);
                             amistats_editades = true;
                             netejar_terminal();
                             break;
