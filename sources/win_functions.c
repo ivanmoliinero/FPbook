@@ -12,7 +12,6 @@ void setup(info_t *dades_sis)
     dades_sis->win.main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
     dades_sis->win.logo = gdk_pixbuf_new_from_file("data/fpbook_logo.png", NULL);
     gtk_window_set_icon(GTK_WINDOW(dades_sis->win.main), GDK_PIXBUF(dades_sis->win.logo)); // Logo
-    gtk_style_context_save(dades_sis->win.styles);
     main_window_setup(&(dades_sis->win));
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
@@ -24,8 +23,10 @@ void setup(info_t *dades_sis)
 void styles_setup(info_t *dades_sis)
 {
     GtkCssProvider *css_provider = gtk_css_provider_new(); // Nova ruta d'accés a arxiu CSS amb estils.
+    GtkStyleContext *style_context = gtk_style_context_new(); // Context d'estils de CSS.
     gtk_css_provider_load_from_path(css_provider, "styles/styles_sheet.css", NULL); // Càrrega de la ruta del fitxer CSS amb els estils.
-    gtk_style_context_add_provider(dades_sis->win.styles, GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER); // Full d'estils carregat.
+    gtk_style_context_add_provider(style_context, GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER); // Full d'estils carregat.
+    gtk_style_context_save(style_context);
 }
 
 void functionalities(info_t *dades_sis)

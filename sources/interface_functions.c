@@ -44,23 +44,37 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
     usuari->data_neix.dia = (char)temp;
 }
 
+
 bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
+    bool resultat = true;
     char dummy[MAX_DUMMY];
     fflush(stdin);
     printf("Introdueix el nom del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->nom))) return false;
-    fflush(stdin);
-    printf("Introdueix el genere del nou usuari:\n");
-    fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->genere))) return false;
-    fflush(stdin);
-    printf("Introdueix la ciutat del nou usuari:\n");
-    fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->ciutat))) return false;
-    demanar_data(usuari);
-    return true;
+    if (!string_copy_without_trash(dummy, &(usuari->nom)))
+        resultat = false;
+    if (resultat)
+    {
+        fflush(stdin);
+        printf("Introdueix el genere del nou usuari:\n");
+        fgets(dummy, MAX_DUMMY, stdin);
+        if (!string_copy_without_trash(dummy, &(usuari->genere)))
+            resultat = false;
+        if (resultat)
+        {
+            fflush(stdin);
+            printf("Introdueix la ciutat del nou usuari:\n");
+            fgets(dummy, MAX_DUMMY, stdin);
+            if (!string_copy_without_trash(dummy, &(usuari->ciutat)))
+                resultat = false;
+            if (resultat)
+            {
+                demanar_data(usuari);
+            }
+        }
+    }
+    return resultat;
 }
 
 short demanar_opcio(short rang_max, short rang_min)
@@ -73,15 +87,6 @@ short demanar_opcio(short rang_max, short rang_min)
             printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
     } while (opcio < rang_min || opcio > rang_max);                               // Procura que el valor introduït estigui entre l'interval establert.
     return opcio;
-}
-
-void confirmar(short *confirmacio, short afirmacio, short denegacio)
-{
-    // printf("¿ESTAS SEGURO DE QUE QUIERES AÑADIR A ALGUIEN CON POCA COMPATIBILIDAD? [%hd para denegar y %hd para confirmar]", denegacio, afirmacio);
-    do
-    {
-        scanf("%hd", confirmacio);
-    } while (*confirmacio != denegacio && *confirmacio != afirmacio); // Procura que el valor introduït sigui binari(dues opcions posibles).
 }
 
 bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int usuari)
@@ -134,30 +139,23 @@ void mostrar_perfil(short usuari, persona_t *usuaris)
     printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
 }
 
-// void mostrar_amistats()
-// {
-
-//     int valor;
-//     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
-//     {
-//         if (usuari != i)
-//         {
-//             if (i > usuari)
-//             {
-//                 valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
-//             }
-//             else
-//             {
-//                 valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
-//             }
-//             if (valor == -1)
-//             {
-//                mostrar_perfil(&valors, )
-//             }
-//         }
-//     }
-// //if amistats [i][j]==-1 --> mostrar_perfil(calcul id, usuaris)
-// }
+void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris)
+{
+    int dir = (usuari * (usuari + 1)) / 2;
+    for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
+    {
+        if (usuari != i)
+        {
+            if (amistats[dir] == -1)
+            {
+                mostrar_perfil(i, usuaris);
+                printf("\n"); // Separació estètica entre usuaris.
+            }
+        }
+        if (i < usuari) dir++; // Avenç fila a fila.
+        else dir += i + 1; // Avenç columna a columna.
+    }
+}
 
 void mostrar_menu_principal()
 {
@@ -172,7 +170,7 @@ void mostrar_menu_principal()
 
 void avis_compatibilitat_dolenta()
 {
-    printf("Estas segur que vols afegir aquest usuari com a amic (no teniu una bona compatibilitat)?\n");
+    printf("Estas segur que vols afegir aquest usuari com a amic (no teniu una bona compatibilitat) [0 per denegar, 1 per acceptar]?\n");
 }
 
 void falta_identificador()
@@ -212,16 +210,18 @@ void missatge_error_arxiu_usuaris()
 
 bool mirar_errors(short control)
 {
+    bool resultat = true;
+
     if (control == -1)
     {
         printf("Error en el guardat de dades d'usuaris i/o amistats\n");
-        return false;
+        resultat = false;
     }
-    else 
+    else
     {
         printf("Guardat satisfactori!\n");
-        return true;
     }
+    return resultat;
 }
 
 void netejar_terminal()
@@ -231,7 +231,7 @@ void netejar_terminal()
 
 void sortir_menu()
 {
-    fflush(stdin); // Evitem la sortida del menú per entrada de brossa. 
+    fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
     printf("\nPrem la tecla intro per sortir del menu actual");
     char o[3];
     fgets(o, 3, stdin);
@@ -242,4 +242,24 @@ void sortir_menu()
 void sense_compatibles()
 {
     printf("No hi ha cap usuari amb el qual siguis compatible. Tot i aixo, pots afegir usuaris de FPbook tot i que no sigueu compatibles.\n");
+}
+
+void missatge_error_un_mateix()
+{
+    printf("No et pots seleccionar a tu mateix.\n");
+}
+
+void missatge_confirmacio_eliminacio_amistat()
+{
+    printf("Estas segur que vols eliminar l'amistat seleccionada? [0 per denegar, 1 per acceptar]?\n");
+}
+
+void missatge_error_ja_amic()
+{
+    printf("Aquest usuari ja és amic teu.\n");
+}
+
+void missatge_error_no_amic()
+{
+    printf("Aquest usuari no és amic teu.\n");
 }

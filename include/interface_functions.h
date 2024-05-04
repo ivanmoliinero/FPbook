@@ -20,63 +20,63 @@
 // Capceleres de les funcions d'interfície.
 /**
  * @brief Mostra un missatge de benvinguda a FPbook.
-*/
+ */
 extern void missatge_benvinguda();
 
 /**
  * @brief Mostra un missatge d'acomiadament de FPbook.
-*/
+ */
 extern void missatge_acomiadament();
 
 /**
  * @brief Mostra el menú principal de FPbook.
-*/
+ */
 extern void mostrar_menu_principal();
 
 /**
  * @brief Mostra missatge informant que no s'ha passat l'identificador com a paràmetre del main.
-*/
+ */
 extern void falta_identificador();
 
 /**
  * @brief Mostra el perfil de l'usuari passat com a paràmetre.
  * @param id (E) Identificador de l'usuari a mostrar.
  * @param t (E) Taula amb la informació dels usuaris.
-*/
+ */
 extern void mostrar_perfil(short id, persona_t t[]);
 
 /**
  * @brief Mostra un missatge d'error en cas que l'usuari no existeixi.
-*/
+ */
 extern void usuari_inexistent();
 
 /**
  * @brief Mostra un missatge d'error en cas que no s'hagin pogut guardar les dades als fitxers.
-*/
+ */
 extern void error_guardat_dades();
 
 /**
  * @brief Obté una opció introduïda per l'usuari per teclat i la converteix en un enter (short). Control d'errors d'entrada de dades numèriques.
  * @return short -1 en cas que s'hagi introduït un caràcter no numèric, el nombre introduït per teclat (dins del rang de short) altrament.
-*/
+ */
 extern short obtenir_opcio_convertida();
 
 /**
  * @brief Demana el nombre d'usuaris nous que s'introduiran a la base d'usuaris.
-*/
+ */
 extern void demanar_n_usuaris_nous();
 
 /**
  * @brief Guarda les dades d'un usuari pel teclat en la variable passada per paràmetre.
  * @param (S) usuari Variable de persona_t on es guarden les dades.
  * @return bool True si s'ha pogut guardar l'usuari correctament, false altrament.
-*/
+ */
 extern bool afegir_usuari(persona_t *usuari);
 
 /**
  * @brief Demana una data de naixement a un usuari per teclat i l'emmagatzema en la variable usuari passada com a paràmetre.
  * @param usuari (S) Variable persona_t on es guarda la data de naixement.
-*/
+ */
 extern void demanar_data(persona_t *usuari);
 
 /**
@@ -86,14 +86,6 @@ extern void demanar_data(persona_t *usuari);
  * @return short Opcio escollida.
  */
 extern short demanar_opcio(short rang_max, short rang_min);
-
-/**
- * @brief Demana a l'usuari confirmar si vol acceptar o denegar una acció.
- * @param confirmacio (E/S) Decisio escollida per l'usuari.
- * @param afirmacio (E) Valor que indica afirmació.
- * @param denegacio (E) Valor que indicia denegació.
- */
-extern void confirmar(short *confirmacio, short afirmacio, short denegacio);
 
 /**
  * @brief Mostra els usuaris compatibles amb un usuari.
@@ -108,34 +100,34 @@ extern bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuari
 
 /**
  * @brief Avisa de compatibilitat dolenta entre usuaris.
-*/
+ */
 extern void avis_compatibilitat_dolenta();
 
 /**
  * @brief Avisa d'errors en la càrrega de dades d'amistats i proximitats d'usuaris.
-*/
+ */
 extern void missatge_error_arxiu_amistats();
 
 /**
  * @brief Informa a l'usuari que ha d'escollir un usuari com a amic.
-*/
+ */
 extern void missatge_seleccio_amistat();
 
 /**
  * @brief Informa a l'usuari que ha d'escollir un usuari per eliminar-lo dels seus amics.
-*/
+ */
 extern void missatge_esborrat_amistat();
 
 /**
  * @brief Mostra la informació d'un usuari per afegir-lo com a amic.
  * @param usuaris (E) Taula d'usuaris del sistema.
  * @param usuari (E) Posició de la taula d'usuaris de l'usuari a mostrar.
-*/
+ */
 extern void mostrar_amistat(persona_t *usuaris, short usuari);
 
 /**
  *@brief Informa a l'usuari d'error en la càrrega del fitxer d'usuaris.
-*/
+ */
 extern void missatge_error_arxiu_usuaris();
 
 /**
@@ -143,22 +135,51 @@ extern void missatge_error_arxiu_usuaris();
  * @param control (E) Nombre d'usuaris final després d'intentar afegir-los.
  * @return bool True si s'han pogut guardar els usuaris, false altrament.
  * @pre Ha de ser -1 en cas que no s'hagin pogut guardar les dades.
-*/
+ */
 extern bool mirar_errors(short control);
 
 /**
  * @brief Neteja la terminal per una lectura més fàcil del codi.
-*/
+ */
 extern void netejar_terminal();
 
 /**
  * @brief Surt del menu especificat.
-*/
+ */
 extern void sortir_menu();
 
 /**
  * @brief Mostra un missatge avisant que no hi ha usuaris compatibles amb l'usuari que ha iniciat sessió.
-*/
+ */
 extern void sense_compatibles();
+
+/**
+ * @brief Mostra les dades de les amistats d'un usuari.
+ * @param usuaris (E) Taula d'usuaris.
+ * @param usuari (E) ID de l'usuari actiu.
+ * @param amistats (E) Vector amb l'informació de cada amistat.
+ * @param n_usuaris (E) Nombre d'usuaris al sistema.
+ */
+extern void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris);
+
+/**
+ * @brief Mostra un missatge d'error si l'usuari intenta afegir-se a si mateix com a amic o eliminar-se a si mateix de la llista d'amistats.
+*/
+extern void missatge_error_un_mateix();
+
+/**
+ * @brief Demana a l'usuari confirmació addicional per eliminar una amistat.
+*/
+extern void missatge_confirmacio_eliminacio_amistat();
+
+/**
+ * @brief Informa a l'usuari de la dolenta selecció a l'hora d'intentar afegir una amistat quan ja és amic seu.
+*/
+extern void missatge_error_ja_amic();
+
+/**
+ * @brief Informa a l'usuari de l'intent d'eliminar un usuari del llistat d'amics quan aquest usuari no és amic.
+*/
+extern void missatge_error_no_amic();
 
 #endif
