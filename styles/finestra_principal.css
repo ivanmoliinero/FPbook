@@ -1,0 +1,17 @@
+#window {
+    background-color: red;
+}
+
+#titol {
+    color: cyan;
+    font-weight: bold;
+}
+
+#mostrar_perfil {
+    color: aquamarine;
+    background-color: black;
+}
+
+#mostrar_perfil:hover {
+    color: blueviolet;
+}

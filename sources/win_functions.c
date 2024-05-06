@@ -19,7 +19,16 @@ void setup(info_t *dades_sis)
     mostrar_perfil_setup(dades_sis);
     afegir_usuaris_setup(&(dades_sis->win));
     amistats_setup(&(dades_sis->win));
+    styles_setup(dades_sis);
     show_main_window(&(dades_sis->win));
+}
+
+void styles_setup(info_t *dades_sis)
+{
+    GtkCssProvider *provider = gtk_css_provider_new();
+    if (!gtk_css_provider_load_from_path(provider, "styles/styles.css", NULL)) printf("ERROR EN LA CÀRREGA DE L'ARXIU CSS\n");
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_widget_set_name(dades_sis->win.main, "window");
 }
 
 void functionalities(info_t *dades_sis)
@@ -91,8 +100,10 @@ void afegir_usuaris_setup(finestra_t *win)
 void main_window_setup(finestra_t *win)
 {
     win->finestra_principal.titol = gtk_label_new("FPbook"); 
+    gtk_widget_set_name(win->finestra_principal.titol, "titol");
     win->finestra_principal.missatge_benvinguda = gtk_label_new("Benvingut/da a FPbook!"); 
     win->finestra_principal.perfil = gtk_button_new_with_label("Mostrar perfil"); 
+    gtk_widget_set_name(win->finestra_principal.perfil, "mostrar_perfil");
     win->finestra_principal.mostrar_amistats = gtk_button_new_with_label("Mostrar amistats");
     win->finestra_principal.afegir_amistats = gtk_button_new_with_label("Afegir amistats");
     win->finestra_principal.eliminar_amistats = gtk_button_new_with_label("Eliminar amistats");

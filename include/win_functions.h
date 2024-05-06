@@ -171,4 +171,9 @@ extern void eliminar_amistats_win(GtkWidget *wid, gpointer ptr);
 */
 extern void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr);
 
+/**
+ * @brief Inicialitza els estils de la finestra.
+*/
+extern void styles_setup(info_t *dades_sis);
+
 #endif
