@@ -173,7 +173,33 @@ extern void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Inicialitza els estils de la finestra.
+ * @param dades_sis (E/S) Informació de tot el programa.
 */
 extern void styles_setup(info_t *dades_sis);
+
+/**
+ * @brief Defineix les classes de les instàncies del menú principal.
+ * @param dades_sis (E/S) Informació de tot el programa.
+*/
+extern void main_window_styles(info_t *dades_sis);
+
+/**
+ * @brief Defineix les classes de les instàncies del menú principal.
+ * @param dades_sis (E/S) Informació de tot el programa.
+*/
+extern void afegir_usuaris_styles(info_t *dades_sis);
+
+/**
+ * @brief Defineix algunes de les classes d'algunes de les instàncies dels menús de mostrar, afegir i eliminar amistats.
+ * @param dades_sis (E/S) Informació de tot el programa.
+*/
+extern void amistats_styles(info_t *dades_sis);
+
+/**
+ * @brief Assigna les classes corresponents a cadascun dels elemnts creats en les funcions per generar afegir, mostrar i eliminar amistats.
+ * @param dades_sis (E/S) Informació de tot el programa.
+ * @pre TOTS ELS WIDGETS NECESSARIS DE LES FINESTRES A GENERAR HAN D'ESTAR CREATS ABANS DE CRIDAR AQUESTA FUNCIÓ.
+*/
+extern void amistats_styles_dynamic(info_t *dades_sis);
 
 #endif

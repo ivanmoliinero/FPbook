@@ -1,0 +1,8 @@
+/*
+    .afegir_usuaris_box = Finestra del menú afegir usuaris.
+    .afegir_usuaris_labels = Etiquetes de text.
+    .afegir_usuaris_buttons = Botons del menú d'afegir usuaris.
+    .afegir_usuaris_entries = Entrades de text per part de l'usuari.
+        -   No hi ha controls de dades de manera activa mentre l'usuari escriu, només al final.
+        -   Per consultar les propietats editables, consultar https://docs.gtk.org/gtk3/class.Entry.html, l'apartat CSS nodes.
+*/

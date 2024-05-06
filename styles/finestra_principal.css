@@ -1,17 +1,23 @@
-#window {
-    background-color: red;
+/*  
+    .main_box = Finestra principal del programa.
+    .main_buttons = Botons de la finestra principal.
+    .main_labels = Etiquetes principals del programa. 
+*/
+
+.main_box {
+    background-color: aquamarine;
 }
 
-#titol {
-    color: cyan;
-    font-weight: bold;
-}
-
-#mostrar_perfil {
+.main_buttons {
     color: aquamarine;
-    background-color: black;
+    background: black;
 }
 
-#mostrar_perfil:hover {
+.main_buttons:hover {
     color: blueviolet;
+}
+
+.main_labels {
+    color: red;
+    font-weight: bold;
 }

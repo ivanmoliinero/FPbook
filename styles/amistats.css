@@ -1,3 +1,15 @@
-#amistats {
-    background-color: brown;
+/*
+ATENCIÓ: Aquestes etiquetes s'apliquen per mostrar, eliminar i afegir amistats (alguns botons poden no aparéixer en totes les finestres, però els estils són compartits.
+    .amistats_box = Finestra principal d'amistats.
+    .amistats_labels = Etiquetes de la finestra d'amistats.
+    .amistats_buttons = Botons de la finestrar d'amistats
+    .amistats_tree_view = Tree view d'amistats. Conté tota la llista d'amistats o usuaris compatibles.
+        -   Més info per tractar amb CSS disponible a https://docs.gtk.org/gtk3/class.TreeView.html, a l'apartat CSS Nodes.
+    .amistats_scrolled_window = Scrolled window de la llista d'amistats.
+        -   ATENCIÓ: Conté el tree view d'amistats. S'afegeix com a classe per si s'haguessin de modificar algunes coses.
+        -   Pel que fa a CSS, té les propietats típiques d'una finestra qualsevol.
+*/
+
+.amistats_box {
+    background-color: blueviolet;
 }

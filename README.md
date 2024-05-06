@@ -46,6 +46,7 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>4.Afegir amistats - (FORMATO).</li>
     <li>5.Eliminar amistats - FER APROFITANT AFEGIR AMISTATS!!!</li>
     <li>EXTRA: Mida de la finestra adaptable / Optimitzar càlcul amistats constant. / CANVIAR TREE VIEW DE MOSTRAR AMISTATS.</li>
+    <li>Reutilitzar funcions per generar amistats + fer FREE de cadascuna de les instàncies creades (o consultar si les noves es borren o no).</li>
 </ul>
 <!-- Fi dels apunts d'Iván -->
 </p>

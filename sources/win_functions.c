@@ -28,7 +28,87 @@ void styles_setup(info_t *dades_sis)
     GtkCssProvider *provider = gtk_css_provider_new();
     if (!gtk_css_provider_load_from_path(provider, "styles/styles.css", NULL)) printf("ERROR EN LA CÀRREGA DE L'ARXIU CSS\n");
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
-    gtk_widget_set_name(dades_sis->win.main, "window");
+    main_window_styles(dades_sis);
+    afegir_usuaris_styles(dades_sis);
+    amistats_styles(dades_sis);
+}
+
+void amistats_styles(info_t *dades_sis)
+{
+    // Buttons.
+    GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.amistats.go_back_button);
+    gtk_style_context_add_class(style_context, "amistats_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.confirm_button);
+    gtk_style_context_add_class(style_context, "amistats_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.eliminar_button);
+    gtk_style_context_add_class(style_context, "amistats_buttons");
+}
+
+void afegir_usuaris_styles(info_t *dades_sis)
+{
+    GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.main_box); // Variable per aconseguir els contexts d'estil dels diferents elements.  
+    gtk_style_context_add_class(style_context, "afegir_usuaris_box");
+
+    // Labels.
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.bar_label1);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.bar_label2);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.main_label);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.name_label);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.genre_label);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.city_label);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.date_label);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
+
+    // Buttons.
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.confirm_button);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.go_back_button);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_buttons");
+
+    // Text entries.
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.name_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.genre_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.day_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.month_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.year_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.city_entry);
+    gtk_style_context_add_class(style_context, "afegir_usuaris_entries");
+}
+
+void main_window_styles(info_t *dades_sis)
+{
+    GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.main_box); // Variable per aconseguir els contexts d'estil dels diferents elements.
+    gtk_style_context_add_class(style_context, "main_box");
+
+    // Buttons.
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.perfil);
+    gtk_style_context_add_class(style_context, "main_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.afegir_amistats);
+    gtk_style_context_add_class(style_context, "main_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.mostrar_amistats);
+    gtk_style_context_add_class(style_context, "main_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.eliminar_amistats);
+    gtk_style_context_add_class(style_context, "main_buttons");
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.afegir_usuaris);
+    gtk_style_context_add_class(style_context, "main_buttons");
+
+    // Labels.
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.titol);
+    gtk_style_context_add_class(style_context, "main_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.missatge_benvinguda);
+    gtk_style_context_add_class(style_context, "main_labels");
+
 }
 
 void functionalities(info_t *dades_sis)
@@ -100,10 +180,8 @@ void afegir_usuaris_setup(finestra_t *win)
 void main_window_setup(finestra_t *win)
 {
     win->finestra_principal.titol = gtk_label_new("FPbook"); 
-    gtk_widget_set_name(win->finestra_principal.titol, "titol");
     win->finestra_principal.missatge_benvinguda = gtk_label_new("Benvingut/da a FPbook!"); 
     win->finestra_principal.perfil = gtk_button_new_with_label("Mostrar perfil"); 
-    gtk_widget_set_name(win->finestra_principal.perfil, "mostrar_perfil");
     win->finestra_principal.mostrar_amistats = gtk_button_new_with_label("Mostrar amistats");
     win->finestra_principal.afegir_amistats = gtk_button_new_with_label("Afegir amistats");
     win->finestra_principal.eliminar_amistats = gtk_button_new_with_label("Eliminar amistats");
@@ -282,6 +360,10 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
         gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
+
+        amistats_styles_dynamic(dades_sis);
+
+        
         gtk_widget_show_all(win->main);
     }
 }
@@ -346,6 +428,9 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
         gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
+
+        amistats_styles_dynamic(dades_sis);
+
         gtk_widget_show_all(win->main);
     }
 }
@@ -556,6 +641,22 @@ void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr)
         win->finestra_principal.main_box = g_object_ref(win->finestra_principal.main_box);
         gtk_container_remove(GTK_CONTAINER(win->main), win->finestra_principal.main_box); 
         gtk_container_add(GTK_CONTAINER(win->main), win->amistats.main_box);
+
+        amistats_styles_dynamic(dades_sis);
+
         gtk_widget_show_all(win->main);
     }
+}
+
+void amistats_styles_dynamic(info_t *dades_sis)
+{
+    GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.amistats.main_box);
+    gtk_style_context_add_class(style_context, "amistats_box"); // Main box.
+
+    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.main_label);
+    gtk_style_context_add_class(style_context, "amistats_labels"); // Main label.
+    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.tree_view);
+    gtk_style_context_add_class(style_context, "amistats_tree_view"); // Tree view.
+    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.scrolled_window);
+    gtk_style_context_add_class(style_context, "amistats_scrolled_window"); // Finestra amb scroll.
 }
