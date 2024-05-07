@@ -5,19 +5,22 @@
 */
 
 .main_box {
-    background-color: aquamarine;
+    background-color: #2c2e30;
 }
 
 .main_buttons {
-    color: aquamarine;
-    background: black;
+    color: #ffffff;
+    border-color: #FF6600;
+    background: #FF6600;
+    border-radius : 10px;
 }
 
 .main_buttons:hover {
-    color: blueviolet;
+    background: #ff983f;
+    border-radius: 100px;
 }
 
 .main_labels {
-    color: red;
+    color: #FFFFFF;
     font-weight: bold;
 }

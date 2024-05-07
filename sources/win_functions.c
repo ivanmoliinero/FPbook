@@ -191,11 +191,11 @@ void main_window_setup(finestra_t *win)
     win->finestra_principal.main_fourth_row_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_box), win->finestra_principal.titol, FALSE, FALSE, 5);
     gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_box), win->finestra_principal.missatge_benvinguda, FALSE, FALSE, 2);
-    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.perfil, TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.mostrar_amistats, TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.afegir_amistats, TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_fourth_row_box), win->finestra_principal.eliminar_amistats, TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_fourth_row_box), win->finestra_principal.afegir_usuaris, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.perfil, TRUE, TRUE, 10);
+    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.mostrar_amistats, TRUE, TRUE, 10);
+    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_third_row_box), win->finestra_principal.afegir_amistats, TRUE, TRUE, 10);
+    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_fourth_row_box), win->finestra_principal.eliminar_amistats, TRUE, TRUE, 10);
+    gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_fourth_row_box), win->finestra_principal.afegir_usuaris, TRUE, TRUE, 10);
     gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_box), win->finestra_principal.main_third_row_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(win->finestra_principal.main_box), win->finestra_principal.main_fourth_row_box, TRUE, TRUE, 0);
 }
