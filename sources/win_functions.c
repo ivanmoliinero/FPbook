@@ -538,24 +538,46 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
         char *dummy, temp_dia, temp_mes;
 
         temp_any = (short)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.year_entry)));
-        if (temp_any < 0 || temp_any > 2024) return -1; // Es podria agafar l'any actual amb time.h.
-        temp_mes = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.month_entry)));
-        if(temp_mes <= 0 || temp_mes > 12) return -1;
-        temp_dia = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.day_entry)));
-        if(!data_compatible(temp_dia, temp_mes, temp_any)) return -1;
+        if (temp_any < 0 || temp_any > 2024) 
+            n_finals = -1; // Es podria agafar l'any actual amb time.h.
+        else
+        {
+            temp_mes = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.month_entry)));
+            if(temp_mes <= 0 || temp_mes > 12) 
+                n_finals = -1;
+            else
+            {
+                temp_dia = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.day_entry)));
+                if(!data_compatible(temp_dia, temp_mes, temp_any)) 
+                    n_finals -1;
+                else
+                {
+                    dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry));
+                    if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].nom))) 
+                        n_finals = -1;
+                    else
+                    {
+                        dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.genre_entry));
+                        if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].genere))) 
+                            n_finals = -1;
+                        else
+                        {
+                            dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.city_entry));
+                            if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].ciutat))) 
+                                n_finals = -1;
+                            else
+                            {
+                                (*temp_usuaris)[id_nou].data_neix.dia = temp_dia;
+                                (*temp_usuaris)[id_nou].data_neix.mes = temp_mes;
+                                (*temp_usuaris)[id_nou].data_neix.any = temp_any;
 
-        dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry));
-        if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].nom))) return -1;
-        dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.genre_entry));
-        if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].genere))) return -1;
-        dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.city_entry));
-        if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].ciutat))) return -1;
-
-        (*temp_usuaris)[id_nou].data_neix.dia = temp_dia;
-        (*temp_usuaris)[id_nou].data_neix.mes = temp_mes;
-        (*temp_usuaris)[id_nou].data_neix.any = temp_any;
-
-        (*temp_usuaris)[id_nou].id = id_nou;
+                                (*temp_usuaris)[id_nou].id = id_nou;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     else n_finals = -1;
     return n_finals;
@@ -563,31 +585,37 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
     
 bool string_copy_without_trash_for_win(char origin[], char **dest)
 {
-    if(origin[0] == ' ') return false;
-    short last_index = -1, i; // -1, si no es modifica siginifica que només hi ha espais.
-    bool correcte;
-    for (i = 0; origin[i] != '\0'; i++)
-        if(origin[i] != ' ') 
-            last_index = i;
-    if(last_index == -1) 
-    {
-        return false; // La string original NOMÉS TÉ ESPAIS.
-    }
-    last_index++;
-    origin[last_index] = 0;
-    char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
-    new_lenght+=2; // Pel caràcter \n.
-    *dest = (char *)malloc(sizeof(char)*new_lenght);
-    if(*dest == NULL)
+    bool correcte = true;
+    if(origin[0] == ' ')
         correcte = false;
     else
     {
-        correcte = true;
-        strcpy(*dest, origin);
-        /* Les següents modificacions poden ser estudiades per veure si realment calen, però per evitar problemes de format
-           i de heap s'inclouen */
-        (*dest)[new_lenght-2] = '\n'; // Caràcter necessari per fer correctament els printf.
-        (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
+        short last_index = -1, i; // -1, si no es modifica siginifica que només hi ha espais.
+        for (i = 0; origin[i] != '\0'; i++)
+            if(origin[i] != ' ') 
+                last_index = i;
+        if(last_index == -1) 
+        {
+            correcte = false; // La string original NOMÉS TÉ ESPAIS.
+        }
+        else
+        {
+            last_index++;
+            origin[last_index] = 0;
+            char new_lenght = strlen(origin); // length fins el caràcter sentinella \0.
+            new_lenght+=2; // Pel caràcter \n.
+            *dest = (char *)malloc(sizeof(char)*new_lenght);
+            if(*dest == NULL)
+                correcte = false;
+            else
+            {
+                strcpy(*dest, origin);
+                /* Les següents modificacions poden ser estudiades per veure si realment calen, però per evitar problemes de format
+                i de heap s'inclouen */
+                (*dest)[new_lenght-2] = '\n'; // Caràcter necessari per fer correctament els printf.
+                (*dest)[new_lenght-1] = '\0'; // Caràcter per indicar fi sentinella.
+            }
+        }
     }
     return correcte;
 }
