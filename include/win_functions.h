@@ -190,13 +190,7 @@ extern void main_window_styles(info_t *dades_sis);
 extern void afegir_usuaris_styles(info_t *dades_sis);
 
 /**
- * @brief Defineix algunes de les classes d'algunes de les instàncies dels menús de mostrar, afegir i eliminar amistats.
- * @param dades_sis (E/S) Informació de tot el programa.
-*/
-extern void amistats_styles(info_t *dades_sis);
-
-/**
- * @brief Assigna les classes corresponents a cadascun dels elemnts creats en les funcions per generar afegir, mostrar i eliminar amistats.
+ * @brief Assigna les classes corresponents a cadascun dels elements creats en les funcions per generar afegir, mostrar i eliminar amistats.
  * @param dades_sis (E/S) Informació de tot el programa.
  * @pre TOTS ELS WIDGETS NECESSARIS DE LES FINESTRES A GENERAR HAN D'ESTAR CREATS ABANS DE CRIDAR AQUESTA FUNCIÓ.
 */

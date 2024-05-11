@@ -11,5 +11,47 @@ ATENCIÓ: Aquestes etiquetes s'apliquen per mostrar, eliminar i afegir amistats 
 */
 
 .amistats_box {
-    background-color: blueviolet;
+    background-color: #2c2e30;
+}
+
+.amistats_buttons{
+    color: #ffffff;
+    border-color: #FF6600;
+    background: #FF6600;
+    border-radius : 10px;
+}
+
+.amistats_buttons:hover {
+    background: #ff983f;
+}
+
+.amistats_labels {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.amistats_tree_view {
+    background-color: #2c2e30;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/* Row selected */
+.amistats_tree_view > *:hover { 
+    background: aqua;
+}
+.amistats_tree_view > *:focus { 
+    background: red;
+}
+
+.amistats_tree_view.view header button {
+    background-color: #2c2e30;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.amistats_scrolled_window {
+    background-color: #2c2e30;
+    color: #FFFFFF;
+    font-weight: bold;
 }
