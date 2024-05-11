@@ -202,4 +202,10 @@ extern void amistats_styles(info_t *dades_sis);
 */
 extern void amistats_styles_dynamic(info_t *dades_sis);
 
+/**
+ * @brief Defineix les classes dels widgets/instàncies del menú de mostrar perfil.
+ * @param dades_sis (E/S) Informació de tot el programa.
+*/
+extern void mostrar_perfil_styles(info_t *dades_sis);
+
 #endif

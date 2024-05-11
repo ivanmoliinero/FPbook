@@ -29,8 +29,33 @@ void styles_setup(info_t *dades_sis)
     if (!gtk_css_provider_load_from_path(provider, "styles/styles.css", NULL)) printf("ERROR EN LA CÀRREGA DE L'ARXIU CSS\n");
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
     main_window_styles(dades_sis);
+    mostrar_perfil_styles(dades_sis);
     afegir_usuaris_styles(dades_sis);
     amistats_styles(dades_sis);
+}
+
+void mostrar_perfil_styles(info_t *dades_sis)
+{
+    GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.main_box);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_box");
+
+    // Labels
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.main_label);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.name_label);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_labels");
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.genre_label);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_labels");
+
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.city_label);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_labels");
+
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.date_label);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_labels");
+
+    // Buttons
+    style_context = gtk_widget_get_style_context(dades_sis->win.mostrar_perfil.back_button);
+    gtk_style_context_add_class(style_context, "mostrar_perfil_buttons");
 }
 
 void amistats_styles(info_t *dades_sis)
@@ -204,9 +229,10 @@ void mostrar_perfil_setup(info_t *dades_sis)
 {
     dades_sis->win.mostrar_perfil.main_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     dades_sis->win.mostrar_perfil.main_label = gtk_label_new("El meu perfil");
-    dades_sis->win.mostrar_perfil.back_button = gtk_button_new_with_label("<--"); // La resta de widgets no s'inicialitzen ja que depenen de l'usuari.
+    dades_sis->win.mostrar_perfil.back_button = gtk_button_new_with_label("<--"); 
     dades_sis->win.mostrar_perfil.name_label = gtk_label_new(dades_sis->usuaris[dades_sis->usuari].nom);
     dades_sis->win.mostrar_perfil.genre_label = gtk_label_new(dades_sis->usuaris[dades_sis->usuari].genere);
+    dades_sis->win.mostrar_perfil.city_label = gtk_label_new(dades_sis->usuaris[dades_sis->usuari].ciutat);
     char date[MAX_CHAR_DATE];
     sprintf(date, "%hd/%hd/%hd", (short)dades_sis->usuaris[dades_sis->usuari].data_neix.dia, (short)dades_sis->usuaris[dades_sis->usuari].data_neix.mes, (short)dades_sis->usuaris[dades_sis->usuari].data_neix.any);
     dades_sis->win.mostrar_perfil.date_label = gtk_label_new(date);
@@ -214,6 +240,7 @@ void mostrar_perfil_setup(info_t *dades_sis)
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.main_label, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.name_label, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.genre_label, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.city_label, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(dades_sis->win.mostrar_perfil.main_box), dades_sis->win.mostrar_perfil.date_label, TRUE, TRUE, 0);
 }
 
@@ -552,7 +579,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
             {
                 temp_dia = (char)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.day_entry)));
                 if(!data_compatible(temp_dia, temp_mes, temp_any)) 
-                    n_finals -1;
+                    n_finals = -1;
                 else
                 {
                     dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry));

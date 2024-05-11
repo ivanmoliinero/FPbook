@@ -1,0 +1,9 @@
+/*  
+    .mostrar_perfil_box = Finestra del menú mostrar perfil.
+    .mostrar_perfil_buttons = Botons del menú de la finestra principal.
+    .mostrar_perfil_labels = Etiquetes del menú mostrar perfil.
+*/
+
+.mostrar_perfil_box {
+    background-color: beige;
+}
