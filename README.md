@@ -32,8 +32,6 @@ En aquest document s'apunten els progressos, notes i tasques pendents de cada me
     <li>OPCIO AFEGIDA -1 A AFEGIR_AMISTAT (no s'afegeix cap, especificat per enunciat)</li>
     <li>CONTROL ERRORES CADENA SUPER LARGA, DOCUMENTAR</li>
     <br>
-    <li>CANVIAR RETURN EN MIG DE FUNCIONS</li>
-    <br>
     <li>DOCUMENTAR PROBLEMAS CON EL HEAP</li>
     <br>
     <li>REVISAR CUANDO HAY QUE HACER LOS FREE EN EL MAIN</li>
