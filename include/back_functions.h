@@ -130,11 +130,12 @@ extern void afegir_amistat(persona_t *usuaris, char **amistats, short n_usuaris,
 /**
  * @brief Permet eliminar una amistat y actualitza la informació a la taula amistats.
  * @pre Taula d'amistats carregada.
+ * @param usuaris (E) Vector amb l'informació de cada usuari.
  * @param amistats (E/S) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  */
-extern void eliminar_amistat(char **amistats, short n_usuaris, short usuari);
+extern void eliminar_amistat(persona_t *usuaris, char **amistats, short n_usuaris, short usuari);
 
 /**
  * @brief Guarda les dades als arxius de manera controlada per tal de no provocar actualitzacions incorrectes.

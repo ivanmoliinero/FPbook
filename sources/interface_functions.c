@@ -44,7 +44,6 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
     usuari->data_neix.dia = (char)temp;
 }
 
-
 bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
     bool resultat = true;
@@ -133,14 +132,16 @@ void missatge_acomiadament()
 
 void mostrar_perfil(short usuari, persona_t *usuaris)
 {
+    printf("%d\n", usuaris[usuari].id);
     printf("%s", usuaris[usuari].nom);
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
     printf("%hd / %hd / %hd \n", (short)usuaris[usuari].data_neix.dia, (short)usuaris[usuari].data_neix.mes, usuaris[usuari].data_neix.any);
 }
 
-void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris)
+bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_usuaris)
 {
+    bool trobat = false;
     int dir = (usuari * (usuari + 1)) / 2;
     for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
     {
@@ -148,13 +149,20 @@ void mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
         {
             if (amistats[dir] == -1)
             {
+                trobat = true;
+                //printf("%d\n", usuaris[i].id);
                 mostrar_perfil(i, usuaris);
                 printf("\n"); // Separació estètica entre usuaris.
             }
         }
-        if (i < usuari) dir++; // Avenç fila a fila.
-        else dir += i + 1; // Avenç columna a columna.
+        if (i < usuari)
+            dir++; // Avenç fila a fila.
+        else
+            dir += i + 1; // Avenç columna a columna.
     }
+    if (!trobat)
+        missatge_error_no_amics();
+    return trobat;
 }
 
 void mostrar_menu_principal()
@@ -200,7 +208,7 @@ void missatge_seleccio_amistat()
 
 void missatge_esborrat_amistat()
 {
-    printf("Escull un usuari per eliminar-lo com a amic\n");
+    printf("Escull un usuari per eliminar-lo com a amic o introdueix -1 per no eliminar cap amic.\n");
 }
 
 void missatge_error_arxiu_usuaris()
@@ -262,4 +270,9 @@ void missatge_error_ja_amic()
 void missatge_error_no_amic()
 {
     printf("Aquest usuari no és amic teu.\n");
+}
+
+void missatge_error_no_amics()
+{
+    printf("No tens cap amic.\n");
 }

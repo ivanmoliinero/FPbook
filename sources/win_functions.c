@@ -508,8 +508,10 @@ void afegir_usuari_entry(GtkWidget *wid, gpointer ptr)
     {
         if(!actualitzacio_amistats(&temp_amistats, dades_sis->n_elem, 1)) // Només afegim 1 ÚNIC USUARI NOU.
         {
-            dades_sis->usuaris = realloc(temp_usuaris, sizeof(persona_t)*dades_sis->n_elem); 
-            dades_sis->amistats = realloc(temp_amistats, sizeof(char)*dades_sis->n_elem); // Es torna a col·locar la memòria al seu lloc.
+            if (temp_usuaris != NULL)
+                dades_sis->usuaris = realloc(temp_usuaris, sizeof(persona_t)*dades_sis->n_elem); 
+            if (temp_amistats != NULL)
+                dades_sis->amistats = realloc(temp_amistats, sizeof(char)*dades_sis->n_elem); // Es torna a col·locar la memòria al seu lloc.
             printf("NO S'HA POGUT COMPLETAR L'OPERACIÓ CORRECTAMENT!\n");
         }
         else // S'ha executat correctament.
@@ -522,7 +524,8 @@ void afegir_usuari_entry(GtkWidget *wid, gpointer ptr)
     }
     else
     {
-        dades_sis->usuaris = realloc(temp_usuaris, sizeof(persona_t)*dades_sis->n_elem); // Es torna a col·locar la memòria al seu lloc.
+        if (temp_usuaris != NULL)
+            dades_sis->usuaris = realloc(temp_usuaris, sizeof(persona_t)*dades_sis->n_elem); // Es torna a col·locar la memòria al seu lloc.
         printf("NO S'HA POGUT COMPLETAR L'OPERACIÓ CORRECTAMENT!\n");
     }
 }
