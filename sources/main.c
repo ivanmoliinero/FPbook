@@ -61,12 +61,11 @@ int main(int argc, char *argv[])
                             netejar_terminal();
                             break;
                         case AFEGIR_USUARI:
-                            n_elem = afegir_usuaris(&usuaris, &amistats, n_elem);
-                            usuaris_editats = mirar_errors(n_elem);
+                            afegir_usuaris_main(&usuaris, &amistats, &n_elem, &usuaris_editats);
                             sortir_menu();
-                            break;
                             netejar_terminal(); // Es neteja la terminal per facilitar la lectura del programa.
-                        }                       // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
+                            break;              
+                        } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                     } while (o != EXIT);
                     if ((amistats_editades || usuaris_editats) && !guardar_dades(usuaris, amistats, n_elem, usuaris_editats, amistats_editades))
                         error_guardat_dades();

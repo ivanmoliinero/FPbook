@@ -165,4 +165,16 @@ extern void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usua
 */
 extern bool string_copy_without_trash(char origin[], char **dest);
 
+/**
+ * @brief Funció afegir usuaris simplificada per ser cridada des del main.
+ * @param usuaris (E/S) Taula d'usuaris.
+ * @param n_usuaris (E/S) Nombre d'usuaris actuals (i nous usuaris en cas que no es produeixi cap error, si no roman igual).
+ * @param amistats (S) Taula d'amistats.
+ * @param usuaris_editats (E/S) Valor booleà per controlar si s'han editat o no els usuaris.
+ * @pre usuaris_editats HA D'ESTAR INICIALITZAT.
+ * @post Si usuaris_editats ja era true, romandra true per molt que no s'hagi pogut completar la introducció de l'usuari.
+ * @return short Nombre d'usuaris finals.
+*/
+extern void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats);
+
 #endif 
