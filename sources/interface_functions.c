@@ -51,6 +51,7 @@ bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
     char dummy[MAX_DUMMY];
     fflush(stdin);
     printf("Introdueix el nom del nou usuari:\n");
+    fgets(dummy, MAX_DUMMY, stdin);
     resultat = nomes_caracters(dummy);
     if (resultat && !string_copy_without_trash(dummy, &(usuari->nom)))
         resultat = false;
@@ -58,6 +59,7 @@ bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
     {
         fflush(stdin);
         printf("Introdueix el genere del nou usuari:\n");
+        fgets(dummy, MAX_DUMMY, stdin);
         resultat = nomes_caracters(dummy);
         if (resultat && !string_copy_without_trash(dummy, &(usuari->genere)))
             resultat = false;
@@ -65,6 +67,7 @@ bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRE
         {
             fflush(stdin);
             printf("Introdueix la ciutat del nou usuari:\n");
+            fgets(dummy, MAX_DUMMY, stdin);
             resultat = nomes_caracters(dummy);
             if (resultat && !string_copy_without_trash(dummy, &(usuari->ciutat)))
                 resultat = false;
@@ -281,7 +284,6 @@ void missatge_error_no_amics()
 bool nomes_caracters(char desti[])
 {
     bool nomes_lletres = true;
-    fgets(desti, MAX_DUMMY, stdin); // Es llegeix la cadena des del terminal.
     for(int i = 0; desti[i] != '\n' && nomes_lletres; i++)
     {
         if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
