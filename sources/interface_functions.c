@@ -281,16 +281,6 @@ void missatge_error_no_amics()
     printf("No tens cap amic.\n");
 }
 
-bool nomes_caracters(char desti[])
-{
-    bool nomes_lletres = true;
-    for(int i = 0; desti[i] != '\n' && nomes_lletres; i++)
-    {
-        if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
-    }
-    return nomes_lletres;
-}   
-
 void mostrar_mesos()
 {
     printf("\n[1] Gener\n");

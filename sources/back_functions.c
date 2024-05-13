@@ -482,3 +482,13 @@ void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris,
     if(n_elem != -1) // Si s'han pogut guardar correctament els nous usuaris.
         *n_usuaris = n_elem; // S'actualitzen els nous usuaris del sistema.
 }
+
+bool nomes_caracters(char desti[])
+{
+    bool nomes_lletres = true;
+    for(int i = 0; desti[i] != '\0' && nomes_lletres; i++)
+    {
+        if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
+    }
+    return nomes_lletres;
+}   

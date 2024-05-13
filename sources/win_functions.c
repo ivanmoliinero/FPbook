@@ -573,19 +573,24 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
                 else
                 {
                     dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry));
-                    comprova_cadena = nomes_carace
-                    if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].nom))) 
+                    comprova_cadena = nomes_caracters(dummy);
+                    if (comprova_cadena && !string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].nom))) 
                         n_finals = -1;
+                    else if(!comprova_cadena) n_finals = -1;
                     else
                     {
                         dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.genre_entry));
-                        if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].genere))) 
+                        comprova_cadena = nomes_caracters(dummy);
+                        if (comprova_cadena && !string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].genere))) 
                             n_finals = -1;
+                        else if(!comprova_cadena) n_finals = -1;
                         else
                         {
                             dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.city_entry));
-                            if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].ciutat))) 
+                            comprova_cadena = nomes_caracters(dummy);
+                            if (comprova_cadena && !string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].ciutat))) 
                                 n_finals = -1;
+                            else if(!comprova_cadena) n_finals = -1;
                             else
                             {
                                 (*temp_usuaris)[id_nou].data_neix.dia = temp_dia;
