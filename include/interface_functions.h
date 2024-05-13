@@ -188,4 +188,16 @@ extern void missatge_error_no_amic();
 */
 extern void missatge_error_no_amics();
 
+/**
+ * @brief Controla que una cadena de caràcters no contingui caràcters numèrics.
+ * @param desti (E/S) Cadena de caràcters que on es guardarà la informació.
+ * @return bool True si no conté cap cadena de caràcters, false altrament.
+*/
+extern bool nomes_caracters(char desti[]);
+
+/**
+ * @brief Mostra els mesos de l'any.
+*/
+extern void mostrar_mesos();
+
 #endif

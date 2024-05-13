@@ -555,6 +555,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
     {
         short temp_any;
         char *dummy, temp_dia, temp_mes;
+        bool comprova_cadena;
 
         temp_any = (short)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.year_entry)));
         if (temp_any < 0 || temp_any > 2024) 
@@ -572,6 +573,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
                 else
                 {
                     dummy = (char *)gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry));
+                    comprova_cadena = nomes_carace
                     if (!string_copy_without_trash_for_win(dummy, &((*temp_usuaris)[id_nou].nom))) 
                         n_finals = -1;
                     else

@@ -471,3 +471,14 @@ bool string_copy_without_trash(char origin[], char **dest)
     }
     return correcte;
 }
+
+void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats)
+{
+    short n_elem = afegir_usuaris(usuaris, amistats, *n_usuaris);
+    if(!(*usuaris_editats)) // Si encara no s'han editat els usuaris.
+        *usuaris_editats = mirar_errors(n_elem);
+    else    
+        mirar_errors(n_elem); // Si han estat editats ja prèviament, es mostra errors però no es modifica el booleà.
+    if(n_elem != -1) // Si s'han pogut guardar correctament els nous usuaris.
+        *n_usuaris = n_elem; // S'actualitzen els nous usuaris del sistema.
+}

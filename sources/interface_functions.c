@@ -28,6 +28,7 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
     short temp;
     bool mes_correcte;
     printf("Introdueix el mes de naixement de l'usuari: ");
+    mostrar_mesos();
     temp = demanar_opcio(12, 1);
     usuari->data_neix.mes = (char)temp;
     printf("Introdueix l'any de naixement de l'usuari: ");
@@ -46,26 +47,29 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 
 bool afegir_usuari(persona_t *usuari) // CAL REAJUSTAR PER OBTENIR OPCIONS CORRECTES EN DATA.
 {
-    bool resultat = true;
+    bool resultat;
     char dummy[MAX_DUMMY];
     fflush(stdin);
     printf("Introdueix el nom del nou usuari:\n");
     fgets(dummy, MAX_DUMMY, stdin);
-    if (!string_copy_without_trash(dummy, &(usuari->nom)))
+    resultat = nomes_caracters(dummy);
+    if (resultat && !string_copy_without_trash(dummy, &(usuari->nom)))
         resultat = false;
     if (resultat)
     {
         fflush(stdin);
         printf("Introdueix el genere del nou usuari:\n");
         fgets(dummy, MAX_DUMMY, stdin);
-        if (!string_copy_without_trash(dummy, &(usuari->genere)))
+        resultat = nomes_caracters(dummy);
+        if (resultat && !string_copy_without_trash(dummy, &(usuari->genere)))
             resultat = false;
         if (resultat)
         {
             fflush(stdin);
             printf("Introdueix la ciutat del nou usuari:\n");
             fgets(dummy, MAX_DUMMY, stdin);
-            if (!string_copy_without_trash(dummy, &(usuari->ciutat)))
+            resultat = nomes_caracters(dummy);
+            if (resultat && !string_copy_without_trash(dummy, &(usuari->ciutat)))
                 resultat = false;
             if (resultat)
             {
@@ -264,15 +268,41 @@ void missatge_confirmacio_eliminacio_amistat()
 
 void missatge_error_ja_amic()
 {
-    printf("Aquest usuari ja és amic teu.\n");
+    printf("Aquest usuari ja es amic teu.\n");
 }
 
 void missatge_error_no_amic()
 {
-    printf("Aquest usuari no és amic teu.\n");
+    printf("Aquest usuari no es amic teu.\n");
 }
 
 void missatge_error_no_amics()
 {
     printf("No tens cap amic.\n");
+}
+
+bool nomes_caracters(char desti[])
+{
+    bool nomes_lletres = true;
+    for(int i = 0; desti[i] != '\n' && nomes_lletres; i++)
+    {
+        if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
+    }
+    return nomes_lletres;
+}   
+
+void mostrar_mesos()
+{
+    printf("\n[1] Gener\n");
+    printf("[2] Febrer\n");
+    printf("[3] Marc\n");
+    printf("[4] Abril\n");
+    printf("[5] Maig\n");
+    printf("[6] Juny\n");
+    printf("[7] Juliol\n");
+    printf("[8] Agost\n");
+    printf("[9] Septembre\n");
+    printf("[10] Octubre\n");
+    printf("[11] Novembre\n");
+    printf("[12] Desembre\n");
 }
