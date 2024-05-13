@@ -177,4 +177,11 @@ extern bool string_copy_without_trash(char origin[], char **dest);
 */
 extern void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats);
 
+/**
+ * @brief Controla que una cadena de caràcters no contingui caràcters numèrics.
+ * @param desti (E/S) Cadena de caràcters que on es guardarà la informació.
+ * @return bool True si no conté cap cadena de caràcters, false altrament.
+*/
+extern bool nomes_caracters(char desti[]);
+
 #endif 
