@@ -2,12 +2,14 @@
     .mostrar_perfil_box = Finestra del menú mostrar perfil.
     .mostrar_perfil_buttons = Botons del menú de la finestra principal.
     .mostrar_perfil_labels = Etiquetes del menú mostrar perfil.
+    #main_label = ID del títol de la finestra.
 */
 
 #main_label {
     color: #ffffff;
     font-weight: bold;
-    font-size: 20px
+    font-size: 20px;
+    text-decoration: underline;
 }
 
 .mostrar_perfil_box {
@@ -22,11 +24,23 @@
 }
 
 .mostrar_perfil_buttons:hover {
-    background: #ff983f;
+    animation-name: background_fading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .mostrar_perfil_labels {
     color: #FFFFFF;
     font-weight: bold;
     font-size: larger;
+}
+
+@keyframes background_fading {
+    from {
+        background: #FF6600;
+    }
+    to {
+        background: #ff983f
+    }
 }

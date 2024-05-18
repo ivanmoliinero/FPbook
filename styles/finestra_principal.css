@@ -2,6 +2,7 @@
     .main_box = Finestra principal del programa.
     .main_buttons = Botons de la finestra principal.
     .main_labels = Etiquetes principals del programa. 
+    #main_box_title = ID del títol del programa.
 */
 
 .main_box {
@@ -13,14 +14,50 @@
     border-color: #FF6600;
     background: #FF6600;
     border-radius : 10px;
+    font-size: larger;
 }
 
 .main_buttons:hover {
-    background: #ff983f;
     border-radius: 50px;
+    animation-name: background_fading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .main_labels {
     color: #FFFFFF;
     font-weight: bold;
+    font-size: large;
+    font-style: italic;
+}
+
+#main_box_title {
+    color: #FFFFFF;
+    font-weight: bold;
+    /* font-style: italic; */
+    font-size: 80px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    animation-name: text_fading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes text_fading {
+    from {
+        color: #ffffff;
+    }
+    to {
+        color: #FF6600;
+    }
+}
+
+@keyframes background_fading {
+    from {
+        background: #FF6600;
+    }
+    to {
+        background: #ff983f
+    }
 }

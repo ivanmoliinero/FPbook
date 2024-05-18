@@ -63,11 +63,10 @@ void afegir_usuaris_styles(info_t *dades_sis)
     gtk_style_context_add_class(style_context, "afegir_usuaris_box");
 
     // Labels.
+    gtk_widget_set_name(dades_sis->win.afegir_usuari.main_label, "afegir_usuaris_main_label");
     style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.bar_label1);
     gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
     style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.bar_label2);
-    gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
-    style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.main_label);
     gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
     style_context = gtk_widget_get_style_context(dades_sis->win.afegir_usuari.name_label);
     gtk_style_context_add_class(style_context, "afegir_usuaris_labels");
@@ -117,8 +116,7 @@ void main_window_styles(info_t *dades_sis)
     gtk_style_context_add_class(style_context, "main_buttons");
 
     // Labels.
-    style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.titol);
-    gtk_style_context_add_class(style_context, "main_labels");
+    gtk_widget_set_name(dades_sis->win.finestra_principal.titol, "main_box_title");
     style_context = gtk_widget_get_style_context(dades_sis->win.finestra_principal.missatge_benvinguda);
     gtk_style_context_add_class(style_context, "main_labels");
 
@@ -355,7 +353,7 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
     else
     {
         finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
-        win->amistats.main_label = gtk_label_new("Afegir amistats: ");
+        win->amistats.main_label = gtk_label_new("Afegir amistats");
         amistats_setup(win);
         amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
         win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
@@ -423,7 +421,7 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
     else
     {
         finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
-        win->amistats.main_label = gtk_label_new("Eliminar amistats: ");
+        win->amistats.main_label = gtk_label_new("Eliminar amistats");
         amistats_setup(win);
         amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
         win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
@@ -675,7 +673,7 @@ void generar_mostrar_amistats(GtkWidget *wid, gpointer ptr)
     else
     {
         finestra_t *win = &(dades_sis->win); // Per evitar diversos accesos a memòria.
-        win->amistats.main_label = gtk_label_new("Les meves amistats: ");
+        win->amistats.main_label = gtk_label_new("Les meves amistats");
         amistats_setup(win);
         amistats_functionalities(dades_sis); // Cal tornar a crear les senyals i objectes de la caixa.
         win->amistats.tree_view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(win->amistats.friend_list));
@@ -707,8 +705,7 @@ void amistats_styles_dynamic(info_t *dades_sis)
     GtkStyleContext *style_context = gtk_widget_get_style_context(dades_sis->win.amistats.main_box);
     gtk_style_context_add_class(style_context, "amistats_box"); // Main box.
 
-    style_context = gtk_widget_get_style_context(dades_sis->win.amistats.main_label);
-    gtk_style_context_add_class(style_context, "amistats_labels"); // Main label.
+    gtk_widget_set_name(dades_sis->win.amistats.main_label, "amistats_main_label");
     style_context = gtk_widget_get_style_context(dades_sis->win.amistats.tree_view);
     gtk_style_context_add_class(style_context, "amistats_tree_view"); // Tree view.
     style_context = gtk_widget_get_style_context(dades_sis->win.amistats.scrolled_window);
