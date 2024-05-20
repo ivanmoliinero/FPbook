@@ -7,6 +7,8 @@
 
 #define MAX_CHAR_DATE 11
 #define MAX_DUMMY 100
+#define COMPATIBILIDAD 3
+#define ANY_ACTUAL 2024
 
 /**
  * @brief Crea tots els widgets de la finestra principal del programa.
@@ -86,22 +88,28 @@ extern void afegir_usuaris_functionalities(info_t *dades_sis);
 
 /**
  * @brief Mostra la pantalla per afegir usuaris.
+ * @param wid (E) Widget que provoca la crida a aquesta funció.
+ * @param ptr (E/S) Finestra principal.
 */
 extern void afegir_usuaris_activate(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Funció per passar de mostrar perfil a la finestra principal del programa.
+ * @param wid (E) Widget que provoca la crida a aquesta funció.
+ * @param ptr (E/S) Dades de tot el programa.
 */
 extern void afegir_usuaris_to_main_window(GtkWidget *wid, gpointer ptr);
 
 /**
  * @brief Afegeix un nou usuari a la base de dades.
+ * @param wid (E) Widget que provoca la crida a aquesta funció.
+ * @param ptr (E/S) Dades de tot el programa.
  * @pre EL PUNTER PASSAT CORRESPON AL PUNTER QUE APUNTA ON ES TROBEN TOTES LES DADES DEL SISTEMA.
 */
 extern void afegir_usuari_entry(GtkWidget *wid, gpointer ptr);
 
 /**
- * @brief Rep la informació d'un usuari de la info introduïda pel terminal.
+ * @brief Rep la informació d'un usuari de la informació introduïda pel terminal.
  * @param dades_sis (E) TOTA la info del sistema.
  * @param temp_usuaris (E/S) Punter que apunta a la taula d'usuaris temporal en el procés de creació d'un nou usuari.
  * @return short n_finals en cas d'execució correcta, -1 en cas d'error.

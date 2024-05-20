@@ -5,8 +5,6 @@
 #include <string.h>
 #include "back_functions.h" // Per l'obtencio de dades dels nous usuaris.
 
-#define COMPATIBILIDAD 3
-
 void setup(info_t *dades_sis)
 {
     dades_sis->win.main = gtk_window_new(GTK_WINDOW_TOPLEVEL); 
@@ -549,7 +547,7 @@ short actualitzacio_usuaris_win(info_t *dades_sis, persona_t **temp_usuaris)
         bool comprova_cadena;
 
         temp_any = (short)atoi(gtk_entry_get_text(GTK_ENTRY(dades_sis->win.afegir_usuari.year_entry)));
-        if (temp_any < 0 || temp_any > 2024) 
+        if (temp_any < 0 || temp_any > ANY_ACTUAL) 
             n_finals = -1; // Es podria agafar l'any actual amb time.h.
         else
         {
