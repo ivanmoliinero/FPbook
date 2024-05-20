@@ -15,7 +15,9 @@
 
 #define MAX_USUARIS 10000 // Màxims usuaris que es suportaran al sistema.
 
-#define COMPATIBILIDAD 3
+#define COMPATIBILIDAD 3 // Nivell de compatibilitat mínim per ser considerat compatible.
+
+#define ANY_ACTUAL 2024 // Any actual, per evitar problemes amb anys negatius. També es podría controlar amb time.h
 
 // Capceleres de les funcions d'interfície.
 

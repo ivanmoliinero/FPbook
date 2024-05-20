@@ -1,7 +1,7 @@
 #ifndef estructures_h
 #define estructures_h // En cas de no estar definit, definir les estructures i constants presents en aquest arxiu de capceleres.
 
-typedef struct 
+typedef struct
 {
     char dia, mes;
     short any;

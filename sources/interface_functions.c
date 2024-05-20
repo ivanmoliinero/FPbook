@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <limits.h>
 
 #include "estructures.h"
 #include "interface_functions.h"
@@ -32,7 +31,7 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
     temp = demanar_opcio(12, 1);
     usuari->data_neix.mes = (char)temp;
     printf("Introdueix l'any de naixement de l'usuari:\n");
-    temp = demanar_opcio(SHRT_MAX, 0); // Cal passar un valor màxim, es passa el màxim valor de short per tal d'evitar conflictes amb anys negatius.
+    temp = demanar_opcio(ANY_ACTUAL, 0); // Cal passar un valor màxim, es passa el màxim valor de short per tal d'evitar conflictes amb anys negatius.
     usuari->data_neix.any = temp;
     do // Com la condició per escollir el mes és més complicada (no és un interval simple), cal integrar un bucle addicional.
     {
@@ -88,7 +87,7 @@ short demanar_opcio(short rang_max, short rang_min)
         opcio = obtenir_opcio_convertida();
         if (opcio < rang_min || opcio > rang_max)
             printf("Introdueix una opcio entre %hd i %hd:\n", rang_min, rang_max); // Missatge d'error.
-    } while (opcio < rang_min || opcio > rang_max);                               // Procura que el valor introduït estigui entre l'interval establert.
+    } while (opcio < rang_min || opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
     return opcio;
 }
 
@@ -154,7 +153,7 @@ bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
             if (amistats[dir] == -1)
             {
                 trobat = true;
-                //printf("%d\n", usuaris[i].id);
+                // printf("%d\n", usuaris[i].id);
                 mostrar_perfil(i, usuaris);
                 printf("\n"); // Separació estètica entre usuaris.
             }
@@ -244,7 +243,7 @@ void netejar_terminal()
 void sortir_menu()
 {
     fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
-    printf("\nPrem la tecla intro per sortir del menu actual");
+    printf("\nPrem la tecla intro per sortir del menu actual.");
     char o[3];
     fgets(o, 3, stdin);
     fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
