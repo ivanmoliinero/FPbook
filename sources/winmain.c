@@ -1,4 +1,4 @@
-#include <gtk/gtk.h> // Dona error però compilant amb Makefile va bé.
+#include <gtk/gtk.h> 
 #include "win_functions.h"
 #include "estructures.h"
 #include "back_functions.h"

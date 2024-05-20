@@ -256,8 +256,8 @@ void eliminar_amistats_win(GtkWidget *wid, gpointer ptr)
     info_t *dades_sis = ptr; // Reanomenació del punter passat com a paràmetre per facilitar l'accés a les dades.
     char *opcio; // Dades de l'usuari escollit.
     GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.amistats.tree_view));
-    GtkTreeModel *model; // ls amb les dades del tree view.
-    GtkTreeIter iter; // fila seleccionada per l'usuari.
+    GtkTreeModel *model; // Llista amb les dades del tree view.
+    GtkTreeIter iter; // Fila seleccionada per l'usuari.
     if(gtk_tree_selection_get_selected(sel, &model, &iter)) // Comprovem si l'usuari realment ha seleccionat una amistat.
     {
         gtk_tree_model_get(model, &iter, 0, &opcio, -1);
@@ -284,7 +284,7 @@ void afegir_amistats_win(GtkWidget *wid, gpointer ptr)
     info_t *dades_sis = ptr; // Reanomenació del punter passat com a paràmetre per facilitar l'accés a les dades.
     char *opcio; // Dades de l'usuari escollit.
     GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(dades_sis->win.amistats.tree_view));
-    GtkTreeModel *model; // ls amb les dades del tree view.
+    GtkTreeModel *model; // Llista amb les dades del tree view.
     GtkTreeIter iter; // fila seleccionada per l'usuari.
     if(gtk_tree_selection_get_selected(sel, &model, &iter)) // Comprovem si l'usuari realment ha seleccionat una amistat.
     {
@@ -301,7 +301,7 @@ void afegir_amistats_win(GtkWidget *wid, gpointer ptr)
             columna = (((id_sel * (id_sel + 1)) / 2) + usuari); // Cerca de columna
         }
         dades_sis->amistats[columna] = -1;
-        dades_sis->amistats_editades = true; // Identifica l'edició de l'arxiu amistats.
+        dades_sis->amistats_editades = true; // Confirma l'edició de l'arxiu amistats.
     }
     else
         printf("CAP AMISTAT SELECCIONADA\n");
@@ -332,7 +332,7 @@ void generar_afegir_amistats(GtkWidget *origin, gpointer ptr)
     short id_usuari = dades_sis->usuari; 
     char *amistats = dades_sis->amistats; 
     persona_t *usuaris = dades_sis->usuaris; // Assignació per evitar accesos a memòria constant.
-    short index = 0; // Index per anar afegint dades a la taula.
+    short index = 0; // Índex per anar afegint dades a la taula.
     bool te_compatibilitat = false; // Suposem que no té compatibilitat amb ningú.
     char buffer[115]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data, 4 max per id. Es podria fer amb malloc i strlen, però el cost algorítmic seria
                          massa elevat i caldria controlar errors. */
@@ -400,7 +400,7 @@ void generar_eliminar_amistats(GtkWidget *wid, gpointer ptr)
     short id_usuari = dades_sis->usuari; 
     char *amistats = dades_sis->amistats; 
     persona_t *usuaris = dades_sis->usuaris; // Assignació per evitar accesos a memòria constant.
-    short index = 0; // Index per anar afegint dades a la taula.
+    short index = 0; // Índex per anar afegint dades a la taula.
     bool te_amics = false; // Suposem que no té amics.
     char buffer[115]; /* 100 max per nom, 100 max per genere, 100 max per ciutat, 11 max per data, 4 max per id. Es podria fer amb malloc i strlen, però el cost algorítmic seria
                          massa elevat i caldria controlar errors. */
@@ -491,13 +491,6 @@ void afegir_usuaris_to_main_window(GtkWidget *wid, gpointer ptr)
     dades_sis->win.afegir_usuari.main_box = g_object_ref(dades_sis->win.afegir_usuari.main_box);
     gtk_container_remove(GTK_CONTAINER(dades_sis->win.main), dades_sis->win.afegir_usuari.main_box);
     gtk_widget_set_size_request(dades_sis->win.main, 500, 500);
-
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.name_entry), "");
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.genre_entry), "");
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.city_entry), "");
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.day_entry), "");
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.month_entry), "");
-    // gtk_entry_set_text(GTK_ENTRY(dades_sis->win.afegir_usuari.year_entry), ""); // Reset del text dins dels entrys.
 
     show_main_window(&(dades_sis->win));
 }
