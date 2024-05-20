@@ -475,20 +475,21 @@ bool string_copy_without_trash(char origin[], char **dest)
 void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats)
 {
     short n_elem = afegir_usuaris(usuaris, amistats, *n_usuaris);
-    if(!(*usuaris_editats)) // Si encara no s'han editat els usuaris.
+    if (!(*usuaris_editats)) // Si encara no s'han editat els usuaris.
         *usuaris_editats = mirar_errors(n_elem);
-    else    
+    else
         mirar_errors(n_elem); // Si han estat editats ja prèviament, es mostra errors però no es modifica el booleà.
-    if(n_elem != -1) // Si s'han pogut guardar correctament els nous usuaris.
-        *n_usuaris = n_elem; // S'actualitzen els nous usuaris del sistema.
+    if (n_elem != -1)         // Si s'han pogut guardar correctament els nous usuaris.
+        *n_usuaris = n_elem;  // S'actualitzen els nous usuaris del sistema.
 }
 
 bool nomes_caracters(char desti[])
 {
     bool nomes_lletres = true;
-    for(int i = 0; desti[i] != '\n' && nomes_lletres; i++)
+    for (int i = 0; desti[i] != '\n' && nomes_lletres; i++)
     {
-        if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
+        if ('0' <= desti[i] && desti[i] <= '9')
+            nomes_lletres = false;
     }
     return nomes_lletres;
-}   
+}

@@ -1,0 +1,61 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     'build/fpbook'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _carregar_data, symObjAddr: 0x0, symBinAddr: 0x100000EF4, symSize: 0x58 }
+  - { offsetInCU: 0x4E, offset: 0x4E, size: 0x8, addend: 0x0, symName: _carregar_data, symObjAddr: 0x0, symBinAddr: 0x100000EF4, symSize: 0x58 }
+  - { offsetInCU: 0x80, offset: 0x80, size: 0x8, addend: 0x0, symName: _carregar_usuari, symObjAddr: 0x58, symBinAddr: 0x100000F4C, symSize: 0x214 }
+  - { offsetInCU: 0xE1, offset: 0xE1, size: 0x8, addend: 0x0, symName: _carregar_usuaris, symObjAddr: 0x26C, symBinAddr: 0x100001160, symSize: 0x15C }
+  - { offsetInCU: 0x14F, offset: 0x14F, size: 0x8, addend: 0x0, symName: _guardar_data, symObjAddr: 0x3C8, symBinAddr: 0x1000012BC, symSize: 0xC4 }
+  - { offsetInCU: 0x181, offset: 0x181, size: 0x8, addend: 0x0, symName: _guardar_usuari, symObjAddr: 0x48C, symBinAddr: 0x100001380, symSize: 0xBC }
+  - { offsetInCU: 0x1B3, offset: 0x1B3, size: 0x8, addend: 0x0, symName: _guardar_dades, symObjAddr: 0x548, symBinAddr: 0x10000143C, symSize: 0x158 }
+  - { offsetInCU: 0x267, offset: 0x267, size: 0x8, addend: 0x0, symName: _guardar_amistats, symObjAddr: 0x6A0, symBinAddr: 0x100001594, symSize: 0x148 }
+  - { offsetInCU: 0x2D1, offset: 0x2D1, size: 0x8, addend: 0x0, symName: _guardar_usuaris, symObjAddr: 0x7E8, symBinAddr: 0x1000016DC, symSize: 0xE4 }
+  - { offsetInCU: 0x349, offset: 0x349, size: 0x8, addend: 0x0, symName: _actualitzacio_usuaris, symObjAddr: 0x8CC, symBinAddr: 0x1000017C0, symSize: 0x170 }
+  - { offsetInCU: 0x3D3, offset: 0x3D3, size: 0x8, addend: 0x0, symName: _actualitzacio_amistats, symObjAddr: 0xA3C, symBinAddr: 0x100001930, symSize: 0x174 }
+  - { offsetInCU: 0x487, offset: 0x487, size: 0x8, addend: 0x0, symName: _genera_aleatori, symObjAddr: 0xBB0, symBinAddr: 0x100001AA4, symSize: 0x50 }
+  - { offsetInCU: 0x4C0, offset: 0x4C0, size: 0x8, addend: 0x0, symName: _afegir_usuaris, symObjAddr: 0xC00, symBinAddr: 0x100001AF4, symSize: 0x17C }
+  - { offsetInCU: 0x54A, offset: 0x54A, size: 0x8, addend: 0x0, symName: _data_compatible, symObjAddr: 0xD7C, symBinAddr: 0x100001C70, symSize: 0x1D4 }
+  - { offsetInCU: 0x5B8, offset: 0x5B8, size: 0x8, addend: 0x0, symName: _ini_llavor, symObjAddr: 0xF50, symBinAddr: 0x100001E44, symSize: 0x1C }
+  - { offsetInCU: 0x5CE, offset: 0x5CE, size: 0x8, addend: 0x0, symName: _obtenir_usuari, symObjAddr: 0xF6C, symBinAddr: 0x100001E60, symSize: 0xBC }
+  - { offsetInCU: 0x616, offset: 0x616, size: 0x8, addend: 0x0, symName: _carregar_amistats, symObjAddr: 0x1028, symBinAddr: 0x100001F1C, symSize: 0x194 }
+  - { offsetInCU: 0x6B8, offset: 0x6B8, size: 0x8, addend: 0x0, symName: _afegir_amistat, symObjAddr: 0x11BC, symBinAddr: 0x1000020B0, symSize: 0x1F4 }
+  - { offsetInCU: 0x747, offset: 0x747, size: 0x8, addend: 0x0, symName: _eliminar_amistat, symObjAddr: 0x13B0, symBinAddr: 0x1000022A4, symSize: 0x1C4 }
+  - { offsetInCU: 0x7E5, offset: 0x7E5, size: 0x8, addend: 0x0, symName: _alliberacio_memoria, symObjAddr: 0x1574, symBinAddr: 0x100002468, symSize: 0xC0 }
+  - { offsetInCU: 0x846, offset: 0x846, size: 0x8, addend: 0x0, symName: _string_copy_without_trash, symObjAddr: 0x1634, symBinAddr: 0x100002528, symSize: 0x198 }
+  - { offsetInCU: 0x8C9, offset: 0x8C9, size: 0x8, addend: 0x0, symName: _afegir_usuaris_main, symObjAddr: 0x17CC, symBinAddr: 0x1000026C0, symSize: 0x98 }
+  - { offsetInCU: 0x92B, offset: 0x92B, size: 0x8, addend: 0x0, symName: _nomes_caracters, symObjAddr: 0x1864, symBinAddr: 0x100002758, symSize: 0xBC }
+  - { offsetInCU: 0x26, offset: 0xC4E, size: 0x8, addend: 0x0, symName: _obtenir_opcio_convertida, symObjAddr: 0x0, symBinAddr: 0x100002814, symSize: 0xB0 }
+  - { offsetInCU: 0x54, offset: 0xC7C, size: 0x8, addend: 0x0, symName: _obtenir_opcio_convertida, symObjAddr: 0x0, symBinAddr: 0x100002814, symSize: 0xB0 }
+  - { offsetInCU: 0x8A, offset: 0xCB2, size: 0x8, addend: 0x0, symName: _demanar_n_usuaris_nous, symObjAddr: 0xB0, symBinAddr: 0x1000028C4, symSize: 0x1C }
+  - { offsetInCU: 0x9F, offset: 0xCC7, size: 0x8, addend: 0x0, symName: _demanar_data, symObjAddr: 0xCC, symBinAddr: 0x1000028E0, symSize: 0xE8 }
+  - { offsetInCU: 0xDF, offset: 0xD07, size: 0x8, addend: 0x0, symName: _demanar_opcio, symObjAddr: 0x1B4, symBinAddr: 0x1000029C8, symSize: 0xD4 }
+  - { offsetInCU: 0x123, offset: 0xD4B, size: 0x8, addend: 0x0, symName: _afegir_usuari, symObjAddr: 0x288, symBinAddr: 0x100002A9C, symSize: 0x1F0 }
+  - { offsetInCU: 0x168, offset: 0xD90, size: 0x8, addend: 0x0, symName: _mostrar_compatibles, symObjAddr: 0x478, symBinAddr: 0x100002C8C, symSize: 0x13C }
+  - { offsetInCU: 0x1F2, offset: 0xE1A, size: 0x8, addend: 0x0, symName: _mostrar_amistat, symObjAddr: 0x5B4, symBinAddr: 0x100002DC8, symSize: 0x7C }
+  - { offsetInCU: 0x224, offset: 0xE4C, size: 0x8, addend: 0x0, symName: _missatge_benvinguda, symObjAddr: 0x630, symBinAddr: 0x100002E44, symSize: 0x1C }
+  - { offsetInCU: 0x239, offset: 0xE61, size: 0x8, addend: 0x0, symName: _missatge_acomiadament, symObjAddr: 0x64C, symBinAddr: 0x100002E60, symSize: 0x1C }
+  - { offsetInCU: 0x24E, offset: 0xE76, size: 0x8, addend: 0x0, symName: _mostrar_perfil, symObjAddr: 0x668, symBinAddr: 0x100002E7C, symSize: 0x138 }
+  - { offsetInCU: 0x280, offset: 0xEA8, size: 0x8, addend: 0x0, symName: _mostrar_amistats, symObjAddr: 0x7A0, symBinAddr: 0x100002FB4, symSize: 0x134 }
+  - { offsetInCU: 0x30A, offset: 0xF32, size: 0x8, addend: 0x0, symName: _mostrar_menu_principal, symObjAddr: 0x8D4, symBinAddr: 0x1000030E8, symSize: 0x64 }
+  - { offsetInCU: 0x31F, offset: 0xF47, size: 0x8, addend: 0x0, symName: _avis_compatibilitat_dolenta, symObjAddr: 0x938, symBinAddr: 0x10000314C, symSize: 0x1C }
+  - { offsetInCU: 0x334, offset: 0xF5C, size: 0x8, addend: 0x0, symName: _falta_identificador, symObjAddr: 0x954, symBinAddr: 0x100003168, symSize: 0x1C }
+  - { offsetInCU: 0x349, offset: 0xF71, size: 0x8, addend: 0x0, symName: _usuari_inexistent, symObjAddr: 0x970, symBinAddr: 0x100003184, symSize: 0x1C }
+  - { offsetInCU: 0x35E, offset: 0xF86, size: 0x8, addend: 0x0, symName: _error_guardat_dades, symObjAddr: 0x98C, symBinAddr: 0x1000031A0, symSize: 0x1C }
+  - { offsetInCU: 0x373, offset: 0xF9B, size: 0x8, addend: 0x0, symName: _missatge_error_arxiu_amistats, symObjAddr: 0x9A8, symBinAddr: 0x1000031BC, symSize: 0x1C }
+  - { offsetInCU: 0x388, offset: 0xFB0, size: 0x8, addend: 0x0, symName: _missatge_seleccio_amistat, symObjAddr: 0x9C4, symBinAddr: 0x1000031D8, symSize: 0x1C }
+  - { offsetInCU: 0x39D, offset: 0xFC5, size: 0x8, addend: 0x0, symName: _missatge_esborrat_amistat, symObjAddr: 0x9E0, symBinAddr: 0x1000031F4, symSize: 0x1C }
+  - { offsetInCU: 0x3B2, offset: 0xFDA, size: 0x8, addend: 0x0, symName: _missatge_error_arxiu_usuaris, symObjAddr: 0x9FC, symBinAddr: 0x100003210, symSize: 0x1C }
+  - { offsetInCU: 0x3C7, offset: 0xFEF, size: 0x8, addend: 0x0, symName: _mirar_errors, symObjAddr: 0xA18, symBinAddr: 0x10000322C, symSize: 0x64 }
+  - { offsetInCU: 0x3FD, offset: 0x1025, size: 0x8, addend: 0x0, symName: _netejar_terminal, symObjAddr: 0xA7C, symBinAddr: 0x100003290, symSize: 0x1C }
+  - { offsetInCU: 0x412, offset: 0x103A, size: 0x8, addend: 0x0, symName: _sortir_menu, symObjAddr: 0xA98, symBinAddr: 0x1000032AC, symSize: 0x5C }
+  - { offsetInCU: 0x436, offset: 0x105E, size: 0x8, addend: 0x0, symName: _sense_compatibles, symObjAddr: 0xAF4, symBinAddr: 0x100003308, symSize: 0x1C }
+  - { offsetInCU: 0x44B, offset: 0x1073, size: 0x8, addend: 0x0, symName: _missatge_error_un_mateix, symObjAddr: 0xB10, symBinAddr: 0x100003324, symSize: 0x1C }
+  - { offsetInCU: 0x461, offset: 0x1089, size: 0x8, addend: 0x0, symName: _missatge_confirmacio_eliminacio_amistat, symObjAddr: 0xB2C, symBinAddr: 0x100003340, symSize: 0x1C }
+  - { offsetInCU: 0x477, offset: 0x109F, size: 0x8, addend: 0x0, symName: _missatge_error_ja_amic, symObjAddr: 0xB48, symBinAddr: 0x10000335C, symSize: 0x1C }
+  - { offsetInCU: 0x48D, offset: 0x10B5, size: 0x8, addend: 0x0, symName: _missatge_error_no_amic, symObjAddr: 0xB64, symBinAddr: 0x100003378, symSize: 0x1C }
+  - { offsetInCU: 0x4A3, offset: 0x10CB, size: 0x8, addend: 0x0, symName: _missatge_error_no_amics, symObjAddr: 0xB80, symBinAddr: 0x100003394, symSize: 0x1C }
+  - { offsetInCU: 0x4B9, offset: 0x10E1, size: 0x8, addend: 0x0, symName: _mostrar_mesos, symObjAddr: 0xB9C, symBinAddr: 0x1000033B0, symSize: 0xA0 }
+  - { offsetInCU: 0x26, offset: 0x11CD, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003450, symSize: 0x230 }
+  - { offsetInCU: 0x3A, offset: 0x11E1, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003450, symSize: 0x230 }
+...

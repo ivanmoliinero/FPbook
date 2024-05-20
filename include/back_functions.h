@@ -2,8 +2,10 @@
 #define back_functions_h
 #include <stdbool.h>
 
+// Constants per escollir acció a l'hora d'afegir amistats incompatibles.
+
 #define ACCEPTAR 1
-#define DENEGAR 0 // Constants per escollir acció a l'hora d'afegir amistats incompatibles.
+#define DENEGAR 0
 
 // Capceleres de les funcions de càlculs interns.
 
@@ -12,21 +14,21 @@
  * @param f (E) Arxiu amb els usuaris.
  * @param usuari (S) Variable de persona on es carrega la info de l'arxiu.
  * @return bool True si no hi ha cap error, false altrament.
-*/
+ */
 extern bool carregar_usuari(FILE *f, persona_t *usuari);
 
 /**
  * @brief Carrega usuaris en una taula passada com a punter.
- * @param t (E/S) Taula on es carreguen les dades dels usuaris.
+ * @param usuaris (E/S) Taula on es carreguen les dades dels usuaris.
  * @return short Nombre d'usuaris registrats en el sistema, -1 en cas d'error.
-*/
+ */
 extern short carregar_usuaris(persona_t **usuaris);
 
 /**
  * @brief Carrega la data de naixement d'un arxiu de text a un usuari.
  * @param f (E) Arxiu d'on s'extreu la informació.
  * @param us (S) Usuari a on es guardarà la data de naixement.
-*/
+ */
 extern void carregar_data(FILE *f, persona_t *us);
 
 /**
@@ -35,14 +37,14 @@ extern void carregar_data(FILE *f, persona_t *us);
  * @param n_elem (E) Nombre d'usuaris a guardar.
  * @param f (E/S) Arxiu on guardar les dades.
  * @pre n_elem ha de ser major al nombre d'usuaris guardats en el fitxer en el moment de cridar la funció.
-*/
+ */
 extern void guardar_usuaris(persona_t *t, short n_elem, FILE *f);
 
 /**
  * @brief Emmagatzema les dades d'un usuari concret en un fitxer de text passat com a paràmetre.
  * @param f (E/S) Fitxer on es guarda la informació de l'usuari en qüestió.
  * @param usuari (E/S) Variable amb tota la informació de l'usuari.
-*/
+ */
 extern void guardar_usuari(FILE *f, persona_t *usuari);
 
 /**
@@ -50,7 +52,7 @@ extern void guardar_usuari(FILE *f, persona_t *usuari);
  * @param amistats (E) Direcció de memòria de la matriu d'amistats (interpretada com un vector).
  * @param n_elem (E) Nombre de files i columnes de la matriu (nombre d'usuaris del sistema).
  * @param f (E/S) Arxiu on guardar les dades.
-*/
+ */
 extern void guardar_amistats(char *amistats, short n_elem, FILE *f);
 
 /**
@@ -60,7 +62,7 @@ extern void guardar_amistats(char *amistats, short n_elem, FILE *f);
  * @param any (E) Any.
  * @return bool True si és compatible, fals altrament.
  * @pre 0 < mes <= 12 && 0 <= any (D.C).
-*/
+ */
 extern bool data_compatible(char dia, char mes, short any);
 
 /**
@@ -69,21 +71,21 @@ extern bool data_compatible(char dia, char mes, short any);
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param amistats (S) Taula d'amistats.
  * @return short Nombre d'usuaris finals.
-*/
+ */
 extern short afegir_usuaris(persona_t **usuaris, char **amistats, short n_usuaris);
 
 /**
  * @brief Actualitza la taula amb tots els usuaris del sistema.
- * @param usuaris (S) Taula amb usuaris del sistema.
+ * @param usuaris (E/S) Taula amb usuaris del sistema.
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
  * @return short Nombre d'usuaris finals que constaran al sistema, -1 en cas d'error.
-*/
+ */
 extern short actualitzacio_usuaris(persona_t **usuaris, short n_usuaris, short n_nous);
 
 /**
  * @brief Inicia la llavor per establir aleatoris.
-*/
+ */
 extern void ini_llavor();
 
 /**
@@ -91,15 +93,15 @@ extern void ini_llavor();
  * @param min (E) Nombre mínim per generar l'aleatori.
  * @param max (E) Nombre màxim per generar l'aleatori.
  * @return int Nombre aleatori generat.
-*/
+ */
 extern int genera_aleatori(int min, int max);
 
 /**
  * @brief Actualitza la taula d'amistats.
- * @param amistats (S) Taula d'amistats i distàncies entre usuaris.
+ * @param amistats (E/S) Taula d'amistats i distàncies entre usuaris.
  * @param n_usuaris (E) Nombre d'usuaris actuals (abans d'afegir-ne nous).
  * @param n_nous (E) Nombre d'usuaris nous que es volen afegir al sistema.
-*/
+ */
 extern bool actualitzacio_amistats(char **amistats, short n_usuaris, short n_nous);
 
 /**
@@ -145,7 +147,7 @@ extern void eliminar_amistat(persona_t *usuaris, char **amistats, short n_usuari
  * @param usuaris_editats (E) Identificador de canvis en la taula d'usuaris.
  * @param amistats_editades (E) Identificador de canvis en la taula d'amistats.
  * @return bool True en cas de guardat de dades correctes, false altrament.
-*/
+ */
 extern bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool usuaris_editats, bool amistats_editades);
 
 /**
@@ -153,7 +155,7 @@ extern bool guardar_dades(persona_t *usuaris, char *amistats, short n_elem, bool
  * @param usuaris (E) Punter a la taula que s'ha d'alliberar.
  * @param amistats (E) Punter a la taula que s'ha d'alliberar.
  * @param n_usuaris (E) Nombre d'usuaris del sistema.
-*/
+ */
 extern void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usuaris);
 
 /**
@@ -162,26 +164,26 @@ extern void alliberacio_memoria(persona_t *usuaris, char *amistats, short n_usua
  * @param dest (S) Punter a l'string destí.
  * @pre Cal que origin tingui el caràcter sentinella '\n'.
  * @return bool True si s'ha pogut completar l'operació, false altrament.
-*/
+ */
 extern bool string_copy_without_trash(char origin[], char **dest);
 
 /**
  * @brief Funció afegir usuaris simplificada per ser cridada des del main.
  * @param usuaris (E/S) Taula d'usuaris.
  * @param n_usuaris (E/S) Nombre d'usuaris actuals (i nous usuaris en cas que no es produeixi cap error, si no roman igual).
- * @param amistats (S) Taula d'amistats.
+ * @param amistats (E/S) Taula d'amistats.
  * @param usuaris_editats (E/S) Valor booleà per controlar si s'han editat o no els usuaris.
  * @pre usuaris_editats HA D'ESTAR INICIALITZAT.
  * @post Si usuaris_editats ja era true, romandra true per molt que no s'hagi pogut completar la introducció de l'usuari.
  * @return short Nombre d'usuaris finals.
-*/
+ */
 extern void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats);
 
 /**
  * @brief Controla que una cadena de caràcters no contingui caràcters numèrics.
  * @param desti (E/S) Cadena de caràcters que on es guardarà la informació.
  * @return bool True si no conté cap cadena de caràcters, false altrament.
-*/
+ */
 extern bool nomes_caracters(char desti[]);
 
-#endif 
+#endif
