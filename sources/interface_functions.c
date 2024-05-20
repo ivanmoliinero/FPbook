@@ -153,7 +153,6 @@ bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
             if (amistats[dir] == -1)
             {
                 trobat = true;
-                // printf("%d\n", usuaris[i].id);
                 mostrar_perfil(i, usuaris);
                 printf("\n"); // Separació estètica entre usuaris.
             }
