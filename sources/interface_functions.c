@@ -102,11 +102,11 @@ bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int 
         {
             if (i > usuari)
             {
-                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
+                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posició en la matriu triangular.
             }
             else
             {
-                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
+                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercanviem usuari i la variable i per mantenir la simetria.
             }
             if (valor <= COMPATIBILIDAD && valor > 0)
             {
