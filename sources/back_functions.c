@@ -33,22 +33,19 @@ bool carregar_usuari(FILE *f, persona_t *usuari)
         usuari->genere = malloc(sizeof(char) * n_elem_dummy);
         if (usuari->genere == NULL)
             resultat = false;
-
-        if (resultat)
+        else
         {
             strcpy(usuari->genere, dummy);
-
             fgets(dummy, MAX_DUMMY, f);
             n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
             usuari->ciutat = malloc(sizeof(char) * n_elem_dummy);
-        }
-        if (usuari->ciutat == NULL)
-            resultat = false;
-        if (resultat)
-        {
-            strcpy(usuari->ciutat, dummy);
-
-            carregar_data(f, usuari);
+            if (usuari->ciutat == NULL)
+                resultat = false;
+            else
+            {
+                strcpy(usuari->ciutat, dummy);
+                carregar_data(f, usuari);
+            }
         }
     }
     return resultat;
