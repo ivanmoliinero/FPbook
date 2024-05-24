@@ -63,7 +63,6 @@ int main(int argc, char *argv[])
                         case AFEGIR_USUARI:
                             afegir_usuaris_main(&usuaris, &amistats, &n_elem, &usuaris_editats);
                             sortir_menu();
-                            netejar_terminal(); // Es neteja la terminal per facilitar la lectura del programa.
                             break;
                         } // Es podria afegir cas DEFAULT, però com el rang de o està controlat (per funció demanar_opcio) no cal.
                     } while (o != EXIT);
