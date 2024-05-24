@@ -485,7 +485,7 @@ bool nomes_caracters(char desti[])
     bool nomes_lletres = true;
     for (int i = 0; desti[i] != '\n' && nomes_lletres; i++)
     {
-        if ('0' <= desti[i] && desti[i] <= '9')
+        if (('a' > desti[i] || desti[i] > 'z') && ('A' > desti[i] || desti[i] > 'Z'))
             nomes_lletres = false;
     }
     return nomes_lletres;
