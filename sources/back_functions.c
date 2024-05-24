@@ -25,7 +25,7 @@ bool carregar_usuari(FILE *f, persona_t *usuari)
     usuari->nom = malloc(sizeof(char) * n_elem_dummy);
     if (usuari->nom == NULL)
         resultat = false;
-    if (resultat)
+    else
     {
         strcpy(usuari->nom, dummy);
         fgets(dummy, MAX_DUMMY, f);

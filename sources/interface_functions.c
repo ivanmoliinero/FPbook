@@ -135,7 +135,7 @@ void missatge_acomiadament()
 
 void mostrar_perfil(short usuari, persona_t *usuaris)
 {
-    printf("%d", usuaris[usuari].id);
+    printf("ID: %d\n", usuaris[usuari].id);
     printf("%s", usuaris[usuari].nom);
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
