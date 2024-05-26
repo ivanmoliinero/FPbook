@@ -15,9 +15,12 @@
 
 #define MAX_USUARIS 10000 // Màxims usuaris que es suportaran al sistema.
 
-#define COMPATIBILIDAD 3
+#define COMPATIBILIDAD 3 // Nivell de compatibilitat mínim per ser considerat compatible.
+
+#define ANY_ACTUAL 2024 // Any actual, per evitar problemes amb anys negatius. També es podría controlar amb time.h
 
 // Capceleres de les funcions d'interfície.
+
 /**
  * @brief Mostra un missatge de benvinguda a FPbook.
  */
@@ -40,10 +43,10 @@ extern void falta_identificador();
 
 /**
  * @brief Mostra el perfil de l'usuari passat com a paràmetre.
- * @param id (E) Identificador de l'usuari a mostrar.
- * @param t (E) Taula amb la informació dels usuaris.
+ * @param usuari (E) Identificador de l'usuari a mostrar.
+ * @param usuaris (E) Taula amb la informació dels usuaris.
  */
-extern void mostrar_perfil(short id, persona_t t[]);
+extern void mostrar_perfil(short usuari, persona_t *usuaris);
 
 /**
  * @brief Mostra un missatge d'error en cas que l'usuari no existeixi.
@@ -91,7 +94,7 @@ extern short demanar_opcio(short rang_max, short rang_min);
  * @brief Mostra els usuaris compatibles amb un usuari.
  * @pre Taula d'amistats carregada.
  * @param usuaris (E) Taula d'usuaris.
- * @param amistats (E/S) Vector amb l'informació de cada amistat.
+ * @param amistats (E) Vector amb l'informació de cada amistat.
  * @param n_usuaris (E) Nombre d'usuaris al sistema.
  * @param usuari (E) ID de l'usuari actiu.
  * @return bool True si es tenen usuaris compatibles per afegir, fals en cas contrari.
@@ -165,32 +168,32 @@ extern bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, s
 
 /**
  * @brief Mostra un missatge d'error si l'usuari intenta afegir-se a si mateix com a amic o eliminar-se a si mateix de la llista d'amistats.
-*/
+ */
 extern void missatge_error_un_mateix();
 
 /**
  * @brief Demana a l'usuari confirmació addicional per eliminar una amistat.
-*/
+ */
 extern void missatge_confirmacio_eliminacio_amistat();
 
 /**
  * @brief Informa a l'usuari de la dolenta selecció a l'hora d'intentar afegir una amistat quan ja és amic seu.
-*/
+ */
 extern void missatge_error_ja_amic();
 
 /**
  * @brief Informa a l'usuari de l'intent d'eliminar un usuari del llistat d'amics quan aquest usuari no és amic.
-*/
+ */
 extern void missatge_error_no_amic();
 
 /**
  * @brief Informa a l'usuari de que no té cap amistat.
-*/
+ */
 extern void missatge_error_no_amics();
 
 /**
  * @brief Mostra els mesos de l'any.
-*/
+ */
 extern void mostrar_mesos();
 
 #endif

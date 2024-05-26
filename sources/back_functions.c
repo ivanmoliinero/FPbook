@@ -25,7 +25,7 @@ bool carregar_usuari(FILE *f, persona_t *usuari)
     usuari->nom = malloc(sizeof(char) * n_elem_dummy);
     if (usuari->nom == NULL)
         resultat = false;
-    if (resultat)
+    else
     {
         strcpy(usuari->nom, dummy);
         fgets(dummy, MAX_DUMMY, f);
@@ -33,22 +33,19 @@ bool carregar_usuari(FILE *f, persona_t *usuari)
         usuari->genere = malloc(sizeof(char) * n_elem_dummy);
         if (usuari->genere == NULL)
             resultat = false;
-
-        if (resultat)
+        else
         {
             strcpy(usuari->genere, dummy);
-
             fgets(dummy, MAX_DUMMY, f);
             n_elem_dummy = strlen(dummy) + 1; // +1 pel caràcter \0.
             usuari->ciutat = malloc(sizeof(char) * n_elem_dummy);
-        }
-        if (usuari->ciutat == NULL)
-            resultat = false;
-        if (resultat)
-        {
-            strcpy(usuari->ciutat, dummy);
-
-            carregar_data(f, usuari);
+            if (usuari->ciutat == NULL)
+                resultat = false;
+            else
+            {
+                strcpy(usuari->ciutat, dummy);
+                carregar_data(f, usuari);
+            }
         }
     }
     return resultat;
@@ -475,20 +472,21 @@ bool string_copy_without_trash(char origin[], char **dest)
 void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris, bool *usuaris_editats)
 {
     short n_elem = afegir_usuaris(usuaris, amistats, *n_usuaris);
-    if(!(*usuaris_editats)) // Si encara no s'han editat els usuaris.
+    if (!(*usuaris_editats)) // Si encara no s'han editat els usuaris.
         *usuaris_editats = mirar_errors(n_elem);
-    else    
+    else
         mirar_errors(n_elem); // Si han estat editats ja prèviament, es mostra errors però no es modifica el booleà.
-    if(n_elem != -1) // Si s'han pogut guardar correctament els nous usuaris.
-        *n_usuaris = n_elem; // S'actualitzen els nous usuaris del sistema.
+    if (n_elem != -1)         // Si s'han pogut guardar correctament els nous usuaris.
+        *n_usuaris = n_elem;  // S'actualitzen els nous usuaris del sistema.
 }
 
 bool nomes_caracters(char desti[])
 {
     bool nomes_lletres = true;
-    for(int i = 0; desti[i] != '\0' && nomes_lletres; i++)
+    for (int i = 0; desti[i] != 0 && nomes_lletres; i++) // En la versió de finestra cal fer aquesta modificació.
     {
-        if ('0' <= desti[i] && desti[i] <= '9') nomes_lletres = false;
+        if (('a' > desti[i] || desti[i] > 'z') && ('A' > desti[i] || desti[i] > 'Z') && (desti[i] != ' '))
+            nomes_lletres = false;
     }
     return nomes_lletres;
-}   
+}

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <limits.h>
 
 #include "estructures.h"
 #include "interface_functions.h"
@@ -27,12 +26,12 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
 {
     short temp;
     bool mes_correcte;
-    printf("Introdueix el mes de naixement de l'usuari: ");
+    printf("Introdueix el mes de naixement de l'usuari:\n");
     mostrar_mesos();
     temp = demanar_opcio(12, 1);
     usuari->data_neix.mes = (char)temp;
-    printf("Introdueix l'any de naixement de l'usuari: ");
-    temp = demanar_opcio(SHRT_MAX, 0); // Cal passar un valor màxim, es passa el màxim valor de short per tal d'evitar conflictes amb anys negatius.
+    printf("Introdueix l'any de naixement de l'usuari:\n");
+    temp = demanar_opcio(ANY_ACTUAL, 0); // Cal passar un valor màxim, es passa el màxim valor de short per tal d'evitar conflictes amb anys negatius.
     usuari->data_neix.any = temp;
     do // Com la condició per escollir el mes és més complicada (no és un interval simple), cal integrar un bucle addicional.
     {
@@ -40,7 +39,7 @@ void demanar_data(persona_t *usuari) // IMPLEMENTAR CON FUNCION DO - WHILE GENÉ
         temp = obtenir_opcio_convertida();
         mes_correcte = data_compatible(temp, usuari->data_neix.mes, usuari->data_neix.any);
         if (!mes_correcte)
-            printf("Introdueix un dia valid per aquest mes\n");
+            printf("Introdueix un dia valid per aquest mes:\n");
     } while (!mes_correcte);
     usuari->data_neix.dia = (char)temp;
 }
@@ -87,8 +86,8 @@ short demanar_opcio(short rang_max, short rang_min)
     {
         opcio = obtenir_opcio_convertida();
         if (opcio < rang_min || opcio > rang_max)
-            printf("Introdueix una opcio entre %hd i %hd\n", rang_min, rang_max); // Missatge d'error.
-    } while (opcio < rang_min || opcio > rang_max);                               // Procura que el valor introduït estigui entre l'interval establert.
+            printf("Introdueix una opcio entre %hd i %hd:\n", rang_min, rang_max); // Missatge d'error.
+    } while (opcio < rang_min || opcio > rang_max); // Procura que el valor introduït estigui entre l'interval establert.
     return opcio;
 }
 
@@ -102,11 +101,11 @@ bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int 
         {
             if (i > usuari)
             {
-                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posición en la matriz triangular
+                valor = amistats[(i * (i + 1)) / 2 + usuari]; // Calcular la posició en la matriu triangular.
             }
             else
             {
-                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercambiamos usuari e i para mantener la simetría
+                valor = amistats[(usuari * (usuari + 1)) / 2 + i]; // Si usuari < i, intercanviem usuari i la variable i per mantenir la simetria.
             }
             if (valor <= COMPATIBILIDAD && valor > 0)
             {
@@ -126,17 +125,17 @@ void mostrar_amistat(persona_t *usuaris, short usuari)
 
 void missatge_benvinguda()
 {
-    printf("Benvingut/da a FPbook! \n");
+    printf("Benvingut/da a FPbook!\n");
 }
 
 void missatge_acomiadament()
 {
-    printf("Fins aviat!");
+    printf("Fins aviat!\n");
 }
 
 void mostrar_perfil(short usuari, persona_t *usuaris)
 {
-    printf("%d\n", usuaris[usuari].id);
+    printf("ID: %d\n", usuaris[usuari].id);
     printf("%s", usuaris[usuari].nom);
     printf("%s", usuaris[usuari].genere);
     printf("%s", usuaris[usuari].ciutat);
@@ -154,7 +153,6 @@ bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
             if (amistats[dir] == -1)
             {
                 trobat = true;
-                //printf("%d\n", usuaris[i].id);
                 mostrar_perfil(i, usuaris);
                 printf("\n"); // Separació estètica entre usuaris.
             }
@@ -171,12 +169,12 @@ bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
 
 void mostrar_menu_principal()
 {
-    printf("Que vols fer?: \n\n");
-    printf("[1] Mostrar el perfil de l'usuari. \n");
-    printf("[2] Mostrar les amistats. \n");
-    printf("[3] Afegir una nova amistat. \n");
-    printf("[4] Eliminar una amistat. \n");
-    printf("[5] Afegir un nou usuari. \n");
+    printf("Que vols fer?:\n\n");
+    printf("[1] Mostrar el perfil de l'usuari.\n");
+    printf("[2] Mostrar les amistats.\n");
+    printf("[3] Afegir una nova amistat.\n");
+    printf("[4] Eliminar una amistat.\n");
+    printf("[5] Afegir un nou usuari.\n");
     printf("[0] SORTIR\n");
 }
 
@@ -187,12 +185,12 @@ void avis_compatibilitat_dolenta()
 
 void falta_identificador()
 {
-    printf("No s'ha inclos l'identificador de l'usuari en l'execucio. Si us plau, reinicia el programa inciant sessio correctament\n");
+    printf("No s'ha inclos l'identificador de l'usuari en l'execucio. Si us plau, reinicia el programa inciant sessio correctament.\n");
 }
 
 void usuari_inexistent()
 {
-    printf("Aquest usuari no existeix, no s'ha pogut iniciar sessio\n");
+    printf("Aquest usuari no existeix, no s'ha pogut iniciar sessio.\n");
 }
 
 void error_guardat_dades()
@@ -202,7 +200,7 @@ void error_guardat_dades()
 
 void missatge_error_arxiu_amistats()
 {
-    printf("No s'han pogut obtenir les dades de les amistats i les relacions entre usuaris\n");
+    printf("No s'han pogut obtenir les dades de les amistats i les relacions entre usuaris.\n");
 }
 
 void missatge_seleccio_amistat()
@@ -217,7 +215,7 @@ void missatge_esborrat_amistat()
 
 void missatge_error_arxiu_usuaris()
 {
-    printf("No s'han pogut carregar els usuaris correctament\n");
+    printf("No s'han pogut carregar els usuaris correctament.\n");
 }
 
 bool mirar_errors(short control)
@@ -226,7 +224,7 @@ bool mirar_errors(short control)
 
     if (control == -1)
     {
-        printf("Error en el guardat de dades d'usuaris i/o amistats\n");
+        printf("Error en el guardat de dades d'usuaris i/o amistats.\n");
         resultat = false;
     }
     else
@@ -244,7 +242,7 @@ void netejar_terminal()
 void sortir_menu()
 {
     fflush(stdin); // Evitem la sortida del menú per entrada de brossa.
-    printf("\nPrem la tecla intro per sortir del menu actual");
+    printf("\nPrem la tecla intro per sortir del menu actual.");
     char o[3];
     fgets(o, 3, stdin);
     fflush(stdin); // Si l'usuari decideix posar més d'un caràcter en comptes de teclejar intro, no pot afectar a la resta del codi.
