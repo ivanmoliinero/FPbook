@@ -483,9 +483,9 @@ void afegir_usuaris_main(persona_t **usuaris, char **amistats, short *n_usuaris,
 bool nomes_caracters(char desti[])
 {
     bool nomes_lletres = true;
-    for (int i = 0; desti[i] != 0 && nomes_lletres; i++) // En la versió de finestra cal fer aquesta modificació.
+    for (int i = 0; desti[i] != '\0' && nomes_lletres; i++)
     {
-        if (('a' > desti[i] || desti[i] > 'z') && ('A' > desti[i] || desti[i] > 'Z') && (desti[i] != ' '))
+        if (('a' > desti[i] || desti[i] > 'z') && ('A' > desti[i] || desti[i] > 'Z') && (desti[i] != ' ') && (desti[i] != '\n'))
             nomes_lletres = false;
     }
     return nomes_lletres;
