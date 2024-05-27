@@ -24,26 +24,10 @@ build/win_fpbook.exe : sources/winmain.c sources/win_functions.c sources/interfa
 	gcc $(CCFLAGS) $(INCL_WINFLAGS) sources/winmain.c sources/win_functions.c sources/interface_functions.c sources/back_functions.c \
 		-o build/win_fpbook.exe $(LIB_WINFLAGS)
 
-build/fpbook.exe : sources/back_functions.c sources/interface_functions.c sources/main.c \
-			 include/back_functions.h include/interface_functions.h include/estructures.h
-	gcc $(CCFLAGS) sources/back_functions.c sources/interface_functions.c sources/main.c \
-		-o build/fpbook.exe
-
-build/tests.exe : sources/tests.c sources/interface_functions.c sources/back_functions.c \
-			 include/back_functions.h include/interface_functions.h include/estructures.h
-	gcc $(CCFLAGS) sources/tests.c sources/interface_functions.c sources/back_functions.c \
-		-o build/tests.exe
-
 
 #------------------------------------------------------------------
 #	run commands
 #------------------------------------------------------------------
-run : build/fpbook.exe
-	build/fpbook.exe $(user)
-
-run_tests : build/tests.exe
-	build/tests.exe
-
 win_run : build/win_fpbook.exe
 	build/win_fpbook.exe $(user)
 
@@ -51,12 +35,6 @@ win_run : build/win_fpbook.exe
 #------------------------------------------------------------------
 #	debug command
 #------------------------------------------------------------------
-debug : build/fpbook.exe
-	gdb build/fpbook.exe
-
-debug_tests : build/tests.exe
-	gdb build/tests.exe 
-
 win_debug : build/win_fpbook.exe
 	gdb build/win_fpbook.exe
 
