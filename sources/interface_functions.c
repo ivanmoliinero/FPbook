@@ -95,7 +95,7 @@ bool mostrar_compatibles(persona_t *usuaris, char *amistats, int n_usuaris, int 
 {
     int valor;
     bool te_compatibles = false;
-    for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
+    for (short i = 0; i < n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
     {
         if (usuari != i)
         {
@@ -146,7 +146,7 @@ bool mostrar_amistats(persona_t *usuaris, short usuari, char *amistats, short n_
 {
     bool trobat = false;
     int dir = (usuari * (usuari + 1)) / 2;
-    for (short i = 0; i <= n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
+    for (short i = 0; i < n_usuaris; i++) // Només necessitem iterar fins a la fila 'usuari'.
     {
         if (usuari != i)
         {
